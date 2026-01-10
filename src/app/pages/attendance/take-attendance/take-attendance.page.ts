@@ -24,7 +24,7 @@ export class TakeAttendancePage implements OnInit {
   saving = false;
 
 
-  attendanceDate = new Date().toISOString().split('T')[0];
+  //attendanceDate = new Date().toISOString().split('T')[0];
 
   classes: number[] = [];     // 1 → 12
   students: any[] = [];
@@ -47,8 +47,17 @@ export class TakeAttendancePage implements OnInit {
 
     this.classes = Array.from({ length: 12 }, (_, i) => i + 1);
   }
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
 
   takeAttendance() {
+    //console.log(this.attendanceDate);
     if (!this.classId || !this.sectionId) return;
 
     this.loading = true;
@@ -59,7 +68,7 @@ export class TakeAttendancePage implements OnInit {
       this.schoolId,
       this.classId,
       this.sectionId,
-      this.attendanceDate
+      this.getTodayDate()
     ).subscribe({
       next: (res) => {
         this.students = res.students ?? [];
@@ -88,7 +97,7 @@ export class TakeAttendancePage implements OnInit {
     schoolId: this.schoolId,
     classId: this.classId,
     sectionId: this.sectionId,
-    attendanceDate: this.attendanceDate,
+    attendanceDate: this.getTodayDate(),
     markedByUserId: this.markedByUserId,
     records
   };

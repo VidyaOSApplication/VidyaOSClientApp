@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register Student</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+
+    <!-- Academic Info -->
+    <h3 class="section-title">Academic Details</h3>
+    <ion-item>
+      <ion-label position="stacked">
+        Academic Year <ion-text color="danger">*</ion-text>
+      </ion-label>
+
+      <ion-select [(ngModel)]="form.academicYear"
+                  interface="popover"
+                  placeholder="Select academic year">
+
+        <ion-select-option *ngFor="let year of academicYears"
+                           [value]="year">
+          {{ year }}
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Class *</ion-label>
+      <ion-select placeholder="Select Class" [(ngModel)]="form.classId">
+        <ion-select-option *ngFor="let c of classes" [value]="c">
+          Class {{ c }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Section *</ion-label>
+      <ion-select placeholder="Select Section" [(ngModel)]="form.sectionId">
+        <ion-select-option value="1">A</ion-select-option>
+        <ion-select-option value="2">B</ion-select-option>
+        <ion-select-option value="3">C</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Student Info -->
+    <h3 class="section-title">Student Details</h3>
+
+    <ion-item>
+      <ion-label position="stacked">First Name *</ion-label>
+      <ion-input placeholder="Enter first name"
+                 [(ngModel)]="form.firstName">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Last Name</ion-label>
+      <ion-input placeholder="Enter last name"
+                 [(ngModel)]="form.lastName">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Gender *</ion-label>
+      <ion-select placeholder="Select gender"
+                  [(ngModel)]="form.gender">
+        <ion-select-option value="Male">Male</ion-select-option>
+        <ion-select-option value="Female">Female</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Date of Birth *</ion-label>
+      <ion-input type="date" [(ngModel)]="form.dob"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="date"
+                 label="Admission Date *"
+                 labelPlacement="floating"
+                 [(ngModel)]="form.admissionDate">
+      </ion-input>
+    </ion-item>
+
+    <ion-text color="danger" *ngIf="isInvalid('admissionDate')">
+      Please select admission date
+    </ion-text>
+
+    <!-- Parent Info -->
+    <h3 class="section-title">Parent Details</h3>
+
+    <ion-item>
+      <ion-label position="stacked">Father Name</ion-label>
+      <ion-input [(ngModel)]="form.fatherName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Mother Name</ion-label>
+      <ion-input [(ngModel)]="form.motherName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="tel"
+                 inputmode="numeric"
+                 maxlength="10"
+                 label="Parent Mobile No *"
+                 labelPlacement="floating"
+                 [(ngModel)]="form.parentPhone">
+      </ion-input>
+    </ion-item>
+
+    <ion-text color="danger" *ngIf="isInvalidPhone()">
+      Enter valid 10-digit mobile number starting with 6–9
+    </ion-text>
+
+    <!-- Address -->
+    <h3 class="section-title">Address</h3>
+
+    <ion-item>
+      <ion-label position="stacked">Address Line</ion-label>
+      <ion-input [(ngModel)]="form.addressLine1"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">City</ion-label>
+      <ion-input [(ngModel)]="form.city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">State</ion-label>
+      <ion-input [(ngModel)]="form.state"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="form.email"></ion-input>
+    </ion-item>
+
+  </div>
+
+</ion-content>
+
+<!-- STICKY ACTION BAR -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                [disabled]="saving"
+                (click)="submit()">
+
+      <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
+      Register Student
+    </ion-button>
+
+  </ion-toolbar>
+</ion-footer>

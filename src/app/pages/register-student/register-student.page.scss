@@ -1,0 +1,58 @@
+.form-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  margin: 20px 8px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+ion-item {
+  --background: transparent;
+  --inner-padding-end: 8px;
+  --padding-start: 8px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+}
+
+ion-input,
+ion-select {
+  font-size: 15px;
+}
+
+ion-footer ion-toolbar {
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+.warning-alert {
+  --background: #fffbeb;
+
+  .alert-head {
+    color: #b45309;
+    text-align: center;
+  }
+
+  .alert-message {
+    font-size: 14px;
+  }
+}
+.alert-wrapper {
+  border-radius: 16px;
+}
+
+.alert-head {
+  text-align: center;
+}
+
+.alert-message {
+  line-height: 1.6;
+}
+
+

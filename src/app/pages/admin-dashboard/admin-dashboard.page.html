@@ -25,26 +25,19 @@
   </div>
 
   <!-- DASHBOARD GRID -->
-  <ion-grid class="dashboard-grid">
-    <ion-row>
+  <div class="dashboard-grid">
 
-      <ion-col size="4" *ngFor="let item of dashboardItems">
-        <div class="dashboard-card">
+    <div class="dashboard-card"
+         *ngFor="let item of dashboardItems"
+         (click)="goTo(item.route)">
 
-          <div class="icon-wrapper">
-            <ion-icon [name]="item.icon"></ion-icon>
+      <div class="icon-wrapper">
+        <ion-icon [name]="item.icon"></ion-icon>
+      </div>
 
-            <!-- Badge (e.g. Circulars) -->
-            <span class="badge" *ngIf="item.count">
-              {{ item.count }}
-            </span>
-          </div>
+      <p>{{ item.title }}</p>
+    </div>
 
-          <p>{{ item.title }}</p>
-        </div>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
+  </div>
 
 </ion-content>

@@ -55,5 +55,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/super-admin-dashboard/super-admin-dashboard.page')
         .then(m => m.SuperAdminDashboardPage)
+  },
+  {
+    path: 'register-student',
+    loadComponent: () => import('./pages/register-student/register-student.page').then( m => m.RegisterStudentPage)
+  },
+  {
+    path: 'admin/register-student',
+    loadComponent: () =>
+      import('./pages/register-student/register-student.page')
+        .then(m => m.RegisterStudentPage)
   }
+
 ];
