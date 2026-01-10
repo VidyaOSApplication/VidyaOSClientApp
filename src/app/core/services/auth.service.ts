@@ -34,21 +34,29 @@ export class AuthService {
           await this.saveAuthData(res.data);
         }
       }),
-      switchMap(() => this.getMyProfile()) // 👈 auto call
+      switchMap(() => this.getMyProfile(username)) // 👈 auto call
     );
   }
 
   // 👤 GET PROFILE
-  getMyProfile(): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/Common/Me`).pipe(
+  getMyProfile(username: string) {
+    return this.http.get<any>(`${this.apiUrl}/Common/Me`).pipe(
       tap(async profile => {
+
+        // 🔥 MERGE USERNAME INTO PROFILE
+        const enrichedProfile = {
+          ...profile,
+          username: username
+        };
+
         await Preferences.set({
           key: 'user_profile',
-          value: JSON.stringify(profile)
+          value: JSON.stringify(enrichedProfile)
         });
       })
     );
   }
+
 
   // 💾 SAVE JWT
   private async saveAuthData(data: {

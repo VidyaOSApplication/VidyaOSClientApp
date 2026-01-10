@@ -15,5 +15,21 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () =>
       import('./home/home.page').then(m => m.HomePage)
+  },
+  {
+    path: 'admin-dashboard',
+    loadComponent: () => import('./pages/admin-dashboard/admin-dashboard.page').then( m => m.AdminDashboardPage)
+  },
+  {
+    path: 'admin/dashboard',
+    loadComponent: () =>
+      import('./pages/admin-dashboard/admin-dashboard.page')
+        .then(m => m.AdminDashboardPage)
+  },
+  {
+    path: 'student/dashboard',
+    loadComponent: () =>
+      import('./pages/student/student-dashboard/student-dashboard.page')
+        .then(m => m.StudentDashboardPage)
   }
 ];

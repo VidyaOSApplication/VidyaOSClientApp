@@ -34,9 +34,24 @@ export class LoginPage {
     this.errorMessage = '';
 
     this.authService.login(this.username, this.password).subscribe({
-      next: () => {
+
+      next: (profile) => {
+        console.log('LOGIN PROFILE:', profile);
+        console.log('ROLE:', profile.role);
         this.loading = false;
+        if (profile.role === 'SchoolAdmin') {
+          this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+          return;
+        }
+
+        if (profile.role === 'Student') {
+          this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
+          return;
+        }
+
+        // Fallback (safety)
         this.router.navigateByUrl('/home', { replaceUrl: true });
+      
       },
       error: () => {
         this.loading = false;

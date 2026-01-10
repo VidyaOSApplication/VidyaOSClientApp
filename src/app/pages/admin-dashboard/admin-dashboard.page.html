@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+
+    <!-- Profile icon (top right) -->
+    <div class="profile-icon" slot="end">
+      <ion-avatar>
+        <img src="https://i.pravatar.cc/100" />
+      </ion-avatar>
+      <span class="profile-badge">2</span>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- SCHOOL ADMIN HEADER -->
+  <div class="profile-header">
+    <div class="avatar"></div>
+    <div class="info">
+      <!-- Dynamic school name -->
+      <h2>{{ schoolName }}</h2>
+      <p>{{ subtitle }}</p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD GRID -->
+  <ion-grid class="dashboard-grid">
+    <ion-row>
+
+      <ion-col size="4" *ngFor="let item of dashboardItems">
+        <div class="dashboard-card">
+
+          <div class="icon-wrapper">
+            <ion-icon [name]="item.icon"></ion-icon>
+
+            <!-- Badge (e.g. Circulars) -->
+            <span class="badge" *ngIf="item.count">
+              {{ item.count }}
+            </span>
+          </div>
+
+          <p>{{ item.title }}</p>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

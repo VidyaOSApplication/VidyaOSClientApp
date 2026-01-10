@@ -1,0 +1,135 @@
+/* Page background */
+ion-content {
+  --background: #f4f6f9;
+}
+
+/* Fix toolbar color */
+
+ion-header ion-toolbar {
+  --background: #0b6f78;
+  --color: #ffffff;
+}
+
+/* ==============================
+   TOP PROFILE HEADER
+   ============================== */
+.profile-header {
+  background: #0b6f78;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 18px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+
+.profile-header .avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #d9f3f5;
+  margin-right: 14px;
+}
+
+.profile-header .info h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.profile-header .info p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* ==============================
+   DASHBOARD GRID
+   ============================== */
+.dashboard-grid {
+  padding: 12px;
+}
+
+/* Dashboard card */
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px 10px;
+  text-align: center;
+  border: 1px solid #eef1f4; /* subtle separation */
+  transition: transform 0.15s ease-in-out;
+}
+
+
+.dashboard-card:active {
+  transform: scale(0.96);
+}
+
+/* Icon wrapper */
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Icon */
+.dashboard-card ion-icon {
+  font-size: 28px;
+  color: #0b6f78;
+  margin-bottom: 6px;
+}
+
+/* Card label */
+.dashboard-card p {
+  font-size: 12px;
+  margin: 0;
+  color: #444;
+}
+
+/* ==============================
+   BADGE (Notification Count)
+   ============================== */
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #e53935;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==============================
+   PROFILE ICON (TOP RIGHT)
+   ============================== */
+.profile-icon {
+  position: relative;
+  margin-right: 12px;
+}
+
+.profile-icon ion-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.profile-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #e53935;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

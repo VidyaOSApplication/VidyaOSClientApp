@@ -7,4 +7,6 @@ export interface UserProfile {
   classId: number;
   sectionId: number;
   admissionNo: string;
+  username: string;
+  schoolName: string;
 }
