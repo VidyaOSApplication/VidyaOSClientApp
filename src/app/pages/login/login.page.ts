@@ -48,6 +48,10 @@ export class LoginPage {
           this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
           return;
         }
+        if (profile.role === 'Teacher') {
+          this.router.navigateByUrl('/teacher/dashboard', { replaceUrl: true });
+          return;
+        }
 
         // Fallback (safety)
         this.router.navigateByUrl('/home', { replaceUrl: true });
