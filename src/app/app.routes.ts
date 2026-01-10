@@ -45,5 +45,15 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/attendance/take-attendance/take-attendance.page')
         .then(m => m.TakeAttendancePage)
+  },
+  {
+    path: 'super-admin-dashboard',
+    loadComponent: () => import('./pages/super-admin-dashboard/super-admin-dashboard.page').then( m => m.SuperAdminDashboardPage)
+  },
+  {
+    path: 'super-admin/dashboard',
+    loadComponent: () =>
+      import('./pages/super-admin-dashboard/super-admin-dashboard.page')
+        .then(m => m.SuperAdminDashboardPage)
   }
 ];

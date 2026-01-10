@@ -1,0 +1,78 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+    margin-right: 16px;
+  }
+
+  .info {
+    h2 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 4px 0 0;
+      color: #666;
+      font-size: 14px;
+    }
+  }
+}
+
+/* GRID */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* CARD */
+.dashboard-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  ion-icon {
+    font-size: 32px;
+    color: var(--ion-color-primary);
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  p {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #666;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* DANGER CARD */
+.dashboard-card.danger {
+  ion-icon {
+    color: var(--ion-color-danger);
+  }
+}
+
+/* AVATAR */
+.toolbar-avatar img {
+  border-radius: 50%;
+}

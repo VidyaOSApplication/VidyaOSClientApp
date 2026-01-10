@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, switchMap } from 'rxjs';
+import { Observable, tap, map } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 import { UserProfile } from '../../models/userProfile';
 
@@ -21,11 +21,11 @@ export class AuthService {
 
   private apiUrl = 'https://localhost:7201/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // 🔐 LOGIN → FETCH PROFILE
-  login(username: string, password: string): Observable<UserProfile> {
-    return this.http.post<any>(
+  // 🔐 LOGIN (NO PROFILE CALL HERE)
+  login(username: string, password: string): Observable<string> {
+    return this.http.post<LoginResponse>(
       `${this.apiUrl}/Auth/Login`,
       { username, password }
     ).pipe(
@@ -34,19 +34,17 @@ export class AuthService {
           await this.saveAuthData(res.data);
         }
       }),
-      switchMap(() => this.getMyProfile(username)) // 👈 auto call
+      map(res => res.data.role) // 👈 return role only
     );
   }
 
-  // 👤 GET PROFILE
-  getMyProfile(username: string) {
-    return this.http.get<any>(`${this.apiUrl}/Common/Me`).pipe(
+  // 👤 PROFILE (CALL ONLY WHEN NEEDED)
+  getMyProfile(username: string): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${this.apiUrl}/Common/Me`).pipe(
       tap(async profile => {
-
-        // 🔥 MERGE USERNAME INTO PROFILE
         const enrichedProfile = {
           ...profile,
-          username: username
+          username
         };
 
         await Preferences.set({
@@ -57,8 +55,7 @@ export class AuthService {
     );
   }
 
-
-  // 💾 SAVE JWT
+  // 💾 SAVE JWT + ROLE
   private async saveAuthData(data: {
     token: string;
     role: string;
@@ -71,18 +68,25 @@ export class AuthService {
     await Preferences.set({ key: 'token_expiry', value: expiryTime.toString() });
   }
 
-  // 📦 READ PROFILE ANYWHERE
+  // 🔑 READ ROLE
+  async getRole(): Promise<string | null> {
+    const res = await Preferences.get({ key: 'user_role' });
+    return res.value;
+  }
+
+  // 📦 READ STORED PROFILE
   async getStoredProfile(): Promise<UserProfile | null> {
-    const result = await Preferences.get({ key: 'user_profile' });
-    return result.value ? JSON.parse(result.value) : null;
+    const res = await Preferences.get({ key: 'user_profile' });
+    return res.value ? JSON.parse(res.value) : null;
   }
 
-  // 🔑 TOKEN FOR INTERCEPTOR
+  // 🔑 TOKEN (INTERCEPTOR)
   async getToken(): Promise<string | null> {
-    const result = await Preferences.get({ key: 'jwt_token' });
-    return result.value;
+    const res = await Preferences.get({ key: 'jwt_token' });
+    return res.value;
   }
 
+  // 🚪 LOGOUT
   async logout() {
     await Preferences.clear();
   }
