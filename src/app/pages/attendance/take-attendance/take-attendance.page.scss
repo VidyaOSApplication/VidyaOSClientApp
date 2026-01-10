@@ -1,0 +1,111 @@
+ion-item {
+  --padding-start: 12px;
+}
+
+ion-badge {
+  margin-right: 8px;
+}
+ion-checkbox {
+  --size: 22px;
+  --checkbox-background-checked: #0b6f78;
+  --checkmark-color: #ffffff;
+  --border-color: #0b6f78;
+  --border-color-checked: #0b6f78;
+  opacity: 1 !important;
+}
+
+/* Disabled (Leave students) */
+ion-checkbox[disabled] {
+  --checkbox-background-checked: #b0bec5;
+  --border-color-checked: #b0bec5;
+  opacity: 0.6;
+}
+
+/* Keep label from overpowering checkbox */
+.student-label {
+  max-width: 70%;
+}
+.student-label {
+  max-width: 70%;
+}
+
+ion-badge {
+  font-size: 11px;
+  padding: 4px 8px;
+}
+.save-attendance {
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.student-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  gap: 10px;
+}
+
+/* LEFT SIDE */
+.student-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1; /* IMPORTANT: allows shrinking */
+  min-width: 0; /* FIXES overflow issue */
+}
+
+.roll {
+  font-weight: 600;
+  min-width: 22px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.admission {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* RIGHT SIDE */
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+
+/* LEAVE BADGE */
+.leave-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  background: #fde68a;
+  color: #92400e;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+  .student-row {
+    padding: 10px;
+  }
+
+  .name {
+    font-size: 13px;
+  }
+}

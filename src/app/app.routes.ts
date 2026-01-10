@@ -35,5 +35,15 @@ export const routes: Routes = [
   {
     path: 'teacher/dashboard',
     loadComponent: () => import('./pages/teacher-dashboard/teacher-dashboard.page').then( m => m.TeacherDashboardPage)
+  },
+  {
+    path: 'take-attendance',
+    loadComponent: () => import('./pages/attendance/take-attendance/take-attendance.page').then( m => m.TakeAttendancePage)
+  },
+  {
+    path: 'teacher/attendance/take-attendance',
+    loadComponent: () =>
+      import('./pages/attendance/take-attendance/take-attendance.page')
+        .then(m => m.TakeAttendancePage)
   }
 ];

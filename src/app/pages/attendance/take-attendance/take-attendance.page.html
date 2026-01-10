@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Take Attendance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- CLASS SELECTION -->
+  <ion-item>
+    <ion-label>Class</ion-label>
+    <ion-select [(ngModel)]="classId"
+                placeholder="Select Class"
+                interface="popover">
+      <ion-select-option *ngFor="let cls of classes"
+                         [value]="cls">
+        Class {{ cls }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- SECTION SELECTION -->
+  <ion-item>
+    <ion-label>Section</ion-label>
+    <ion-select [(ngModel)]="sectionId"
+                placeholder="Select Section"
+                interface="popover">
+      <ion-select-option [value]="1">A</ion-select-option>
+      <ion-select-option [value]="2">B</ion-select-option>
+      <ion-select-option [value]="3">C</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- TAKE ATTENDANCE BUTTON -->
+  <ion-button expand="block"
+              color="primary"
+              class="ion-margin-top"
+              (click)="takeAttendance()"
+              [disabled]="!classId || !sectionId">
+    Take Attendance
+  </ion-button>
+
+  <!-- LOADER -->
+  <div class="ion-text-center ion-margin" *ngIf="loading">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <!-- STUDENT LIST -->
+  <div *ngIf="students.length && !loading">
+
+    <div class="student-row"
+         *ngFor="let student of students; let i = index">
+
+      <!-- LEFT INFO -->
+      <div class="student-info">
+        <span class="roll">{{ i + 1 }}.</span>
+
+        <div class="details">
+          <div class="name">{{ student.fullName }}</div>
+          <div class="admission">{{ student.admissionNo }}</div>
+        </div>
+      </div>
+
+      <!-- RIGHT STATUS -->
+      <div class="status">
+
+        <!-- ON LEAVE -->
+        <span class="leave-badge"
+              *ngIf="!student.isEditable">
+          On Leave
+        </span>
+
+        <!-- PRESENT / ABSENT -->
+        <ion-checkbox *ngIf="student.isEditable"
+                      mode="md"
+                      [checked]="student.status === 'Present'"
+                      (ionChange)="onToggle(student, $event)">
+        </ion-checkbox>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NO STUDENTS -->
+  <div class="no-data"
+       *ngIf="hasSearched && !loading && students.length === 0">
+
+    <ion-icon name="people-outline"></ion-icon>
+    <p>No students available for selected class and section</p>
+
+  </div>
+
+  <!-- SAVE BUTTON -->
+  <div class="save-attendance"
+       *ngIf="students.length && !loading">
+
+    <ion-button expand="block"
+                color="success"
+                (click)="saveAttendance()"
+                [disabled]="saving">
+
+      <ion-spinner *ngIf="saving"
+                   slot="start">
+      </ion-spinner>
+
+      Save Attendance
+    </ion-button>
+
+  </div>
+
+</ion-content>

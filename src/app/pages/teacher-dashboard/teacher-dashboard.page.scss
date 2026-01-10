@@ -119,3 +119,19 @@ ion-header ion-toolbar {
   align-items: center;
   justify-content: center;
 }
+
+.no-data {
+  text-align: center;
+  margin-top: 40px;
+  color: #777;
+}
+
+.no-data ion-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  color: #b0bec5;
+}
+
+.no-data p {
+  font-size: 14px;
+}
