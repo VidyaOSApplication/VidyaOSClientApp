@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Apply Leave</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="form-card">
+
+    <ion-item>
+      <ion-label position="stacked">From Date *</ion-label>
+      <ion-input type="date" [(ngModel)]="form.fromDate"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="isInvalid('fromDate')">
+      Please select from date
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">To Date *</ion-label>
+      <ion-input type="date" [(ngModel)]="form.toDate"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="isInvalid('toDate')">
+      Please select to date
+    </ion-text>
+
+    <ion-text color="danger" *ngIf="isInvalidDateRange()">
+      From date cannot be after To date
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Reason *</ion-label>
+      <ion-textarea rows="4"
+                    placeholder="Enter reason"
+                    [(ngModel)]="form.reason">
+      </ion-textarea>
+    </ion-item>
+    <ion-text color="danger" *ngIf="isInvalid('reason')">
+      Reason is required
+    </ion-text>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                [disabled]="submitting"
+                (click)="submit()">
+
+      <ion-spinner *ngIf="submitting" slot="start"></ion-spinner>
+      Apply Leave
+
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

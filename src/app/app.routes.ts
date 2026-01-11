@@ -71,6 +71,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/register-teacher/register-teacher.page')
         .then(m => m.RegisterTeacherPage)
+  },
+  {
+    path: 'student-apply-leave',
+    loadComponent: () => import('./pages/student-apply-leave/student-apply-leave.page').then( m => m.StudentApplyLeavePage)
+  },
+  {
+    path: 'student/apply-leave',
+    loadComponent: () =>
+      import('./pages/student-apply-leave/student-apply-leave.page')
+        .then(m => m.StudentApplyLeavePage)
   }
 
 

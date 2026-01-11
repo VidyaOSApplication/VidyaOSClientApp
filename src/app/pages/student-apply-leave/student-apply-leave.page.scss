@@ -1,0 +1,90 @@
+/* PAGE */
+.leave-page {
+  --background: #f4f6fb;
+}
+
+/* HEADER */
+.leave-header ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
+}
+
+/* FORM CONTAINER */
+.form-card {
+  padding: 16px;
+  padding-bottom: 100px; // space for footer
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* SECTION TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.section-title ion-icon {
+  font-size: 18px;
+  color: var(--ion-color-primary);
+}
+
+/* INPUT ITEMS */
+ion-item {
+  --background: transparent;
+  --highlight-height: 0;
+  --min-height: 52px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+ion-item.item-has-focus {
+  border-color: var(--ion-color-primary);
+}
+
+/* INPUTS */
+ion-input,
+ion-textarea {
+  font-size: 14px;
+}
+
+/* TEXTAREA */
+ion-textarea {
+  --padding-top: 10px;
+}
+
+/* ERROR TEXT */
+ion-text[color="danger"] {
+  font-size: 12px;
+  margin-left: 6px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* FOOTER */
+.leave-footer {
+  padding: 10px 14px;
+  background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* BUTTON */
+.leave-footer ion-button {
+  height: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 14px;
+}
