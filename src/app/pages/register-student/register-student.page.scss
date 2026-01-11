@@ -78,3 +78,39 @@ ion-button {
 ion-item {
   --background: transparent;
 }
+ion-item {
+  --disabled-opacity: 1;
+  opacity: 1 !important;
+}
+
+/* Fix select text color */
+ion-select {
+  --color: #111827;
+  --placeholder-color: #6b7280;
+  --placeholder-opacity: 1;
+  opacity: 1 !important;
+}
+
+/* VERY IMPORTANT: selected value text */
+ion-select::part(text) {
+  color: #111827 !important;
+  opacity: 1 !important;
+  font-weight: 500;
+}
+
+/* Dropdown arrow */
+ion-select::part(icon) {
+  color: #374151 !important;
+  opacity: 1 !important;
+}
+
+/* When value exists */
+ion-item.item-has-value ion-select::part(text) {
+  color: #111827 !important;
+}
+
+/* Labels should never fade */
+ion-label {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
