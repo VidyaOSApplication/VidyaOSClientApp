@@ -1,20 +1,30 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Super Admin</ion-title>
+<ion-header class="dashboard-header">
+  <ion-toolbar>
 
-    <ion-avatar slot="end" class="toolbar-avatar">
-      <img src="https://i.pravatar.cc/100?img=12" />
-    </ion-avatar>
+    <ion-title class="header-title">
+      Super Admin
+    </ion-title>
+
+    <!-- Profile avatar -->
+    <div class="profile-icon" slot="end">
+      <ion-avatar class="header-avatar">
+        <img src="https://i.pravatar.cc/100?img=12" />
+      </ion-avatar>
+    </div>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <!-- PROFILE HEADER -->
+  <!-- SUPER ADMIN PROFILE CARD -->
   <div class="profile-header">
-    <div class="avatar"></div>
+    <ion-avatar class="header-avatar-lg">
+      <img src="https://i.pravatar.cc/150?img=12" />
+    </ion-avatar>
+
     <div class="info">
-      <h2>Super Admin</h2>
+      <h2>{{ superAdminName }}</h2>
       <p>System Administrator</p>
     </div>
   </div>
@@ -22,46 +32,18 @@
   <!-- DASHBOARD GRID -->
   <div class="dashboard-grid">
 
-    <div class="dashboard-card" routerLink="/super-admin/register-school">
-      <ion-icon name="add-circle-outline"></ion-icon>
-      <h3>Register School</h3>
-      <p>Add a new school to the platform</p>
-    </div>
+    <div class="dashboard-card"
+         *ngFor="let item of dashboardItems"
+         [routerLink]="item.route"
+         [class.danger]="item.title === 'System Settings'">
 
-    <div class="dashboard-card" routerLink="/super-admin/schools">
-      <ion-icon name="school-outline"></ion-icon>
-      <h3>Manage Schools</h3>
-      <p>View, enable or disable schools</p>
-    </div>
+      <div class="icon-wrapper">
+        <ion-icon [name]="item.icon"></ion-icon>
+      </div>
 
-    <div class="dashboard-card" routerLink="/super-admin/admins">
-      <ion-icon name="people-outline"></ion-icon>
-      <h3>School Admins</h3>
-      <p>Manage school administrators</p>
-    </div>
+      <h3>{{ item.title }}</h3>
+      <p>{{ getSubtitle(item.title) }}</p>
 
-    <div class="dashboard-card" routerLink="/super-admin/subscriptions">
-      <ion-icon name="card-outline"></ion-icon>
-      <h3>Subscriptions</h3>
-      <p>Plans, expiry & renewals</p>
-    </div>
-
-    <div class="dashboard-card" routerLink="/super-admin/analytics">
-      <ion-icon name="stats-chart-outline"></ion-icon>
-      <h3>Platform Analytics</h3>
-      <p>Usage & growth insights</p>
-    </div>
-
-    <div class="dashboard-card" routerLink="/super-admin/support">
-      <ion-icon name="help-circle-outline"></ion-icon>
-      <h3>Support & Issues</h3>
-      <p>Tickets & system issues</p>
-    </div>
-
-    <div class="dashboard-card danger" routerLink="/super-admin/settings">
-      <ion-icon name="settings-outline"></ion-icon>
-      <h3>System Settings</h3>
-      <p>Critical platform configuration</p>
     </div>
 
   </div>

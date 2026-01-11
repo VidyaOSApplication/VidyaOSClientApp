@@ -64,5 +64,18 @@ export class SuperAdminDashboardPage {
       route: '/super-admin/settings'
     }
   ];
-;
+  ;
+  getSubtitle(title: string): string {
+    switch (title) {
+      case 'Register School': return 'Add a new school';
+      case 'Manage Schools': return 'Enable or disable schools';
+      case 'School Admins': return 'Manage administrators';
+      case 'Subscriptions': return 'Plans & renewals';
+      case 'Platform Analytics': return 'Usage & growth';
+      case 'Support & Issues': return 'Tickets & system issues';
+      case 'System Settings': return 'Critical configuration';
+      default: return '';
+    }
+  }
+
 }

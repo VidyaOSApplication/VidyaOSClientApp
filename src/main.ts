@@ -19,10 +19,24 @@ import {
   megaphoneOutline,
   volumeHighOutline,
   chatbubbleOutline,
-
+  personOutline,
+  peopleOutline,
+  locationOutline,
   bookOutline,
   notificationsOutline,
-  documentTextOutline
+  documentTextOutline,
+  checkboxOutline,
+  createOutline,
+  timeOutline,
+  walletOutline,
+  chatbubblesOutline,
+  addCircleOutline,
+  cardOutline,
+  barChartOutline,
+  helpCircleOutline,
+  settingsOutline,
+  lockClosedOutline
+
 } from 'ionicons/icons';
 
 addIcons({
@@ -36,10 +50,24 @@ addIcons({
   'megaphone-outline': megaphoneOutline,
   'volume-high-outline': volumeHighOutline,
   'chatbubble-outline': chatbubbleOutline,
-
+  'person-outline': personOutline,
+  'people-outline': peopleOutline,
+  'location-outline': locationOutline,
   'book-outline': bookOutline,
   'notifications-outline': notificationsOutline,
-  'document-text-outline': documentTextOutline
+  'document-text-outline': documentTextOutline,
+  'checkbox-outline': checkboxOutline,
+  'create-outline': createOutline,
+  'time-outline': timeOutline,
+  'wallet-outline': walletOutline,
+  'chatbubbles-outline': chatbubblesOutline,
+  'add-circle-outline': addCircleOutline,
+  'card-outline': cardOutline,
+  'bar-chart-outline': barChartOutline,
+  'help-circle-outline': helpCircleOutline,
+  'settings-outline': settingsOutline,
+  'lock-closed-outline': lockClosedOutline
+
 });
 bootstrapApplication(AppComponent, {
   providers: [

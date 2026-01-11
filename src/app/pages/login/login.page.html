@@ -2,17 +2,22 @@
 
   <div class="login-container">
 
-    <!-- Logo / App Name -->
+    <!-- LOGO / BRAND -->
     <div class="logo-section">
-      <ion-icon name="school-outline"></ion-icon>
+      <div class="logo-icon floating">
+        <ion-icon name="school-outline"></ion-icon>
+      </div>
+
       <h1>VidyaOS</h1>
       <p>Manage students, staff & academics</p>
     </div>
 
-    <!-- Login Card -->
+    <!-- LOGIN CARD -->
     <ion-card class="login-card">
+
       <ion-card-content>
 
+        <!-- USERNAME -->
         <ion-item lines="none" class="input-item">
           <ion-icon name="person-outline" slot="start"></ion-icon>
           <ion-input placeholder="Username"
@@ -20,6 +25,7 @@
           </ion-input>
         </ion-item>
 
+        <!-- PASSWORD -->
         <ion-item lines="none" class="input-item">
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
           <ion-input type="password"
@@ -28,10 +34,20 @@
           </ion-input>
         </ion-item>
 
+        <!-- ERROR -->
+        <div class="error-text" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <!-- LOGIN BUTTON -->
         <ion-button expand="block"
                     class="login-btn"
+                    [disabled]="loading"
                     (click)="login()">
+
+          <ion-spinner *ngIf="loading" slot="start"></ion-spinner>
           Login
+
         </ion-button>
 
         <div class="extra-links">
@@ -41,6 +57,16 @@
       </ion-card-content>
     </ion-card>
 
+  </div>
+
+  <!-- FULLSCREEN LOADING OVERLAY -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="loading-box">
+      <div class="loader-logo">
+        <ion-icon name="school-outline"></ion-icon>
+      </div>
+      <p>Signing you in…</p>
+    </div>
   </div>
 
 </ion-content>

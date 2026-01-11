@@ -10,11 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule
-  ],
+  imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
@@ -31,15 +27,19 @@ export class LoginPage {
   ) { }
 
   login() {
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Username and password required';
+      return;
+    }
+
     this.loading = true;
     this.errorMessage = '';
 
     this.authService.login(this.username, this.password).subscribe({
       next: async (role) => {
 
-        // 🔥 SUPER ADMIN → NO PROFILE API
+        // SUPER ADMIN
         if (role === 'SuperAdmin') {
-
           await Preferences.set({
             key: 'user_profile',
             value: JSON.stringify({
@@ -48,13 +48,15 @@ export class LoginPage {
             })
           });
 
+          this.loading = false;
           this.router.navigateByUrl('/super-admin/dashboard', { replaceUrl: true });
           return;
         }
 
-        // 🔁 OTHER ROLES → LOAD PROFILE
+        // OTHER ROLES
         this.authService.getMyProfile(this.username).subscribe({
           next: profile => {
+            this.loading = false;
 
             if (profile.role === 'Student') {
               this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
@@ -65,8 +67,10 @@ export class LoginPage {
             else if (profile.role === 'SchoolAdmin') {
               this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
             }
-
+          },
+          error: () => {
             this.loading = false;
+            this.errorMessage = 'Unable to load profile';
           }
         });
       },

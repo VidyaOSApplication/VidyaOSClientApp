@@ -1,13 +1,18 @@
-<ion-header>
+<ion-header class="dashboard-header">
   <ion-toolbar>
 
+    <ion-title class="header-title">
+      Teacher Dashboard
+    </ion-title>
+
     <!-- Profile icon -->
-    <div class="profile-icon" slot="end">
-      <ion-avatar>
+    <!--<div class="profile-icon" slot="end">
+      <ion-avatar class="header-avatar">
         <img src="https://i.pravatar.cc/100?img=5" />
       </ion-avatar>
+
       <span class="profile-badge">1</span>
-    </div>
+    </div>-->
 
   </ion-toolbar>
 </ion-header>
@@ -16,7 +21,10 @@
 
   <!-- TEACHER HEADER -->
   <div class="profile-header">
-    <div class="avatar"></div>
+    <ion-avatar class="header-avatar">
+      <img src="https://i.pravatar.cc/150?img=5" />
+    </ion-avatar>
+
     <div class="info">
       <h2>{{ teacherName }}</h2>
       <p>{{ subtitle }}</p>
@@ -29,13 +37,13 @@
 
       <ion-col size="4" *ngFor="let item of dashboardItems">
 
-        <!-- CARD WITH ROUTE -->
         <div class="dashboard-card"
-             *ngIf="item.route; else noRoute"
-             [routerLink]="item.route">
+             [routerLink]="item.route"
+             [class.no-route]="!item.route">
 
           <div class="icon-wrapper">
             <ion-icon [name]="item.icon"></ion-icon>
+
             <span class="badge" *ngIf="item.count">
               {{ item.count }}
             </span>
@@ -43,20 +51,6 @@
 
           <p>{{ item.title }}</p>
         </div>
-
-        <!-- CARD WITHOUT ROUTE -->
-        <ng-template #noRoute>
-          <div class="dashboard-card">
-            <div class="icon-wrapper">
-              <ion-icon [name]="item.icon"></ion-icon>
-              <span class="badge" *ngIf="item.count !== undefined">
-                {{ item.count }}
-              </span>
-            </div>
-
-            <p>{{ item.title }}</p>
-          </div>
-        </ng-template>
 
       </ion-col>
 

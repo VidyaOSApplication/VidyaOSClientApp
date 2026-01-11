@@ -1,74 +1,101 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Register Teacher</ion-title>
+    <ion-title size="large">Register Teacher</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <!-- FULL NAME -->
-  <ion-item>
-    <ion-label position="floating">Full Name *</ion-label>
-    <ion-input [(ngModel)]="form.fullName"
-               type="text">
-    </ion-input>
-  </ion-item>
-  <ion-text color="danger" *ngIf="submitted && !form.fullName">
-    <small>Teacher name is required</small>
-  </ion-text>
+  <div class="form-card">
 
-  <!-- PHONE -->
-  <ion-item>
-    <ion-label position="floating">Mobile Number *</ion-label>
-    <ion-input [(ngModel)]="form.phone"
-               type="tel"
-               maxlength="10">
-    </ion-input>
-  </ion-item>
-  <ion-text color="danger"
-            *ngIf="submitted && !mobileRegex.test(form.phone)">
-    <small>Phone must start with 6–9 and be 10 digits</small>
-  </ion-text>
+    <!-- BASIC DETAILS -->
+    <div class="section-card">
+      <h3 class="section-title">
+        <ion-icon name="person-outline"></ion-icon>
+        Basic Details
+      </h3>
 
-  <!-- EMAIL -->
-  <ion-item>
-    <ion-label position="floating">Email</ion-label>
-    <ion-input [(ngModel)]="form.email"
-               type="email">
-    </ion-input>
-  </ion-item>
+      <!-- FULL NAME -->
+      <ion-item>
+        <ion-label position="stacked">Full Name *</ion-label>
+        <ion-input type="text"
+                   placeholder="Enter full name"
+                   [(ngModel)]="form.fullName">
+        </ion-input>
+      </ion-item>
 
-  <!-- JOINING DATE -->
-  <ion-item>
-    <ion-label position="stacked">Joining Date *</ion-label>
-    <ion-input [(ngModel)]="form.joiningDate"
-               type="date">
-    </ion-input>
-  </ion-item>
-  <ion-text color="danger" *ngIf="submitted && !form.joiningDate">
-    <small>Joining date is required</small>
-  </ion-text>
+      <ion-text color="danger" *ngIf="submitted && !form.fullName">
+        Teacher name is required
+      </ion-text>
 
-  <!-- QUALIFICATION -->
-  <ion-item>
-    <ion-label position="floating">Qualification</ion-label>
-    <ion-input [(ngModel)]="form.qualification"
-               type="text">
-    </ion-input>
-  </ion-item>
+      <!-- MOBILE -->
+      <ion-item>
+        <ion-label position="stacked">Mobile Number *</ion-label>
+        <ion-input type="tel"
+                   maxlength="10"
+                   inputmode="numeric"
+                   placeholder="Enter mobile number"
+                   [(ngModel)]="form.phone">
+        </ion-input>
+      </ion-item>
 
-  <!-- SUBMIT BUTTON -->
-  <ion-button expand="block"
-              color="success"
-              class="ion-margin-top"
-              (click)="submit()"
-              [disabled]="saving">
+      <ion-text color="danger" *ngIf="submitted && !mobileRegex.test(form.phone)">
+        Phone must start with 6–9 and be 10 digits
+      </ion-text>
 
-    <ion-spinner *ngIf="saving"
-                 slot="start">
-    </ion-spinner>
+      <!-- EMAIL -->
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input type="email"
+                   placeholder="Enter email address"
+                   [(ngModel)]="form.email">
+        </ion-input>
+      </ion-item>
+    </div>
 
-    Register Teacher
-  </ion-button>
+    <!-- PROFESSIONAL DETAILS -->
+    <div class="section-card">
+      <h3 class="section-title">
+        <ion-icon name="school-outline"></ion-icon>
+        Professional Details
+      </h3>
+
+      <!-- JOINING DATE -->
+      <ion-item>
+        <ion-label position="stacked">Joining Date *</ion-label>
+        <ion-input type="date"
+                   [(ngModel)]="form.joiningDate">
+        </ion-input>
+      </ion-item>
+
+      <ion-text color="danger" *ngIf="submitted && !form.joiningDate">
+        Joining date is required
+      </ion-text>
+
+      <!-- QUALIFICATION -->
+      <ion-item>
+        <ion-label position="stacked">Qualification</ion-label>
+        <ion-input type="text"
+                   placeholder="Eg. B.Ed, M.Sc, B.Tech"
+                   [(ngModel)]="form.qualification">
+        </ion-input>
+      </ion-item>
+    </div>
+
+  </div>
 
 </ion-content>
+
+<!-- STICKY FOOTER -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                [disabled]="saving"
+                (click)="submit()">
+
+      <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
+      Register Teacher
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

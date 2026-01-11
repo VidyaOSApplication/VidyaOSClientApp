@@ -1,9 +1,13 @@
-<ion-header>
+<ion-header class="dashboard-header">
   <ion-toolbar>
+
+    <ion-title class="header-title">
+      Student Dashboard
+    </ion-title>
 
     <!-- Profile icon (top right) -->
     <div class="profile-icon" slot="end">
-      <ion-avatar>
+      <ion-avatar class="header-avatar">
         <img src="https://i.pravatar.cc/100?img=12" />
       </ion-avatar>
       <span class="profile-badge">1</span>
@@ -14,13 +18,14 @@
 
 <ion-content>
 
-  <!-- STUDENT HEADER -->
+  <!-- STUDENT HEADER CARD -->
   <div class="profile-header">
-    <div class="avatar"></div>
+    <ion-avatar class="header-avatar-lg">
+      <img src="https://i.pravatar.cc/150?img=12" />
+    </ion-avatar>
+
     <div class="info">
-      <!-- Dynamic student name -->
       <h2>{{ studentName }}</h2>
-      <!-- Class / section -->
       <p>{{ subtitle }}</p>
     </div>
   </div>
@@ -35,7 +40,7 @@
           <div class="icon-wrapper">
             <ion-icon [name]="item.icon"></ion-icon>
 
-            <!-- Badge (e.g. Circulars) -->
+            <!-- Badge -->
             <span class="badge" *ngIf="item.count">
               {{ item.count }}
             </span>

@@ -1,26 +1,77 @@
-ion-card {
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+ion-content {
+  --background: #f4f6fb;
 }
 
-ion-item {
-  --border-radius: 12px;
-  margin-bottom: 8px;
+/* MAIN FORM */
+.form-card {
+  padding: 16px;
+  padding-bottom: 100px; // space for footer
 }
 
-ion-text {
-  margin-left: 16px;
-  margin-top: -4px;
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
-ion-button {
-  margin-top: 24px;
-  height: 48px;
+/* SECTION TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  border-radius: 14px;
+  color: #2c2c2c;
 }
 
-ion-spinner {
-  margin-right: 8px;
+.section-title ion-icon {
+  font-size: 18px;
+  color: var(--ion-color-primary);
+}
+
+/* INPUTS */
+ion-item {
+  --background: transparent;
+  --highlight-height: 0;
+  --min-height: 52px;
+  border: 1px solid #e4e7ec;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+ion-item.item-has-focus,
+ion-item.item-has-value {
+  border-color: var(--ion-color-primary);
+  background: #f9fafb;
+}
+
+ion-input {
+  font-size: 14px;
+}
+
+/* ERROR TEXT */
+ion-text[color="danger"] {
+  font-size: 12px;
+  margin-left: 6px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* FOOTER */
+ion-footer ion-toolbar {
+  --background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 14px;
+}
+
+/* BUTTON */
+ion-button {
+  height: 52px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
 }
