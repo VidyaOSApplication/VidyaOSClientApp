@@ -7,6 +7,7 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { addIcons } from 'ionicons';
 import { checkmarkCircleOutline } from 'ionicons/icons';
+import { errorInterceptor } from './app/core/interceptors/error.interceptor';
 
 addIcons({
   'checkmark-circle-outline': checkmarkCircleOutline
@@ -16,8 +17,9 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideHttpClient(
-      withInterceptors([authInterceptor]) // 🔥 REGISTER HERE
+      withInterceptors([authInterceptor, errorInterceptor]) // 🔥 REGISTER HERE
     ),
     provideRouter(routes, withPreloading(PreloadAllModules)),
+    
   ],
 });
