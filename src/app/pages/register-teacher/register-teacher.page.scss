@@ -1,0 +1,26 @@
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+ion-item {
+  --border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+ion-text {
+  margin-left: 16px;
+  margin-top: -4px;
+}
+
+ion-button {
+  margin-top: 24px;
+  height: 48px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 14px;
+}
+
+ion-spinner {
+  margin-right: 8px;
+}

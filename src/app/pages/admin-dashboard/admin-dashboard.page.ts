@@ -28,18 +28,19 @@ export class AdminDashboardPage {
     {
       title: 'Register Student',
       icon: 'person-add-outline',
-      route: '/admin/register-student'
+      route: '/register-student'
     },
     {
       title: 'Register Teacher',
       icon: 'school-outline',
-      route: '/admin/register-teacher'
+      route: '/register-teacher'
     },
     {
       title: 'Mark Fees',
       icon: 'cash-outline',
-      route: '/admin/fees'
+      route: '/fees'
     }
+  ];
     //{ title: 'Attendance', icon: 'calendar-outline' },
     //{ title: 'Homework', icon: 'book-outline' },
 
@@ -53,7 +54,7 @@ export class AdminDashboardPage {
     //{ title: 'Communication', icon: 'megaphone-outline' },
     //{ title: 'Leaves', icon: 'document-text-outline' },
     //{ title: 'Announcements', icon: 'volume-high-outline' }
-  ];
+
   constructor(private authService: AuthService, private router: Router) { }
   async ngOnInit() {
     const profile = await this.authService.getStoredProfile();

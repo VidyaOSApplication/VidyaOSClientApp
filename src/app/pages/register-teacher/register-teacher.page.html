@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register Teacher</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- FULL NAME -->
+  <ion-item>
+    <ion-label position="floating">Full Name *</ion-label>
+    <ion-input [(ngModel)]="form.fullName"
+               type="text">
+    </ion-input>
+  </ion-item>
+  <ion-text color="danger" *ngIf="submitted && !form.fullName">
+    <small>Teacher name is required</small>
+  </ion-text>
+
+  <!-- PHONE -->
+  <ion-item>
+    <ion-label position="floating">Mobile Number *</ion-label>
+    <ion-input [(ngModel)]="form.phone"
+               type="tel"
+               maxlength="10">
+    </ion-input>
+  </ion-item>
+  <ion-text color="danger"
+            *ngIf="submitted && !mobileRegex.test(form.phone)">
+    <small>Phone must start with 6–9 and be 10 digits</small>
+  </ion-text>
+
+  <!-- EMAIL -->
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="form.email"
+               type="email">
+    </ion-input>
+  </ion-item>
+
+  <!-- JOINING DATE -->
+  <ion-item>
+    <ion-label position="stacked">Joining Date *</ion-label>
+    <ion-input [(ngModel)]="form.joiningDate"
+               type="date">
+    </ion-input>
+  </ion-item>
+  <ion-text color="danger" *ngIf="submitted && !form.joiningDate">
+    <small>Joining date is required</small>
+  </ion-text>
+
+  <!-- QUALIFICATION -->
+  <ion-item>
+    <ion-label position="floating">Qualification</ion-label>
+    <ion-input [(ngModel)]="form.qualification"
+               type="text">
+    </ion-input>
+  </ion-item>
+
+  <!-- SUBMIT BUTTON -->
+  <ion-button expand="block"
+              color="success"
+              class="ion-margin-top"
+              (click)="submit()"
+              [disabled]="saving">
+
+    <ion-spinner *ngIf="saving"
+                 slot="start">
+    </ion-spinner>
+
+    Register Teacher
+  </ion-button>
+
+</ion-content>
