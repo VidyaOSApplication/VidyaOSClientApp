@@ -39,21 +39,22 @@ export class AdminDashboardPage {
       title: 'Mark Fees',
       icon: 'cash-outline',
       route: '/fees'
-    }
+    },
+
+    { title: 'Attendance', icon: 'calendar-outline', route: '/fees' },
+    { title: 'Homework', icon: 'book-outline', route: '/fees' },
+
+
+    { title: 'Circulars', icon: 'notifications-outline' ,route: '/fees' },
+
+    { title: 'Remarks', icon: 'chatbubble-outline', route: '/fees' },
+    { title: 'Calendar', icon: 'today-outline', route: '/fees' },
+    { title: 'Birthdays', icon: 'gift-outline', route: '/fees' },
+    { title: 'Examination', icon: 'clipboard-outline', route: '/fees' },
+    { title: 'Communication', icon: 'megaphone-outline', route: '/fees' },
+    { title: 'Leaves', icon: 'document-text-outline', route: '/fees' },
+    { title: 'Announcements', icon: 'volume-high-outline', route: '/fees' }
   ];
-    //{ title: 'Attendance', icon: 'calendar-outline' },
-    //{ title: 'Homework', icon: 'book-outline' },
-
-
-    //{ title: 'Circulars', icon: 'notifications-outline', count: 2 },
-
-    //{ title: 'Remarks', icon: 'chatbubble-outline' },
-    //{ title: 'Calendar', icon: 'today-outline' },
-    //{ title: 'Birthdays', icon: 'gift-outline' },
-    //{ title: 'Examination', icon: 'clipboard-outline' },
-    //{ title: 'Communication', icon: 'megaphone-outline' },
-    //{ title: 'Leaves', icon: 'document-text-outline' },
-    //{ title: 'Announcements', icon: 'volume-high-outline' }
 
   constructor(private authService: AuthService, private router: Router) { }
   async ngOnInit() {
