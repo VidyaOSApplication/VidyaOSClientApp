@@ -1,0 +1,28 @@
+.center-spinner {
+  display: block;
+  margin: 40px auto;
+}
+
+.leave-card {
+  margin-bottom: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 60px;
+  color: #6b7280;
+
+  ion-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+}
+.name{
+    color:black;
+}

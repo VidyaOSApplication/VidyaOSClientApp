@@ -81,6 +81,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/student-apply-leave/student-apply-leave.page')
         .then(m => m.StudentApplyLeavePage)
+  },
+  {
+    path: 'admin-pending-leaves',
+    loadComponent: () => import('./pages/admin-pending-leaves/admin-pending-leaves.page').then( m => m.AdminPendingLeavesPage)
   }
 
 

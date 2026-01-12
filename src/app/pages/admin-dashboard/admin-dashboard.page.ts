@@ -35,6 +35,7 @@ export class AdminDashboardPage {
       icon: 'school-outline',
       route: '/register-teacher'
     },
+    { title: 'Leave Requests', icon: 'document-text-outline', route: 'admin-pending-leaves' },
     {
       title: 'Mark Fees',
       icon: 'cash-outline',
@@ -52,7 +53,6 @@ export class AdminDashboardPage {
     { title: 'Birthdays', icon: 'gift-outline', route: '/fees' },
     { title: 'Examination', icon: 'clipboard-outline', route: '/fees' },
     { title: 'Communication', icon: 'megaphone-outline', route: '/fees' },
-    { title: 'Leaves', icon: 'document-text-outline', route: '/fees' },
     { title: 'Announcements', icon: 'volume-high-outline', route: '/fees' }
   ];
 
