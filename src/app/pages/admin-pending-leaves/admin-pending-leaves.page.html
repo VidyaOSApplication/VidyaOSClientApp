@@ -1,61 +1,47 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Pending Leave Requests</ion-title>
+    <ion-title>Pending Leaves</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <!-- Loader -->
-  <ion-spinner *ngIf="loading" class="center-spinner"></ion-spinner>
+  <ion-spinner *ngIf="loading" class="ion-margin"></ion-spinner>
 
-  <!-- Empty State -->
-  <div *ngIf="!loading && leaves.length === 0" class="empty-state">
-    <ion-icon name="checkmark-done-outline"></ion-icon>
-    <p>No pending leave requests 🎉</p>
-  </div>
-
-  <!-- Leave Cards -->
-  <ion-card *ngFor="let leave of leaves" class="leave-card">
-
+  <ion-card *ngFor="let leave of leaves">
     <ion-card-header>
-      <ion-card-title class="name">
-        {{ leave.name }}
-      </ion-card-title>
+      <ion-card-title>{{ leave.name }}</ion-card-title>
       <ion-card-subtitle>
-        {{ leave.role }}
+        {{ leave.role }} | {{ leave.appliedOn }}
       </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-
       <p>
-        <strong>From:</strong> {{ leave.fromDate }}
-        <br />
-        <strong>To:</strong> {{ leave.toDate }}
+        <strong>{{ leave.fromDate | date:'dd-MM-yyyy' }}</strong>
+        →
+        <strong>{{ leave.toDate | date:'dd-MM-yyyy' }}</strong>
       </p>
+      <p><strong>Reason:</strong> {{ leave.reason }}</p>
 
-      <p>
-        <strong>Reason:</strong> {{ leave.reason }}
-      </p>
-
-      <p class="applied-date">
-        Applied on {{ leave.appliedOn }}
-      </p>
-
-      <!-- Actions (Next Step) -->
-      <div class="actions">
-        <ion-button color="success" size="small">
+      <div class="action-row">
+        <ion-button color="success"
+                    size="small"
+                    (click)="takeAction(leave, 'Approved')">
           Approve
         </ion-button>
 
-        <ion-button color="danger" size="small">
+        <ion-button color="danger"
+                    size="small"
+                    (click)="takeAction(leave, 'Rejected')">
           Reject
         </ion-button>
       </div>
-
     </ion-card-content>
-
   </ion-card>
+
+  <div *ngIf="!loading && leaves.length === 0" class="empty-state">
+    🎉 No pending leave requests
+  </div>
 
 </ion-content>
