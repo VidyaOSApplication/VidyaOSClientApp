@@ -1,0 +1,72 @@
+.fees-header {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  ion-icon {
+    font-size: 48px;
+    color: var(--ion-color-primary);
+  }
+
+  h2 {
+    margin: 10px 0 4px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #6b7280;
+    font-size: 14px;
+  }
+}
+
+.fee-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 26px;
+    color: var(--ion-color-primary);
+  }
+}
+
+.fee-info {
+  flex: 1;
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #6b7280;
+  }
+}
+
+.arrow {
+  font-size: 20px;
+  color: #9ca3af;
+}

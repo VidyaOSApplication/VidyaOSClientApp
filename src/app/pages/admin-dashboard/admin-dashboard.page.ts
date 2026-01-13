@@ -39,7 +39,7 @@ export class AdminDashboardPage {
     {
       title: 'Mark Fees',
       icon: 'cash-outline',
-      route: '/fees'
+      route: 'admin/fees'
     },
 
     { title: 'Attendance', icon: 'calendar-outline', route: '/fees' },

@@ -85,7 +85,21 @@ export const routes: Routes = [
   {
     path: 'admin-pending-leaves',
     loadComponent: () => import('./pages/admin-pending-leaves/admin-pending-leaves.page').then( m => m.AdminPendingLeavesPage)
+  },  {
+    path: 'admin-fees',
+    loadComponent: () => import('./pages/admin-fees/admin-fees.page').then( m => m.AdminFeesPage)
+  },
+  {
+    path: 'admin/fees',
+    loadComponent: () =>
+      import('./pages/admin-fees/admin-fees.page')
+        .then(m => m.AdminFeesPage)
+  },
+  {
+    path: 'admin/fees/structure',
+    loadComponent: () =>
+      import('./pages/admin-fee-structure/admin-fee-structure.page')
+        .then(m => m.AdminFeeStructurePage)
   }
-
 
 ];
