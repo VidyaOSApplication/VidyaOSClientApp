@@ -1,0 +1,85 @@
+/* PAGE */
+.fee-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.fee-header ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+.section-title ion-icon {
+  color: var(--ion-color-primary);
+}
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.primary-btn {
+  height: 48px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* FEE LIST */
+.fee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ROW */
+.fee-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+/* INFO */
+.fee-info .class-name {
+  font-weight: 600;
+  font-size: 14.5px;
+  color: #111827;
+}
+
+.fee-info .fee-meta {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+/* EDIT ICON */
+.fee-row ion-button {
+  --color: #2563eb;
+}

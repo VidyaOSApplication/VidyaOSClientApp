@@ -1,71 +1,99 @@
-.fees-header {
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 20px;
-
-  ion-icon {
-    font-size: 48px;
-    color: var(--ion-color-primary);
-  }
-
-  h2 {
-    margin: 10px 0 4px;
-    font-weight: 600;
-  }
-
-  p {
-    color: #6b7280;
-    font-size: 14px;
-  }
+/* PAGE */
+.fees-page {
+  --background: #f4f6fb;
+  padding: 16px;
 }
 
+/* HEADER BAR */
+.fees-header-bar ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
+}
+
+/* TOP HEADER CARD */
+.fees-header {
+  background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+  border-radius: 20px;
+  padding: 22px 18px;
+  text-align: center;
+  margin-bottom: 22px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+.fees-header ion-icon {
+  font-size: 42px;
+  color: var(--ion-color-primary);
+  margin-bottom: 6px;
+}
+
+.fees-header h2 {
+  font-size: 18.5px;
+  font-weight: 700;
+  margin: 6px 0;
+  color: #0f172a;
+}
+
+.fees-header p {
+  font-size: 14px;
+  color: #475569;
+  margin: 0;
+}
+
+/* FEE CARD */
 .fee-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-
-  &:active {
-    transform: scale(0.98);
-  }
+  gap: 14px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+/* CLICK FEEDBACK */
+.fee-card.clickable:active {
+  transform: scale(0.97);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ICON BOX */
 .icon-box {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #e0f2fe;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  ion-icon {
-    font-size: 26px;
-    color: var(--ion-color-primary);
-  }
+  flex-shrink: 0;
 }
 
+.icon-box ion-icon {
+  font-size: 22px;
+  color: var(--ion-color-primary);
+}
+
+/* TEXT */
 .fee-info {
   flex: 1;
-
-  h3 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  p {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: #6b7280;
-  }
 }
 
+.fee-info h3 {
+  font-size: 15.5px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+.fee-info p {
+  font-size: 13px;
+  margin-top: 4px;
+  color: #6b7280;
+}
+
+/* ARROW */
 .arrow {
   font-size: 20px;
   color: #9ca3af;

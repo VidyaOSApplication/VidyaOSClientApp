@@ -49,16 +49,9 @@ export class AdminDashboardPage {
 
     { title: 'Attendance', icon: 'calendar-outline', route: '/fees' },
     { title: 'Homework', icon: 'book-outline', route: '/fees' },
-
-
-    { title: 'Circulars', icon: 'notifications-outline' ,route: '/fees' },
-
-    { title: 'Remarks', icon: 'chatbubble-outline', route: '/fees' },
     { title: 'Calendar', icon: 'today-outline', route: '/fees' },
     { title: 'Birthdays', icon: 'gift-outline', route: '/fees' },
     { title: 'Examination', icon: 'clipboard-outline', route: '/fees' },
-    { title: 'Communication', icon: 'megaphone-outline', route: '/fees' },
-    { title: 'Announcements', icon: 'volume-high-outline', route: '/fees' }
   ];
 
   constructor(private authService: AuthService, private router: Router) { }
