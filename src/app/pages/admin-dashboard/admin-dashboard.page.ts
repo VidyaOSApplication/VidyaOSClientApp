@@ -37,7 +37,12 @@ export class AdminDashboardPage {
     },
     { title: 'Leave Requests', icon: 'document-text-outline', route: 'admin-pending-leaves' },
     {
-      title: 'Mark Fees',
+      title: 'Collect Fee',
+      icon: 'cash-outline',
+      route: '/admin/collect-fee' // 👈 NEW
+    },
+    {
+      title: 'Fee Management',
       icon: 'cash-outline',
       route: 'admin/fees'
     },

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Generate Monthly Fee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="form-card">
+
+    <ion-item>
+      <ion-label position="stacked">
+        Month <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Select Month"
+                  [(ngModel)]="form.month">
+        <ion-select-option *ngFor="let m of months"
+                           [value]="m.value">
+          {{ m.label }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Year <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select placeholder="Select Year"
+                  [(ngModel)]="form.year">
+        <ion-select-option *ngFor="let y of years"
+                           [value]="y">
+          {{ y }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                [disabled]="loading"
+                (click)="generateFee()">
+
+      <ion-spinner *ngIf="loading" slot="start"></ion-spinner>
+      Generate Monthly Fee
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

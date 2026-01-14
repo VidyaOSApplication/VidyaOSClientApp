@@ -29,7 +29,7 @@ export class AdminFeesPage implements OnInit {
     {
       title: 'Generate Monthly Fees',
       icon: 'calendar-outline',
-      route: '/admin/fees/generate',
+      route: 'fees/generate',
       description: 'Generate fees for a selected month'
     },
     {

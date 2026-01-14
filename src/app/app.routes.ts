@@ -100,6 +100,26 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/admin-fee-structure/admin-fee-structure.page')
         .then(m => m.AdminFeeStructurePage)
-  }
+  },  {
+    path: 'generate-monthly-fee',
+    loadComponent: () => import('./pages/generate-monthly-fee/generate-monthly-fee.page').then( m => m.GenerateMonthlyFeePage)
+  },
+  {
+    path: 'fees/generate',
+    loadComponent: () =>
+      import('./pages/generate-monthly-fee/generate-monthly-fee.page')
+        .then(m => m.GenerateMonthlyFeePage)
+  },
+  {
+    path: 'collect-fee',
+    loadComponent: () => import('./pages/collect-fee/collect-fee.page').then( m => m.CollectFeePage)
+  },
+  {
+    path: 'admin/collect-fee',
+    loadComponent: () =>
+      import('./pages/collect-fee/collect-fee.page')
+        .then(m => m.CollectFeePage)
+  },
+
 
 ];
