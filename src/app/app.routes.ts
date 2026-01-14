@@ -120,6 +120,10 @@ export const routes: Routes = [
       import('./pages/collect-fee/collect-fee.page')
         .then(m => m.CollectFeePage)
   },
+  {
+    path: 'admin/view-attendance',
+    loadComponent: () => import('./pages/view-attendance/view-attendance.page').then( m => m.ViewAttendancePage)
+  },
 
 
 ];

@@ -47,7 +47,7 @@ export class AdminDashboardPage {
       route: 'admin/fees'
     },
 
-    { title: 'Attendance', icon: 'calendar-outline', route: '/fees' },
+    { title: 'Attendance', icon: 'calendar-outline', route: 'admin/view-attendance' },
     { title: 'Homework', icon: 'book-outline', route: '/fees' },
     { title: 'Calendar', icon: 'today-outline', route: '/fees' },
     { title: 'Birthdays', icon: 'gift-outline', route: '/fees' },
@@ -64,6 +64,7 @@ export class AdminDashboardPage {
 
   }
   goTo(route: string) {
+    console.log(route);
     this.router.navigateByUrl(route);
   }
 
