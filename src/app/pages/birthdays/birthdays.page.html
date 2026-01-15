@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>🎂 Today’s Birthdays</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- LOADER -->
+  <ion-spinner *ngIf="loading" class="center-spinner"></ion-spinner>
+
+  <!-- NO BIRTHDAYS -->
+  <div *ngIf="!loading && students.length === 0" class="empty-state">
+    <ion-icon name="happy-outline"></ion-icon>
+    <p>No student birthdays today 🎈</p>
+  </div>
+
+  <!-- STUDENT BIRTHDAYS -->
+  <ion-card *ngFor="let s of students" class="birthday-card">
+
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <img src="https://i.pravatar.cc/150?u={{ s.userId }}" />
+      </ion-avatar>
+
+      <ion-label>
+        <h2>{{ s.name }}</h2>
+        <p>DOB: {{ formatDate(s.dob) }}</p>
+      </ion-label>
+
+      <ion-icon slot="end"
+                name="gift-outline"
+                color="danger">
+      </ion-icon>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>

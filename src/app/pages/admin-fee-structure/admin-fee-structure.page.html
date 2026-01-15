@@ -1,0 +1,85 @@
+<ion-header class="fee-header">
+  <ion-toolbar>
+    <ion-title>Fee Structure</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fee-page">
+
+  <!-- ADD / UPDATE FEE -->
+  <div class="section-card">
+
+    <h3 class="section-title">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      Add / Update Fee
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">Class *</ion-label>
+      <ion-select [(ngModel)]="form.classId" placeholder="Select class">
+        <ion-select-option *ngFor="let c of classes" [value]="c">
+          Class {{ c }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fee Name *</ion-label>
+      <ion-input [(ngModel)]="form.feeName"
+                 placeholder="e.g. Monthly Tuition Fee">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Monthly Amount *</ion-label>
+      <ion-input type="number"
+                 [(ngModel)]="form.monthlyAmount"
+                 placeholder="Enter amount">
+      </ion-input>
+    </ion-item>
+
+    <ion-button expand="block"
+                color="success"
+                class="primary-btn"
+                [disabled]="saving"
+                (click)="saveFee()">
+
+      <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
+      Save Fee Structure
+
+    </ion-button>
+
+  </div>
+
+  <!-- EXISTING FEES -->
+  <div class="section-card" *ngIf="feeStructures.length">
+
+    <h3 class="section-title">
+      <ion-icon name="wallet-outline"></ion-icon>
+      Existing Fee Structures
+    </h3>
+
+    <div class="fee-list">
+
+      <div class="fee-row" *ngFor="let fee of feeStructures">
+
+        <div class="fee-info">
+          <div class="class-name">Class {{ fee.className }}</div>
+          <div class="fee-meta">
+            {{ fee.feeName }} • ₹{{ fee.monthlyAmount }}
+          </div>
+        </div>
+
+        <ion-button fill="clear"
+                    size="small"
+                    (click)="editFee(fee)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

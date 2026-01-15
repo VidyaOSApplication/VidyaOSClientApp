@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pending Leaves</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-spinner *ngIf="loading" class="ion-margin"></ion-spinner>
+
+  <ion-card *ngFor="let leave of leaves">
+    <ion-card-header>
+      <ion-card-title>{{ leave.name }}</ion-card-title>
+      <ion-card-subtitle>
+        {{ leave.role }} | {{ leave.appliedOn }}
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>
+        <strong>{{ leave.fromDate | date:'dd-MM-yyyy' }}</strong>
+        →
+        <strong>{{ leave.toDate | date:'dd-MM-yyyy' }}</strong>
+      </p>
+      <p><strong>Reason:</strong> {{ leave.reason }}</p>
+
+      <div class="action-row">
+        <ion-button color="success"
+                    size="small"
+                    (click)="takeAction(leave, 'Approved')">
+          Approve
+        </ion-button>
+
+        <ion-button color="danger"
+                    size="small"
+                    (click)="takeAction(leave, 'Rejected')">
+          Reject
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="!loading && leaves.length === 0" class="empty-state">
+    🎉 No pending leave requests
+  </div>
+
+</ion-content>

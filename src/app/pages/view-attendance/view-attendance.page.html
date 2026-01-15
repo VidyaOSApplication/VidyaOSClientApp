@@ -1,0 +1,132 @@
+<ion-header class="attendance-header">
+  <ion-toolbar>
+    <ion-title>View Attendance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="attendance-page">
+
+  <!-- FILTER CARD -->
+  <div class="section-card">
+
+    <h3 class="section-title">
+      <ion-icon name="calendar-outline"></ion-icon>
+      Attendance Filters
+    </h3>
+
+    <!-- DATE -->
+    <ion-item>
+      <ion-label position="stacked">Date</ion-label>
+      <ion-input type="date"
+                 [(ngModel)]="date"
+                 [max]="today">
+      </ion-input>
+    </ion-item>
+
+    <!-- CLASS & SECTION -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Class</ion-label>
+            <ion-select [(ngModel)]="classId" placeholder="Select Class">
+              <ion-select-option *ngFor="let c of [1,2,3,4,5,6,7,8,9,10,11,12]"
+                                 [value]="c">
+                Class {{ c }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="stacked">Section</ion-label>
+            <ion-select [(ngModel)]="sectionId" placeholder="Select Section">
+              <ion-select-option [value]="1">A</ion-select-option>
+              <ion-select-option [value]="2">B</ion-select-option>
+              <ion-select-option [value]="3">C</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button expand="block"
+                class="primary-btn"
+                (click)="viewAttendance()">
+      View Attendance
+    </ion-button>
+
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-card" *ngIf="summary">
+
+    <h3 class="section-title">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      Summary
+    </h3>
+
+    <div class="summary-grid">
+      <div class="summary-item primary">
+        <span>Total</span>
+        <strong>{{ summary.total }}</strong>
+      </div>
+
+      <div class="summary-item success">
+        <span>Present</span>
+        <strong>{{ summary.present }}</strong>
+      </div>
+
+      <div class="summary-item danger">
+        <span>Absent</span>
+        <strong>{{ summary.absent }}</strong>
+      </div>
+
+      <div class="summary-item warning">
+        <span>Leave</span>
+        <strong>{{ summary.leave }}</strong>
+      </div>
+
+      <div class="summary-item medium">
+        <span>Not Marked</span>
+        <strong>{{ summary.notMarked }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STUDENT LIST -->
+  <div class="section-card" *ngIf="students.length">
+
+    <h3 class="section-title">
+      <ion-icon name="people-outline"></ion-icon>
+      Student Attendance
+    </h3>
+
+    <div class="student-card"
+         *ngFor="let s of students">
+
+      <!-- LEFT -->
+      <div class="left">
+        <div class="roll-circle">
+          {{ s.rollNo }}
+        </div>
+
+        <div class="info">
+          <div class="name">{{ s.fullName }}</div>
+          <div class="sub">Roll No</div>
+        </div>
+      </div>
+
+      <!-- STATUS -->
+      <ion-badge class="status-badge"
+                 [color]="getStatusColor(s.status)">
+        {{ s.status }}
+      </ion-badge>
+
+    </div>
+
+  </div>
+
+</ion-content>

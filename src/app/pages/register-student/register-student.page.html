@@ -8,48 +8,67 @@
 
   <div class="form-card">
 
-    <!-- ACADEMIC DETAILS -->
+    <!-- ================= ACADEMIC DETAILS ================= -->
     <div class="section-card">
       <h3 class="section-title">
         <ion-icon name="school-outline"></ion-icon>
         Academic Details
       </h3>
 
+      <!-- Academic Year -->
       <ion-item>
         <ion-label position="stacked">
           Academic Year <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-select interface="action-sheet"
+
+        <ion-select interface="popover"
+                    mode="md"
                     placeholder="Select academic year"
                     [(ngModel)]="form.academicYear">
-          <ion-select-option *ngFor="let year of academicYears" [value]="year">
+
+          <ion-select-option *ngFor="let year of academicYears"
+                             [value]="year">
             {{ year }}
           </ion-select-option>
+
         </ion-select>
       </ion-item>
 
+      <!-- Class -->
       <ion-item>
         <ion-label position="stacked">Class *</ion-label>
-        <ion-select interface="action-sheet"
-                    placeholder="Select Class"
+
+        <ion-select interface="popover"
+                    mode="md"
+                    placeholder="Select class"
                     [(ngModel)]="form.classId">
-          <ion-select-option *ngFor="let c of classes" [value]="c">
+
+          <ion-select-option *ngFor="let c of classes"
+                             [value]="c">
             Class {{ c }}
           </ion-select-option>
+
         </ion-select>
       </ion-item>
 
+      <!-- Section -->
       <ion-item>
         <ion-label position="stacked">Section *</ion-label>
-        <ion-select [(ngModel)]="form.sectionId">
+
+        <ion-select interface="popover"
+                    mode="md"
+                    placeholder="Select section"
+                    [(ngModel)]="form.sectionId">
+
           <ion-select-option [value]="1">A</ion-select-option>
           <ion-select-option [value]="2">B</ion-select-option>
           <ion-select-option [value]="3">C</ion-select-option>
+
         </ion-select>
       </ion-item>
     </div>
 
-    <!-- STUDENT DETAILS -->
+    <!-- ================= STUDENT DETAILS ================= -->
     <div class="section-card">
       <h3 class="section-title">
         <ion-icon name="person-outline"></ion-icon>
@@ -58,21 +77,30 @@
 
       <ion-item>
         <ion-label position="stacked">First Name *</ion-label>
-        <ion-input placeholder="Enter first name" [(ngModel)]="form.firstName"></ion-input>
+        <ion-input placeholder="Enter first name"
+                   [(ngModel)]="form.firstName">
+        </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Last Name</ion-label>
-        <ion-input placeholder="Enter last name" [(ngModel)]="form.lastName"></ion-input>
+        <ion-input placeholder="Enter last name"
+                   [(ngModel)]="form.lastName">
+        </ion-input>
       </ion-item>
 
+      <!-- Gender -->
       <ion-item>
         <ion-label position="stacked">Gender *</ion-label>
-        <ion-select interface="action-sheet"
+
+        <ion-select interface="popover"
+                    mode="md"
                     placeholder="Select gender"
                     [(ngModel)]="form.gender">
+
           <ion-select-option value="Male">Male</ion-select-option>
           <ion-select-option value="Female">Female</ion-select-option>
+
         </ion-select>
       </ion-item>
 
@@ -91,7 +119,7 @@
       </ion-text>
     </div>
 
-    <!-- PARENT DETAILS -->
+    <!-- ================= PARENT DETAILS ================= -->
     <div class="section-card">
       <h3 class="section-title">
         <ion-icon name="people-outline"></ion-icon>
@@ -123,7 +151,7 @@
       </ion-text>
     </div>
 
-    <!-- ADDRESS -->
+    <!-- ================= ADDRESS ================= -->
     <div class="section-card">
       <h3 class="section-title">
         <ion-icon name="location-outline"></ion-icon>
@@ -155,7 +183,7 @@
 
 </ion-content>
 
-<!-- STICKY FOOTER -->
+<!-- ================= FOOTER ================= -->
 <ion-footer>
   <ion-toolbar>
     <ion-button expand="block"

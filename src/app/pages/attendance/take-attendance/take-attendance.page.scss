@@ -1,111 +1,211 @@
-ion-item {
-  --padding-start: 12px;
+/* PAGE */
+.attendance-page {
+  --background: #f4f6fb;
+  padding: 14px;
 }
 
-ion-badge {
-  margin-right: 8px;
-}
-ion-checkbox {
-  --size: 22px;
-  --checkbox-background-checked: #0b6f78;
-  --checkmark-color: #ffffff;
-  --border-color: #0b6f78;
-  --border-color-checked: #0b6f78;
-  opacity: 1 !important;
+/* HEADER */
+.attendance-header ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
 }
 
-/* Disabled (Leave students) */
-ion-checkbox[disabled] {
-  --checkbox-background-checked: #b0bec5;
-  --border-color-checked: #b0bec5;
-  opacity: 0.6;
-}
-
-/* Keep label from overpowering checkbox */
-.student-label {
-  max-width: 70%;
-}
-.student-label {
-  max-width: 70%;
-}
-
-ion-badge {
-  font-size: 11px;
-  padding: 4px 8px;
-}
-.save-attendance {
-  padding: 16px;
-  margin-bottom: 20px;
-}
-.student-row {
+/* SECTION TITLE */
+.section-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  margin-bottom: 10px;
-  background: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  gap: 10px;
-}
-
-/* LEFT SIDE */
-.student-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  flex: 1; /* IMPORTANT: allows shrinking */
-  min-width: 0; /* FIXES overflow issue */
-}
-
-.roll {
+  gap: 8px;
+  font-size: 15px;
   font-weight: 600;
-  min-width: 22px;
+  margin-bottom: 12px;
+  //margin-left:15px;
+  color: #1f2937;
 }
-
-.details {
+.section-title1 {
   display: flex;
-  flex-direction: column;
-  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  margin-left:15px;
+  color: #1f2937;
 }
 
-.name {
-  font-size: 14px;
-  font-weight: 500;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+.section-title ion-icon {
+  color: var(--ion-color-primary);
 }
 
-.admission {
-  font-size: 12px;
+/* FILTER CARD */
+.filter-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+}
+
+.filter-card ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.load-btn {
+  margin-top: 4px;
+  height: 48px;
+  font-weight: 600;
+}
+
+/* LOADER */
+.loader {
+  text-align: center;
+  margin-top: 24px;
   color: #6b7280;
 }
 
-/* RIGHT SIDE */
-.status {
+.loader p {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* STUDENT LIST */
+.students-list {
+  margin-top: 8px;
+}
+
+/* STUDENT CARD */
+.student-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* LEFT */
+.student-card .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 14px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 50px;
+}
+
+.details .name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.details .admission {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+/* RIGHT */
+.student-card .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* LEAVE BADGE */
 .leave-badge {
   font-size: 12px;
   padding: 4px 8px;
-  background: #fde68a;
+  background: #fef3c7;
   color: #92400e;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* NO DATA */
+.no-data {
+  margin-top: 40px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.no-data ion-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+/* FOOTER */
+.attendance-footer {
+  padding: 10px 14px;
+  background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.attendance-footer ion-button {
+  height: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 14px;
+}
+ion-item {
+  --disabled-opacity: 1;
+  opacity: 1 !important;
+}
+
+/* Fix ion-select text after selection */
+ion-select {
+  --color: #111827; /* dark text */
+  --placeholder-color: #6b7280;
+  --placeholder-opacity: 1;
+  opacity: 1 !important;
+}
+
+/* VERY IMPORTANT: selected value text */
+ion-select::part(text) {
+  color: #111827 !important;
+  opacity: 1 !important;
   font-weight: 500;
 }
 
-/* MOBILE FIX */
-@media (max-width: 480px) {
-  .student-row {
-    padding: 10px;
-  }
+/* When value exists (Ionic adds this class) */
+ion-item.item-has-value ion-select::part(text) {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
 
-  .name {
-    font-size: 13px;
-  }
+/* Dropdown arrow */
+ion-select::part(icon) {
+  color: #374151 !important;
+  opacity: 1 !important;
+}
+ion-checkbox {
+  --size: 22px;
+  --border-width: 2px;
+  --border-radius: 6px;
+  /* UNCHECKED STATE */
+  --border-color: #9ca3af; /* visible gray */
+  --background: #ffffff;
+  /* CHECKED STATE */
+  --checkmark-color: #ffffff;
+  --background-checked: #0ea5a4; /* teal */
+  --border-color-checked: #0ea5a4;
+}
+
+/* Ensure visibility inside cards */
+.student-card ion-checkbox {
+  margin-left: 6px;
 }

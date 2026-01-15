@@ -71,6 +71,68 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/register-teacher/register-teacher.page')
         .then(m => m.RegisterTeacherPage)
+  },
+  {
+    path: 'student-apply-leave',
+    loadComponent: () => import('./pages/student-apply-leave/student-apply-leave.page').then( m => m.StudentApplyLeavePage)
+  },
+  {
+    path: 'student/apply-leave',
+    loadComponent: () =>
+      import('./pages/student-apply-leave/student-apply-leave.page')
+        .then(m => m.StudentApplyLeavePage)
+  },
+  {
+    path: 'admin-pending-leaves',
+    loadComponent: () => import('./pages/admin-pending-leaves/admin-pending-leaves.page').then( m => m.AdminPendingLeavesPage)
+  },  {
+    path: 'admin-fees',
+    loadComponent: () => import('./pages/admin-fees/admin-fees.page').then( m => m.AdminFeesPage)
+  },
+  {
+    path: 'admin/fees',
+    loadComponent: () =>
+      import('./pages/admin-fees/admin-fees.page')
+        .then(m => m.AdminFeesPage)
+  },
+  {
+    path: 'admin/fees/structure',
+    loadComponent: () =>
+      import('./pages/admin-fee-structure/admin-fee-structure.page')
+        .then(m => m.AdminFeeStructurePage)
+  },  {
+    path: 'generate-monthly-fee',
+    loadComponent: () => import('./pages/generate-monthly-fee/generate-monthly-fee.page').then( m => m.GenerateMonthlyFeePage)
+  },
+  {
+    path: 'fees/generate',
+    loadComponent: () =>
+      import('./pages/generate-monthly-fee/generate-monthly-fee.page')
+        .then(m => m.GenerateMonthlyFeePage)
+  },
+  {
+    path: 'collect-fee',
+    loadComponent: () => import('./pages/collect-fee/collect-fee.page').then( m => m.CollectFeePage)
+  },
+  {
+    path: 'admin/collect-fee',
+    loadComponent: () =>
+      import('./pages/collect-fee/collect-fee.page')
+        .then(m => m.CollectFeePage)
+  },
+  {
+    path: 'admin/view-attendance',
+    loadComponent: () => import('./pages/view-attendance/view-attendance.page').then( m => m.ViewAttendancePage)
+  },
+  {
+    path: 'birthdays',
+    loadComponent: () => import('./pages/birthdays/birthdays.page').then( m => m.BirthdaysPage)
+  },
+  {
+    path: 'birthdays',
+    loadComponent: () =>
+      import('./pages/birthdays/birthdays.page')
+        .then(m => m.BirthdaysPage)
   }
 
 

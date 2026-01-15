@@ -1,0 +1,229 @@
+/* PAGE */
+.attendance-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.attendance-header ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+.section-title ion-icon {
+  color: var(--ion-color-primary);
+}
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.primary-btn {
+  height: 48px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* SUMMARY */
+.summary-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.summary-item {
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+}
+
+.summary-item span {
+  font-size: 12px;
+  color: inherit;
+}
+
+.summary-item strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* SUMMARY COLORS */
+.summary-item.primary {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.summary-item.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.summary-item.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.summary-item.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.summary-item.medium {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* STUDENT CARD */
+.student-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f9fafb;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+}
+
+/* LEFT */
+.student-card .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ROLL CIRCLE */
+.roll-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #075985;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* INFO */
+.student-card .info .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.student-card .info .sub {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* STATUS BADGE */
+.status-badge {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* BADGE COLORS */
+ion-badge[color="success"] {
+  --background: #22c55e;
+  color: #ffffff;
+}
+
+ion-badge[color="danger"] {
+  --background: #ef4444;
+  color: #ffffff;
+}
+
+ion-badge[color="warning"] {
+  --background: #f59e0b;
+  color: #ffffff;
+}
+ion-select {
+  --color: #111827; /* dark text */
+  --placeholder-color: #6b7280;
+  --placeholder-opacity: 1;
+  opacity: 1 !important;
+}
+
+/* VERY IMPORTANT: selected value text */
+ion-select::part(text) {
+  color: #111827 !important;
+  opacity: 1 !important;
+  font-weight: 500;
+}
+
+/* When value exists (Ionic adds this class) */
+ion-item.item-has-value ion-select::part(text) {
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+/* Dropdown arrow */
+ion-select::part(icon) {
+  color: #374151 !important;
+  opacity: 1 !important;
+}
+
+ion-checkbox {
+  --size: 22px;
+  --border-width: 2px;
+  --border-radius: 6px;
+  /* UNCHECKED STATE */
+  --border-color: #9ca3af; /* visible gray */
+  --background: #ffffff;
+  /* CHECKED STATE */
+  --checkmark-color: #ffffff;
+  --background-checked: #0ea5a4; /* teal */
+  --border-color-checked: #0ea5a4;
+}
+ion-item.item-interactive {
+  opacity: 1 !important;
+}
+
+/* When select has value */
+ion-item.item-has-value {
+  opacity: 1 !important;
+}
+
+/* Also cover focus/active states */
+ion-item.item-has-focus {
+  opacity: 1 !important;
+}

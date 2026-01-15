@@ -1,0 +1,47 @@
+<ion-header class="fees-header-bar">
+  <ion-toolbar>
+    <ion-title>Fees Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fees-page">
+
+  <!-- HEADER / INTRO CARD -->
+  <div class="fees-header">
+    <ion-icon name="wallet-outline"></ion-icon>
+    <h2>Manage School Fees</h2>
+    <p>Configure, generate and collect student fees</p>
+  </div>
+
+  <!-- FEES MENU GRID -->
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="12"
+               size-md="6"
+               *ngFor="let item of feeMenus">
+
+        <div class="fee-card clickable"
+             (click)="goTo(item.route)">
+
+          <div class="icon-box">
+            <ion-icon [name]="item.icon"></ion-icon>
+          </div>
+
+          <div class="fee-info">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+
+          <ion-icon class="arrow"
+                    name="chevron-forward-outline">
+          </ion-icon>
+
+        </div>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
