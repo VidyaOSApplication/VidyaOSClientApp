@@ -50,7 +50,7 @@ export class AdminDashboardPage {
     { title: 'Attendance', icon: 'calendar-outline', route: 'admin/view-attendance' },
     { title: 'Homework', icon: 'book-outline', route: '/fees' },
     { title: 'Calendar', icon: 'today-outline', route: '/fees' },
-    { title: 'Birthdays', icon: 'gift-outline', route: '/fees' },
+    { title: 'Birthdays', icon: 'gift-outline', route: '/birthdays' },
     { title: 'Examination', icon: 'clipboard-outline', route: '/fees' },
   ];
 

@@ -124,6 +124,16 @@ export const routes: Routes = [
     path: 'admin/view-attendance',
     loadComponent: () => import('./pages/view-attendance/view-attendance.page').then( m => m.ViewAttendancePage)
   },
+  {
+    path: 'birthdays',
+    loadComponent: () => import('./pages/birthdays/birthdays.page').then( m => m.BirthdaysPage)
+  },
+  {
+    path: 'birthdays',
+    loadComponent: () =>
+      import('./pages/birthdays/birthdays.page')
+        .then(m => m.BirthdaysPage)
+  }
 
 
 ];
