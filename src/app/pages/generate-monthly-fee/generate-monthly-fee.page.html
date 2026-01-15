@@ -1,0 +1,69 @@
+<ion-header class="fee-header">
+  <ion-toolbar>
+    <ion-title>Generate Monthly Fee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fee-page">
+
+  <!-- INFO HEADER -->
+  <div class="info-card">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <h2>Monthly Fee Generation</h2>
+    <p>
+      Select month and year to generate fees for all applicable students
+    </p>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="section-card">
+
+    <h3 class="section-title">
+      <ion-icon name="settings-outline"></ion-icon>
+      Fee Period
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Month <ion-text color="danger">*</ion-text>
+      </ion-label>
+
+      <ion-select placeholder="Select month"
+                  [(ngModel)]="form.month">
+        <ion-select-option *ngFor="let m of months"
+                           [value]="m.value">
+          {{ m.label }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Year <ion-text color="danger">*</ion-text>
+      </ion-label>
+
+      <ion-select placeholder="Select year"
+                  [(ngModel)]="form.year">
+        <ion-select-option *ngFor="let y of years"
+                           [value]="y">
+          {{ y }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+</ion-content>
+
+<!-- STICKY FOOTER -->
+<ion-footer class="fee-footer">
+  <ion-button expand="block"
+              color="success"
+              [disabled]="loading"
+              (click)="generateFee()">
+
+    <ion-spinner *ngIf="loading" slot="start"></ion-spinner>
+    Generate Monthly Fee
+
+  </ion-button>
+</ion-footer>

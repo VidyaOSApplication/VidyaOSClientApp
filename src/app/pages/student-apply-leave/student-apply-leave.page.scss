@@ -1,8 +1,16 @@
-ion-content {
+/* PAGE */
+.leave-page {
   --background: #f4f6fb;
 }
 
-/* MAIN FORM CONTAINER */
+/* HEADER */
+.leave-header ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
+}
+
+/* FORM CONTAINER */
 .form-card {
   padding: 16px;
   padding-bottom: 100px; // space for footer
@@ -25,7 +33,7 @@ ion-content {
   margin: 0 0 14px;
   font-size: 15px;
   font-weight: 600;
-  color: #2c2c2c;
+  color: #1f2937;
 }
 
 .section-title ion-icon {
@@ -38,7 +46,7 @@ ion-item {
   --background: transparent;
   --highlight-height: 0;
   --min-height: 52px;
-  border: 1px solid #e4e7ec;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   margin-bottom: 12px;
 }
@@ -47,10 +55,15 @@ ion-item.item-has-focus {
   border-color: var(--ion-color-primary);
 }
 
-/* INPUT TEXT */
+/* INPUTS */
 ion-input,
-ion-select {
+ion-textarea {
   font-size: 14px;
+}
+
+/* TEXTAREA */
+ion-textarea {
+  --padding-top: 10px;
 }
 
 /* ERROR TEXT */
@@ -62,55 +75,16 @@ ion-text[color="danger"] {
 }
 
 /* FOOTER */
-ion-footer ion-toolbar {
-  --background: #ffffff;
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+.leave-footer {
   padding: 10px 14px;
+  background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* BUTTON */
-ion-button {
-  height: 52px;
+.leave-footer ion-button {
+  height: 50px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 14px;
-}
-ion-item {
-  --background: transparent;
-}
-ion-item {
-  --disabled-opacity: 1;
-  opacity: 1 !important;
-}
-
-/* Fix select text color */
-ion-select {
-  --color: #111827;
-  --placeholder-color: #6b7280;
-  --placeholder-opacity: 1;
-  opacity: 1 !important;
-}
-
-/* VERY IMPORTANT: selected value text */
-ion-select::part(text) {
-  color: #111827 !important;
-  opacity: 1 !important;
-  font-weight: 500;
-}
-
-/* Dropdown arrow */
-ion-select::part(icon) {
-  color: #374151 !important;
-  opacity: 1 !important;
-}
-
-/* When value exists */
-ion-item.item-has-value ion-select::part(text) {
-  color: #111827 !important;
-}
-
-/* Labels should never fade */
-ion-label {
-  color: #111827 !important;
-  opacity: 1 !important;
 }

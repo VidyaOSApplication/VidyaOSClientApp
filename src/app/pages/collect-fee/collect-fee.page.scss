@@ -1,0 +1,211 @@
+/* PAGE */
+.fee-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.fee-header ion-toolbar {
+  --background: #e0f2fe;
+  --color: #075985;
+  font-weight: 700;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+.section-title ion-icon {
+  color: var(--ion-color-primary);
+}
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.primary-btn {
+  height: 48px;
+  font-weight: 600;
+}
+
+/* STUDENT CARD */
+.student-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+  background: #f9fafb;
+  margin-bottom: 10px;
+}
+
+.student-card .name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.student-card .meta {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+/* EMPTY */
+.empty-text {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* SELECTED STUDENT */
+.selected-student {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.student-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* FEES */
+.fee-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  margin-bottom: 8px;
+}
+
+.fee-info .month {
+  font-weight: 600;
+  color: #111827;
+}
+
+.fee-info .amount {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+/* TOTAL */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  margin-top: 8px;
+  border-top: 1px dashed #e5e7eb;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* FOOTER */
+.fee-footer {
+  padding: 10px 14px;
+  background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.fee-footer ion-button {
+  height: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 14px;
+}
+ion-checkbox {
+  --size: 22px;
+  --border-width: 2px;
+  --border-radius: 6px;
+  /* UNCHECKED */
+  --border-color: #9ca3af; /* visible gray */
+  --background: #ffffff;
+  /* CHECKED */
+  --background-checked: #0ea5a4;
+  --border-color-checked: #0ea5a4;
+  --checkmark-color: #ffffff;
+}
+
+/* DISABLED (Paid months) */
+ion-checkbox[disabled] {
+  --border-color: #d1d5db;
+  --background: #f3f4f6;
+  opacity: 0.9;
+}
+
+/* Align inside fee row */
+.fee-row ion-checkbox {
+  margin-top: 2px;
+}
+/* ===============================
+   PAID BADGE + CHECKBOX STYLING
+   =============================== */
+
+.fee-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* PAID BADGE */
+.paid-badge {
+  margin-left: auto;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #bbf7d0;
+}
+
+/* CHECKBOX VISIBILITY */
+ion-checkbox {
+  --size: 22px;
+  --border-width: 2px;
+  --border-radius: 6px;
+  /* Unchecked */
+  --border-color: #9ca3af;
+  --background: #ffffff;
+  /* Checked */
+  --background-checked: #16a34a;
+  --border-color-checked: #16a34a;
+  --checkmark-color: #ffffff;
+}
+
+/* Disabled (Paid) checkbox */
+ion-checkbox[disabled] {
+  opacity: 1;
+}
+
+/* Fee info text */
+.fee-info .month {
+  font-weight: 600;
+  color: #111827;
+}
+
+.fee-info .amount {
+  font-size: 12.5px;
+  color: #6b7280;
+}

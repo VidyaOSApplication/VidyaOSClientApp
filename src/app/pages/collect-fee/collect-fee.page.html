@@ -1,0 +1,167 @@
+<ion-header class="fee-header">
+  <ion-toolbar>
+    <ion-title>Collect Fee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fee-page">
+
+  <!-- STEP 1: CLASS & SECTION -->
+  <div class="section-card">
+
+    <h3 class="section-title">
+      <ion-icon name="school-outline"></ion-icon>
+      Select Class & Section
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">Class</ion-label>
+      <ion-select [(ngModel)]="classId" placeholder="Select class">
+        <ion-select-option *ngFor="let c of classes" [value]="c">
+          Class {{ c }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Section</ion-label>
+      <ion-select [(ngModel)]="sectionId" placeholder="Select section">
+        <ion-select-option *ngFor="let s of sections" [value]="s.id">
+          {{ s.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block"
+                class="primary-btn"
+                [disabled]="!classId || !sectionId"
+                (click)="loadStudents()">
+      Load Students
+    </ion-button>
+
+  </div>
+
+  <!-- STEP 2: STUDENT LIST -->
+  <div class="section-card" *ngIf="showStudentList">
+
+    <h3 class="section-title">
+      <ion-icon name="people-outline"></ion-icon>
+      Students
+    </h3>
+
+    <div *ngIf="students.length; else noStudents">
+
+      <div class="student-card" *ngFor="let s of students">
+
+        <div class="info">
+          <div class="name">{{ s.fullName }}</div>
+          <div class="meta">
+            Roll {{ s.rollNo }} • {{ s.admissionNo }}
+          </div>
+        </div>
+
+        <ion-button size="small"
+                    color="success"
+                    (click)="loadFees(s)">
+          Select
+        </ion-button>
+
+      </div>
+
+    </div>
+
+    <ng-template #noStudents>
+      <p class="empty-text">No students found</p>
+    </ng-template>
+
+  </div>
+
+  <!-- STEP 3: SELECTED STUDENT -->
+  <div class="section-card selected-student" *ngIf="selectedStudent">
+
+    <h3 class="section-title">
+      <ion-icon name="person-outline"></ion-icon>
+      Selected Student
+    </h3>
+
+    <div class="student-summary">
+      <div>
+        <strong>{{ selectedStudent.fullName }}</strong>
+        <p>
+          Roll {{ selectedStudent.rollNo }} •
+          {{ selectedStudent.admissionNo }}
+        </p>
+      </div>
+
+      <ion-button fill="outline"
+                  size="small"
+                  color="medium"
+                  (click)="changeStudent()">
+        Change
+      </ion-button>
+    </div>
+
+  </div>
+
+  <!-- STEP 4: FEES -->
+  <div class="section-card" *ngIf="selectedStudent && fees.length">
+
+    <h3 class="section-title">
+      <ion-icon name="wallet-outline"></ion-icon>
+      Pending Fees
+    </h3>
+
+    <!-- 🔴 f EXISTS ONLY INSIDE THIS ngFor -->
+    <div class="fee-row" *ngFor="let f of fees">
+
+      <ion-checkbox [checked]="f.status === 'Paid' || selectedMonths.includes(f.feeMonth)"
+                    [disabled]="f.status === 'Paid'"
+                    (ionChange)="toggleMonth(f.feeMonth, $event.detail.checked)">
+      </ion-checkbox>
+
+      <div class="fee-info">
+        <div class="month">
+          {{ formatMonth(f.feeMonth) }}
+        </div>
+        <div class="amount">
+          ₹{{ f.amount }}
+        </div>
+      </div>
+
+      <span class="paid-badge" *ngIf="f.status === 'Paid'">
+        Paid
+      </span>
+
+    </div>
+
+    <!-- TOTAL -->
+    <div class="total-row">
+      <span>Total</span>
+      <strong>₹{{ totalAmount }}</strong>
+    </div>
+
+    <!-- PAYMENT MODE -->
+    <ion-item>
+      <ion-label position="stacked">Payment Mode</ion-label>
+      <ion-select [(ngModel)]="paymentMode">
+        <ion-select-option value="Cash">Cash</ion-select-option>
+        <ion-select-option value="Online">Online</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+</ion-content>
+
+<!-- FOOTER -->
+<ion-footer *ngIf="selectedStudent && fees.length" class="fee-footer">
+  <ion-button expand="block"
+              color="success"
+              [disabled]="saving"
+              (click)="collectFee()">
+
+    <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
+    Collect Fee
+
+  </ion-button>
+</ion-footer>
