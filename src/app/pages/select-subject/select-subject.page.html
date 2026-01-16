@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Select Subject</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- INFO CARD -->
+  <ion-card>
+    <ion-card-content>
+      <p><strong>Exam:</strong> {{ examId }}</p>
+      <p><strong>Class:</strong> {{ classId }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- SUBJECT LIST -->
+  <ion-list *ngIf="subjects.length > 0">
+    <ion-item button
+              detail
+              *ngFor="let s of subjects"
+              (click)="selectSubject(s)">
+
+      <ion-label>
+        <h3>{{ s.subjectName }}</h3>
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
+
+  <!-- EMPTY STATE -->
+  <div *ngIf="subjects.length === 0"
+       class="ion-text-center ion-margin-top">
+    <ion-icon name="book-outline"
+              style="font-size: 48px; opacity: 0.5">
+    </ion-icon>
+    <p>No subjects assigned for this class</p>
+  </div>
+
+</ion-content>

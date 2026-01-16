@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Enter Marks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-card-content>
+      <p><strong>Exam ID:</strong> {{ examId }}</p>
+      <p><strong>Class:</strong> {{ classId }}</p>
+      <p><strong>Subject ID:</strong> {{ subjectId }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Students</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item *ngFor="let s of students; let i = index">
+        <ion-label>
+          <h3>{{ s.rollNo }} - {{ s.name }}</h3>
+        </ion-label>
+
+        <ion-input type="number"
+                   placeholder="Marks"
+                   [(ngModel)]="marks[i].marksObtained">
+        </ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                (click)="saveMarks()">
+      Save Marks
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

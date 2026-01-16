@@ -51,7 +51,7 @@ export class AdminDashboardPage {
     { title: 'Homework', icon: 'book-outline', route: '/fees' },
     { title: 'Calendar', icon: 'today-outline', route: '/fees' },
     { title: 'Birthdays', icon: 'gift-outline', route: '/birthdays' },
-    { title: 'Examination', icon: 'clipboard-outline', route: '/fees' },
+    { title: 'Examination', icon: 'clipboard-outline', route: 'admin/exam-dashboard' },
   ];
 
   constructor(private authService: AuthService, private router: Router) { }

@@ -1,0 +1,84 @@
+<ion-header class="exam-header">
+  <ion-toolbar>
+    <ion-title>Create Exam</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="exam-page">
+
+  <!-- EXAM DETAILS -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="clipboard-outline"></ion-icon>
+      Exam Details
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Exam Name <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input placeholder="e.g. Mid Term Examination"
+                 [(ngModel)]="examName">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Exam Type <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-select interface="action-sheet"
+                  placeholder="Select exam type"
+                  [(ngModel)]="examType">
+        <ion-select-option value="Unit Test">Unit Test</ion-select-option>
+        <ion-select-option value="Mid Term">Mid Term</ion-select-option>
+        <ion-select-option value="Final">Final</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Academic Year <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input readonly [(ngModel)]="academicYear"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">
+        Exam Date <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input type="date" [(ngModel)]="examDate"></ion-input>
+    </ion-item>
+  </div>
+
+  <!-- CLASS SELECTION -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="school-outline"></ion-icon>
+      Select Classes
+    </h3>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let c of classes">
+          <ion-item lines="none" class="checkbox-item">
+            <ion-checkbox slot="start"
+                          (ionChange)="toggleClass(c, $event.detail.checked)">
+            </ion-checkbox>
+            <ion-label>Class {{ c }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                (click)="createExam()">
+      Create Exam
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

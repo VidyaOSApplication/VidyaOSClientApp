@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Assign Subjects</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Exam Info -->
+  <ion-card>
+    <ion-card-content>
+      <p><strong>Exam:</strong> {{ examName }}</p>
+      <p><strong>Class:</strong> {{ classId }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Available Subjects -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Subjects</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item *ngFor="let s of subjects">
+        <ion-label>{{ s.subjectName }}</ion-label>
+        <ion-button size="small" (click)="addSubject(s)">
+          Add
+        </ion-button>
+      </ion-item>
+
+      <p *ngIf="subjects.length === 0" class="ion-text-center ion-margin-top">
+        No subjects available
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Selected Subjects -->
+  <ion-card *ngIf="selectedSubjects.length > 0">
+    <ion-card-header>
+      <ion-card-title>Selected Subjects</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content *ngFor="let sub of selectedSubjects">
+
+      <ion-item>
+        <ion-label>{{ sub.subjectName }}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Exam Date</ion-label>
+        <ion-input type="date"
+                   [(ngModel)]="sub.examDate">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Max Marks</ion-label>
+        <ion-input type="number"
+                   [(ngModel)]="sub.maxMarks">
+        </ion-input>
+      </ion-item>
+
+      <!--<ion-divider class="ion-margin-vertical"></ion-divider>-->
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block"
+                color="success"
+                (click)="save()">
+      Save Subjects
+    </ion-button>

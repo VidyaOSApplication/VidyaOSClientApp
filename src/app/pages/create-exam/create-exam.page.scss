@@ -1,0 +1,97 @@
+/* PAGE */
+.exam-page {
+  --background: #f4f6fb;
+  padding: 16px;
+  padding-bottom: 90px;
+}
+
+/* HEADER */
+.exam-header ion-toolbar {
+  --background: linear-gradient( 135deg, var(--ion-color-primary), #4f8cff );
+  --color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* SECTION TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+  .section-title ion-icon {
+    font-size: 18px;
+    color: var(--ion-color-primary);
+  }
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  opacity: 1 !important;
+}
+
+  /* FOCUS STATE */
+  ion-item.item-has-focus {
+    border-color: var(--ion-color-primary);
+  }
+
+  /* FIX SELECT FADE (IMPORTANT) */
+  ion-item.item-interactive,
+  ion-item.item-has-value {
+    opacity: 1 !important;
+  }
+
+/* SELECT TEXT */
+ion-select {
+  --color: #111827;
+  --placeholder-opacity: 1;
+}
+
+  ion-select::part(text) {
+    color: #111827 !important;
+    opacity: 1 !important;
+    font-weight: 500;
+  }
+
+  ion-select::part(icon) {
+    color: #374151 !important;
+  }
+
+/* CHECKBOX ITEM */
+.checkbox-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 6px 8px;
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+ion-footer ion-toolbar {
+  --background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 14px;
+}
+
+/* BUTTON */
+ion-button {
+  height: 52px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+}
