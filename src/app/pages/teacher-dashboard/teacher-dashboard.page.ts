@@ -37,7 +37,7 @@ export class TeacherDashboardPage implements OnInit {
     },
     { title: 'Homework', icon: 'book-outline' },
     { title: 'Enter Marks', icon: 'create-outline' },
-    { title: 'Student Remarks', icon: 'chatbubble-outline' },
+    { title: 'Examination', icon: 'clipboard-outline', route: '/admin/exam-dashboard' },
     { title: 'Timetable', icon: 'time-outline' },
     { title: 'Apply Leave', icon: 'document-text-outline' },
     {

@@ -6,25 +6,25 @@
 
 /* HEADER */
 .assign-header ion-toolbar {
-  --background: linear-gradient(135deg, #2563eb, #3b82f6);
+  --background: linear-gradient(135deg, #0ea5a4, #0284c7);
   --color: #ffffff;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-/* EXAM INFO CARD */
+/* EXAM INFO */
 .exam-info-card {
-  background: linear-gradient(135deg, #0ea5a4, #14b8a6);
-  color: #ffffff;
+  background: linear-gradient(135deg, #0ea5a4, #0284c7);
+  //border-radius: 20px;
   padding: 18px;
-  border-radius: 18px;
+  color: #ffffff;
   margin-bottom: 18px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 14px 30px rgba(2, 132, 199, 0.35);
 }
 
 .exam-info h2 {
   margin: 0;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .exam-info p {
@@ -54,64 +54,53 @@
 }
 
   .section-title ion-icon {
-    color: var(--ion-color-primary);
+    color: #0284c7;
+    font-size: 18px;
   }
 
-/* AVAILABLE SUBJECTS */
+/* SUBJECT LIST */
 .subject-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
+/* SUBJECT PILL */
 .subject-pill {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: #eff6ff;
-  color: #1e40af;
+  background: #eef6ff;
+  color: #1d4ed8;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
+  border: none;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
   .subject-pill ion-icon {
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  .subject-pill:hover {
-    background: #dbeafe;
-  }
-
-/* EMPTY */
-.empty-text {
-  text-align: center;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-/* SELECTED SUBJECT CARD */
+/* SELECTED SUBJECT */
 .selected-subject-card {
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 14px;
-  margin-bottom: 16px;
-  background: #f9fafb;
+  margin-bottom: 14px;
 }
 
 .subject-header {
+  font-weight: 600;
+  color: #0284c7;
   margin-bottom: 10px;
-  font-size: 14px;
-  color: #111827;
 }
 
 /* FORM ITEMS */
 ion-item {
   --background: transparent;
-  --highlight-height: 0;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -120,13 +109,14 @@ ion-item {
 /* FOOTER */
 .footer-bar {
   --background: #ffffff;
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
   padding: 10px 14px;
 }
 
-ion-button {
+/* PRIMARY BUTTON */
+.primary-btn {
   height: 52px;
-  font-size: 15px;
-  font-weight: 600;
   border-radius: 14px;
+  font-weight: 600;
+  --background: linear-gradient(135deg, #0ea5a4, #0284c7);
 }

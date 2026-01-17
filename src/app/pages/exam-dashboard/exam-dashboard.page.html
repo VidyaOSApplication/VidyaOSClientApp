@@ -1,38 +1,44 @@
-<ion-header translucent="true">
-  <ion-toolbar class="exam-toolbar">
+<ion-header class="exam-header">
+  <ion-toolbar>
     <ion-title>Examinations</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen class="exam-page">
+<ion-content class="exam-page">
 
-  <!-- HERO / INTRO CARD -->
-  <div class="exam-hero">
-    <div class="hero-icon">
-      <ion-icon name="school-outline"></ion-icon>
+  <!-- HERO (LIGHT & CLEAN) -->
+  <!--<div class="exam-hero">
+    <ion-icon name="school-outline"></ion-icon>
+    <div>
+      <h2>Examination Management</h2>
+      <p>Create exams, assign subjects & manage marks</p>
     </div>
-    <h2>Examination Management</h2>
-    <p>Create exams, assign subjects, and manage student marks seamlessly</p>
-  </div>
+  </div>-->
 
-  <!-- DASHBOARD -->
-  <div class="exam-grid">
-    <div class="exam-card"
+  <!-- ACTIONS -->
+  <div class="exam-actions">
+
+    <div class="action-card"
          *ngFor="let m of menus"
          (click)="goTo(m.route)">
-      <div class="card-left">
+
+      <div class="left">
         <div class="icon-circle">
           <ion-icon [name]="m.icon"></ion-icon>
         </div>
 
         <div class="text">
           <h3>{{ m.title }}</h3>
-          <span>Tap to manage</span>
+          <span>Manage</span>
         </div>
       </div>
 
-      <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+      <ion-icon name="chevron-forward-outline"
+                class="arrow">
+      </ion-icon>
+
     </div>
+
   </div>
 
 </ion-content>

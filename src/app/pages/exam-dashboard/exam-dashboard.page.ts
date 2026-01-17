@@ -27,16 +27,6 @@ export class ExamDashboardPage {
       title: 'Exam List',
       icon: 'book-outline',
       route: 'admin/exam-list'
-    },
-    {
-      title: 'Assign Subjects',
-      icon: 'book-outline',
-      route: 'admin/assign-subjects'
-    },
-    {
-      title: 'Enter Marks',
-      icon: 'clipboard-outline',
-      route: 'admin/enter-marks'
     }
   ];
 
