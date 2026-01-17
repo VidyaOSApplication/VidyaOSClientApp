@@ -1,0 +1,127 @@
+/* PAGE */
+.subject-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.subject-header ion-toolbar {
+  --background: linear-gradient(135deg, #0f766e, #14b8a6);
+  --color: #ffffff;
+  font-weight: 600;
+}
+
+/* EXAM INFO CARD */
+.exam-info-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-item span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 15px;
+  color: #111827;
+}
+
+/* SECTION */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+  .section-title ion-icon {
+    color: var(--ion-color-primary);
+  }
+
+/* SUBJECT CARD */
+.subject-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #f9fafb;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+  .subject-card:active {
+    transform: scale(0.97);
+  }
+
+  /* LEFT */
+  .subject-card .left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+/* ICON */
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #075985;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .icon-circle ion-icon {
+    font-size: 20px;
+  }
+
+/* TEXT */
+.details .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.details .sub {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* CHEVRON */
+.chevron {
+  font-size: 20px;
+  color: #9ca3af;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 22px 0;
+  color: #6b7280;
+}
+
+  .empty-state ion-icon {
+    font-size: 30px;
+    margin-bottom: 6px;
+  }

@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-enter-marks',
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
+  styleUrls: ['./enter-marks.page.scss'],
   templateUrl: './enter-marks.page.html'
 })
 export class EnterMarksPage implements OnInit {

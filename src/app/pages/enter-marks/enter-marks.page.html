@@ -1,42 +1,63 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="marks-header">
+  <ion-toolbar>
     <ion-title>Enter Marks</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="marks-page">
 
-  <ion-card>
-    <ion-card-content>
-      <p><strong>Exam ID:</strong> {{ examId }}</p>
-      <p><strong>Class:</strong> {{ classId }}</p>
-      <p><strong>Subject ID:</strong> {{ subjectId }}</p>
-    </ion-card-content>
-  </ion-card>
+  <!-- EXAM INFO -->
+  <div class="exam-info-card">
+    <div class="info-row">
+      <span>Exam ID</span>
+      <strong>{{ examId }}</strong>
+    </div>
+    <div class="info-row">
+      <span>Class</span>
+      <strong>{{ classId }}</strong>
+    </div>
+    <div class="info-row">
+      <span>Subject</span>
+      <strong>{{ subjectId }}</strong>
+    </div>
+  </div>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Students</ion-card-title>
-    </ion-card-header>
+  <!-- STUDENT LIST -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="people-outline"></ion-icon>
+      Students
+    </h3>
 
-    <ion-card-content>
-      <ion-item *ngFor="let s of students; let i = index">
-        <ion-label>
-          <h3>{{ s.rollNo }} - {{ s.name }}</h3>
-        </ion-label>
+    <div class="student-card"
+         *ngFor="let s of students; let i = index">
 
+      <!-- LEFT -->
+      <div class="left">
+        <div class="roll-circle">{{ s.rollNo }}</div>
+
+        <div class="details">
+          <div class="name">{{ s.name }}</div>
+          <div class="sub">Roll No {{ s.rollNo }}</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right">
         <ion-input type="number"
                    placeholder="Marks"
                    [(ngModel)]="marks[i].marksObtained">
         </ion-input>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+      </div>
+
+    </div>
+  </div>
 
 </ion-content>
 
+<!-- FOOTER -->
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="save-footer">
     <ion-button expand="block"
                 color="success"
                 (click)="saveMarks()">

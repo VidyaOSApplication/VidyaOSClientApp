@@ -1,50 +1,53 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="assign-header">
+  <ion-toolbar>
     <ion-title>Assign Subjects</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="assign-page">
 
-  <!-- Exam Info -->
-  <ion-card>
-    <ion-card-content>
-      <p><strong>Exam:</strong> {{ examName }}</p>
-      <p><strong>Class:</strong> {{ classId }}</p>
-    </ion-card-content>
-  </ion-card>
+  <!-- EXAM INFO -->
+  <div class="exam-info-card">
+    <div class="exam-info">
+      <h2>{{ examName }}</h2>
+      <p>Class {{ classId }}</p>
+    </div>
+  </div>
 
-  <!-- Available Subjects -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Subjects</ion-card-title>
-    </ion-card-header>
+  <!-- AVAILABLE SUBJECTS -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="book-outline"></ion-icon>
+      Available Subjects
+    </h3>
 
-    <ion-card-content>
-      <ion-item *ngFor="let s of subjects">
-        <ion-label>{{ s.subjectName }}</ion-label>
-        <ion-button size="small" (click)="addSubject(s)">
-          Add
-        </ion-button>
-      </ion-item>
+    <div class="subject-list" *ngIf="subjects.length > 0">
+      <div class="subject-pill"
+           *ngFor="let s of subjects"
+           (click)="addSubject(s)">
+        <span>{{ s.subjectName }}</span>
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </div>
+    </div>
 
-      <p *ngIf="subjects.length === 0" class="ion-text-center ion-margin-top">
-        No subjects available
-      </p>
-    </ion-card-content>
-  </ion-card>
+    <div class="empty-text" *ngIf="subjects.length === 0">
+      No subjects available
+    </div>
+  </div>
 
-  <!-- Selected Subjects -->
-  <ion-card *ngIf="selectedSubjects.length > 0">
-    <ion-card-header>
-      <ion-card-title>Selected Subjects</ion-card-title>
-    </ion-card-header>
+  <!-- SELECTED SUBJECTS -->
+  <div class="section-card" *ngIf="selectedSubjects.length > 0">
+    <h3 class="section-title">
+      <ion-icon name="checkmark-done-outline"></ion-icon>
+      Selected Subjects
+    </h3>
 
-    <ion-card-content *ngFor="let sub of selectedSubjects">
+    <div class="selected-subject-card"
+         *ngFor="let sub of selectedSubjects">
 
-      <ion-item>
-        <ion-label>{{ sub.subjectName }}</ion-label>
-      </ion-item>
+      <div class="subject-header">
+        <strong>{{ sub.subjectName }}</strong>
+      </div>
 
       <ion-item>
         <ion-label position="stacked">Exam Date</ion-label>
@@ -56,21 +59,23 @@
       <ion-item>
         <ion-label position="stacked">Max Marks</ion-label>
         <ion-input type="number"
+                   placeholder="e.g. 100"
                    [(ngModel)]="sub.maxMarks">
         </ion-input>
       </ion-item>
 
-      <!--<ion-divider class="ion-margin-vertical"></ion-divider>-->
-
-    </ion-card-content>
-  </ion-card>
+    </div>
+  </div>
 
 </ion-content>
 
+<!-- FOOTER -->
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="footer-bar">
     <ion-button expand="block"
                 color="success"
                 (click)="save()">
       Save Subjects
     </ion-button>
+  </ion-toolbar>
+</ion-footer>

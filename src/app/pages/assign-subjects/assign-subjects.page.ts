@@ -10,7 +10,9 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-assign-subjects',
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
+  styleUrls: ['./assign-subjects.page.scss'],
   templateUrl: './assign-subjects.page.html'
+  
 })
 export class AssignSubjectsPage implements OnInit {
 

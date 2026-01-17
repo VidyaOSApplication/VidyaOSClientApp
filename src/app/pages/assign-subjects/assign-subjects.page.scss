@@ -1,0 +1,132 @@
+/* PAGE */
+.assign-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.assign-header ion-toolbar {
+  --background: linear-gradient(135deg, #2563eb, #3b82f6);
+  --color: #ffffff;
+  font-weight: 600;
+}
+
+/* EXAM INFO CARD */
+.exam-info-card {
+  background: linear-gradient(135deg, #0ea5a4, #14b8a6);
+  color: #ffffff;
+  padding: 18px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.exam-info h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.exam-info p {
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* SECTION TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+  .section-title ion-icon {
+    color: var(--ion-color-primary);
+  }
+
+/* AVAILABLE SUBJECTS */
+.subject-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.subject-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1e40af;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+  .subject-pill ion-icon {
+    font-size: 18px;
+  }
+
+  .subject-pill:hover {
+    background: #dbeafe;
+  }
+
+/* EMPTY */
+.empty-text {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* SELECTED SUBJECT CARD */
+.selected-subject-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+  background: #f9fafb;
+}
+
+.subject-header {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #111827;
+}
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  --highlight-height: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* FOOTER */
+.footer-bar {
+  --background: #ffffff;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 14px;
+}
+
+ion-button {
+  height: 52px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+}

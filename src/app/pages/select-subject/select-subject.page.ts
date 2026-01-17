@@ -9,6 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-select-subject',
   standalone: true,
   imports: [CommonModule, IonicModule],
+  styleUrls: ['./select-subject.page.scss'],
   templateUrl: './select-subject.page.html'
 })
 export class SelectSubjectPage implements OnInit {
