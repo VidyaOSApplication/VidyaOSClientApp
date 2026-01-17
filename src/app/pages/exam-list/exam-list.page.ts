@@ -52,14 +52,23 @@ export class ExamListPage implements OnInit {
     });
   }
 
+  // 🔹 ASSIGN SUBJECTS FLOW
   goToAssignSubjects(exam: any) {
-    this.router.navigate(['admin/select-class', exam.examId]);
+    this.router.navigate([
+      'admin/select-class',
+      exam.examId,
+      'assign'
+    ]);
   }
 
+  // 🔹 ENTER MARKS FLOW
   goToEnterMarks(exam: any) {
-    this.router.navigate(['admin/select-class', exam.examId]);
+    this.router.navigate([
+      'admin/select-class',
+      exam.examId,
+      'marks'
+    ]);
   }
-
 
   getStatusColor(status: string) {
     switch (status) {

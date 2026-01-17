@@ -58,7 +58,7 @@ export const routes: Routes = [
 
   // STEP 1: Select Class (used for BOTH assign & marks)
   {
-    path: 'admin/select-class/:examId',
+    path: 'admin/select-class/:examId/:mode',
     loadComponent: () =>
       import('./pages/select-class/select-class.page')
         .then(m => m.SelectClassPage)

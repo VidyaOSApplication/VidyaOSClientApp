@@ -15,7 +15,9 @@ import { Preferences } from '@capacitor/preferences';
 export class SelectClassPage implements OnInit {
 
   examId!: number;
+  mode!: 'assign' | 'marks';
   schoolId!: number;
+
   classes: any[] = [];
   loading = false;
 
@@ -28,6 +30,12 @@ export class SelectClassPage implements OnInit {
 
   async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
+    this.mode = this.route.snapshot.paramMap.get('mode') as 'assign' | 'marks';
+
+    if (!this.mode) {
+      this.showToast('Invalid navigation', 'danger');
+      return;
+    }
 
     const profile = await Preferences.get({ key: 'user_profile' });
     this.schoolId = JSON.parse(profile.value!).schoolId;
@@ -41,19 +49,48 @@ export class SelectClassPage implements OnInit {
     this.http.get<any>(
       'https://localhost:7201/api/Exam/GetExams',
       { params: { schoolId: this.schoolId } }
-    ).subscribe(res => {
-      const exam = res.data?.find((e: any) => e.examId === this.examId);
-      this.classes = exam?.classes || [];
-      this.loading = false;
+    ).subscribe({
+      next: res => {
+        const exam = res.data?.find((e: any) => e.examId === this.examId);
+        this.classes = exam?.classes || [];
+        this.loading = false;
+      },
+      error: async () => {
+        this.loading = false;
+        await this.showToast('Failed to load classes', 'danger');
+      }
     });
   }
 
   selectClass(classId: number) {
-    // 🔥 ALWAYS GO TO SELECT SUBJECT FOR MARKS
-    this.router.navigate([
-      'admin/select-subject',
-      this.examId,
-      classId
-    ]);
+
+    // 🔀 DECIDE NEXT PAGE BASED ON MODE
+    if (this.mode === 'assign') {
+      this.router.navigate([
+        '/admin/assign-subjects',
+        this.examId,
+        classId
+      ]);
+      return;
+    }
+
+    if (this.mode === 'marks') {
+      this.router.navigate([
+        '/admin/select-subject',
+        this.examId,
+        classId
+      ]);
+      return;
+    }
+  }
+
+  async showToast(message: string, color: 'success' | 'danger') {
+    const toast = await this.toast.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'top'
+    });
+    toast.present();
   }
 }

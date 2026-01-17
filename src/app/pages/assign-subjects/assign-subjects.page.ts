@@ -1,10 +1,9 @@
-// assign-subjects.page.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -23,9 +22,12 @@ export class AssignSubjectsPage implements OnInit {
   subjects: any[] = [];
   selectedSubjects: any[] = [];
 
+  saving = false;
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private router: Router,
     private toast: ToastController,
     private authService: AuthService
   ) { }
@@ -33,22 +35,28 @@ export class AssignSubjectsPage implements OnInit {
   async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
-    const profile = await this.authService.getStoredProfile();
 
+    const profile = await this.authService.getStoredProfile();
     if (profile) {
-      this.schoolId = profile.schoolId; // 👈 from API
+      this.schoolId = profile.schoolId;
     }
+
     this.loadData();
   }
 
   loadData() {
     this.http.get<any>(
       'https://localhost:7201/api/Exam/GetExamToAddSubjects',
-      { params: { examId: this.examId, classId: this.classId, schoolId: this.schoolId } }
+      {
+        params: {
+          examId: this.examId,
+          classId: this.classId,
+          schoolId: this.schoolId
+        }
+      }
     ).subscribe(res => {
-      // 🔥 SAFE HANDLING
-      this.examName = res.examName ?? res.data?.examName ?? '';
-      this.subjects = res.subjects ?? res.data?.subjects ?? [];
+      this.examName = res.data?.examName || '';
+      this.subjects = res.data?.subjects || [];
     });
   }
 
@@ -64,23 +72,50 @@ export class AssignSubjectsPage implements OnInit {
   }
 
   async save() {
-    await this.http.post(
-      'https://localhost:7201/api/Exam/AddExamSubjects',
-      {
-        examId: this.examId,
-        classId: this.classId,
-        subjects: this.selectedSubjects.map(s => ({
-          subjectId: s.subjectId,
-          examDate: s.examDate,
-          maxMarks: s.maxMarks
-        }))
-      }
-    ).toPromise();
+    if (this.selectedSubjects.length === 0) {
+      (await this.toast.create({
+        message: 'Please select at least one subject',
+        color: 'danger',
+        duration: 2000
+      })).present();
+      return;
+    }
 
-    (await this.toast.create({
-      message: 'Subjects assigned',
-      color: 'success',
-      duration: 2000
-    })).present();
+    this.saving = true;
+
+    try {
+      await this.http.post(
+        'https://localhost:7201/api/Exam/AddExamSubjects',
+        {
+          examId: this.examId,
+          classId: this.classId,
+          subjects: this.selectedSubjects.map(s => ({
+            subjectId: s.subjectId,
+            examDate: s.examDate,
+            maxMarks: s.maxMarks
+          }))
+        }
+      ).toPromise();
+
+      (await this.toast.create({
+        message: 'Subjects assigned successfully',
+        color: 'success',
+        duration: 1500
+      })).present();
+
+      // ✅ REDIRECT TO EXAM LIST
+      setTimeout(() => {
+        this.router.navigateByUrl('/admin/exam-list');
+      }, 500);
+
+    } catch {
+      (await this.toast.create({
+        message: 'Failed to assign subjects',
+        color: 'danger',
+        duration: 2000
+      })).present();
+    } finally {
+      this.saving = false;
+    }
   }
 }
