@@ -56,7 +56,7 @@ export const routes: Routes = [
         .then(m => m.CreateExamPage)
   },
 
-  // 🔐 STEP 1: Select Class
+  // STEP 1: Select Class (used for BOTH assign & marks)
   {
     path: 'admin/select-class/:examId',
     loadComponent: () =>
@@ -64,7 +64,7 @@ export const routes: Routes = [
         .then(m => m.SelectClassPage)
   },
 
-  // 🔐 STEP 2: Assign Subjects (ADMIN)
+  // STEP 2A: Assign Subjects (ADMIN only)
   {
     path: 'admin/assign-subjects/:examId/:classId',
     loadComponent: () =>
@@ -72,8 +72,19 @@ export const routes: Routes = [
         .then(m => m.AssignSubjectsPage)
   },
 
-  // 🔐 STEP 3: Select Subject (TEACHER / MARKS)
-  { path: 'admin/select-subject/:examId/:classId', loadComponent: () => import('./pages/select-subject/select-subject.page').then(m => m.SelectSubjectPage) },
+  // STEP 2B: Select Subject (MARKS flow)
+  {
+    path: 'admin/select-subject/:examId/:classId',
+    loadComponent: () =>
+      import('./pages/select-subject/select-subject.page')
+        .then(m => m.SelectSubjectPage)
+  },
 
-  { path: 'admin/enter-marks/:examId/:classId/:subjectId', loadComponent: () => import('./pages/enter-marks/enter-marks.page').then(m => m.EnterMarksPage) },
+  // STEP 3: Enter Marks
+  {
+    path: 'admin/enter-marks/:examId/:classId/:subjectId',
+    loadComponent: () =>
+      import('./pages/enter-marks/enter-marks.page')
+        .then(m => m.EnterMarksPage)
+  },
 ];

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-select-subject',
@@ -15,22 +16,39 @@ export class SelectSubjectPage implements OnInit {
   examId!: number;
   classId!: number;
   subjects: any[] = [];
+  schoolId!: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService:AuthService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
+    const profile = await this.authService.getStoredProfile();
 
+    if (profile) {
+      this.schoolId = profile.schoolId; // 👈 from API
+    }
+
+    this.loadSubjects();
+  }
+
+  loadSubjects() {
     this.http.get<any>(
-      'https://localhost:7201/api/Exam/GetExam',
-      { params: { examId: this.examId } }
+      'https://localhost:7201/api/Exam/GetAssignedSubjects',
+      {
+        params: {
+          examId: this.examId,
+          classId: this.classId,
+          schoolId: this.schoolId
+        }
+      }
     ).subscribe(res => {
-      this.subjects = res.Subjects.filter((x: any) => x.classId === this.classId);
+      this.subjects = res.data.subjects || [];
     });
   }
 

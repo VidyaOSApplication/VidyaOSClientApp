@@ -1,3 +1,4 @@
+// select-class.page.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
@@ -40,26 +41,17 @@ export class SelectClassPage implements OnInit {
     this.http.get<any>(
       'https://localhost:7201/api/Exam/GetExams',
       { params: { schoolId: this.schoolId } }
-    ).subscribe({
-      next: (res) => {
-        const exam = res.data?.find((e: any) => e.examId === this.examId);
-        this.classes = exam?.classes || [];
-        this.loading = false;
-      },
-      error: async () => {
-        this.loading = false;
-        (await this.toast.create({
-          message: 'Failed to load classes',
-          color: 'danger',
-          duration: 2000
-        })).present();
-      }
+    ).subscribe(res => {
+      const exam = res.data?.find((e: any) => e.examId === this.examId);
+      this.classes = exam?.classes || [];
+      this.loading = false;
     });
   }
 
   selectClass(classId: number) {
+    // 🔥 ALWAYS GO TO SELECT SUBJECT FOR MARKS
     this.router.navigate([
-      'admin/assign-subjects',
+      'admin/select-subject',
       this.examId,
       classId
     ]);

@@ -24,6 +24,11 @@ export class ExamDashboardPage {
       route: 'admin/create-exam'
     },
     {
+      title: 'Exam List',
+      icon: 'book-outline',
+      route: 'admin/exam-list'
+    },
+    {
       title: 'Assign Subjects',
       icon: 'book-outline',
       route: 'admin/assign-subjects'

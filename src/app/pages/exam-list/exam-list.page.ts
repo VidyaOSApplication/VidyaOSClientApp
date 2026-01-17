@@ -57,10 +57,7 @@ export class ExamListPage implements OnInit {
   }
 
   goToEnterMarks(exam: any) {
-    this.router.navigate([
-      'admin/select-class',
-      exam.examId
-    ]);
+    this.router.navigate(['admin/select-class', exam.examId]);
   }
 
 

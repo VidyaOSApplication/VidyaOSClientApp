@@ -1,9 +1,11 @@
+// assign-subjects.page.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-assign-subjects',
@@ -16,6 +18,7 @@ export class AssignSubjectsPage implements OnInit {
   examId!: number;
   classId!: number;
   examName = '';
+  schoolId!: number;
 
   subjects: any[] = [];
   selectedSubjects: any[] = [];
@@ -23,27 +26,29 @@ export class AssignSubjectsPage implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private toast: ToastController
+    private toast: ToastController,
+    private authService: AuthService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
+    const profile = await this.authService.getStoredProfile();
+
+    if (profile) {
+      this.schoolId = profile.schoolId; // 👈 from API
+    }
     this.loadData();
   }
 
   loadData() {
     this.http.get<any>(
       'https://localhost:7201/api/Exam/GetExamToAddSubjects',
-      {
-        params: {
-          examId: this.examId,
-          classId: this.classId
-        }
-      }
+      { params: { examId: this.examId, classId: this.classId, schoolId: this.schoolId } }
     ).subscribe(res => {
-      this.examName = res.data.examName;
-      this.subjects = res.data.subjects || [];
+      // 🔥 SAFE HANDLING
+      this.examName = res.examName ?? res.data?.examName ?? '';
+      this.subjects = res.subjects ?? res.data?.subjects ?? [];
     });
   }
 
@@ -58,8 +63,8 @@ export class AssignSubjectsPage implements OnInit {
     });
   }
 
-  save() {
-    this.http.post(
+  async save() {
+    await this.http.post(
       'https://localhost:7201/api/Exam/AddExamSubjects',
       {
         examId: this.examId,
@@ -70,12 +75,12 @@ export class AssignSubjectsPage implements OnInit {
           maxMarks: s.maxMarks
         }))
       }
-    ).subscribe(async () => {
-      (await this.toast.create({
-        message: 'Subjects assigned',
-        color: 'success',
-        duration: 2000
-      })).present();
-    });
+    ).toPromise();
+
+    (await this.toast.create({
+      message: 'Subjects assigned',
+      color: 'success',
+      duration: 2000
+    })).present();
   }
 }
