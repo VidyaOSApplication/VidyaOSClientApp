@@ -5,8 +5,11 @@ export const routes: Routes = [
   // ======================
   // ROOT & AUTH
   // ======================
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     loadComponent: () =>
@@ -34,11 +37,47 @@ export const routes: Routes = [
       import('./pages/student/student-dashboard/student-dashboard.page')
         .then(m => m.StudentDashboardPage)
   },
+
+  // ======================
+  // ADMIN – EXAMS (SIMPLIFIED FLOW)
+  // ======================
+
+  // 📌 Exam Dashboard (optional landing)
   {
-    path: 'super-admin/dashboard',
+    path: 'admin/exam-dashboard',
     loadComponent: () =>
-      import('./pages/super-admin-dashboard/super-admin-dashboard.page')
-        .then(m => m.SuperAdminDashboardPage)
+      import('./pages/exam-dashboard/exam-dashboard.page')
+        .then(m => m.ExamDashboardPage)
+  },
+
+  // 📌 Exam List (MAIN HUB)
+  {
+    path: 'admin/exam-list',
+    loadComponent: () =>
+      import('./pages/exam-list/exam-list.page')
+        .then(m => m.ExamListPage)
+  },
+
+  // 📌 Create Exam
+  {
+    path: 'admin/create-exam',
+    loadComponent: () =>
+      import('./pages/create-exam/create-exam.page')
+        .then(m => m.CreateExamPage)
+  },
+
+  // 📌 Schedule Exam (dates + max marks for ALL subjects)
+  {
+    path: 'admin/schedule-exam/:examId/:classId',
+    loadComponent: () =>
+      import('./pages/schedule-exam/schedule-exam.page')
+        .then(m => m.ScheduleExamPage)
+  },
+  {
+    path: 'admin/enter-marks/:examId/:classId',
+    loadComponent: () =>
+      import('./pages/enter-marks/enter-marks.page')
+        .then(m => m.EnterMarksPage)
   },
 
   // ======================
@@ -55,22 +94,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/view-attendance/view-attendance.page')
         .then(m => m.ViewAttendancePage)
-  },
-
-  // ======================
-  // REGISTRATION
-  // ======================
-  {
-    path: 'admin/register-student',
-    loadComponent: () =>
-      import('./pages/register-student/register-student.page')
-        .then(m => m.RegisterStudentPage)
-  },
-  {
-    path: 'admin/register-teacher',
-    loadComponent: () =>
-      import('./pages/register-teacher/register-teacher.page')
-        .then(m => m.RegisterTeacherPage)
   },
 
   // ======================
@@ -102,67 +125,21 @@ export const routes: Routes = [
   },
 
   // ======================
-  // BIRTHDAYS
+  // STUDENT FEATURES
   // ======================
   {
-    path: 'birthdays',
+    path: 'student/apply-leave',
     loadComponent: () =>
-      import('./pages/birthdays/birthdays.page')
-        .then(m => m.BirthdaysPage)
+      import('./pages/student-apply-leave/student-apply-leave.page')
+        .then(m => m.StudentApplyLeavePage)
   },
 
   // ======================
-  // EXAMS – FINAL ADMIN FLOW
+  // FALLBACK (SAFETY)
   // ======================
   {
-    path: 'admin/exam-dashboard',
-    loadComponent: () =>
-      import('./pages/exam-dashboard/exam-dashboard.page')
-        .then(m => m.ExamDashboardPage)
-  },
-  {
-    path: 'admin/exam-list',
-    loadComponent: () =>
-      import('./pages/exam-list/exam-list.page')
-        .then(m => m.ExamListPage)
-  },
-  {
-    path: 'admin/create-exam',
-    loadComponent: () =>
-      import('./pages/create-exam/create-exam.page')
-        .then(m => m.CreateExamPage)
-  },
-
-  // STEP 1: Select Class (used for BOTH assign & marks)
-  {
-    path: 'admin/select-class/:examId/:mode',
-    loadComponent: () =>
-      import('./pages/select-class/select-class.page')
-        .then(m => m.SelectClassPage)
-  },
-
-  // STEP 2A: Assign Subjects (ADMIN only)
-  {
-    path: 'admin/assign-subjects/:examId/:classId',
-    loadComponent: () =>
-      import('./pages/assign-subjects/assign-subjects.page')
-        .then(m => m.AssignSubjectsPage)
-  },
-
-  // STEP 2B: Select Subject (MARKS flow)
-  {
-    path: 'admin/select-subject/:examId/:classId',
-    loadComponent: () =>
-      import('./pages/select-subject/select-subject.page')
-        .then(m => m.SelectSubjectPage)
-  },
-
-  // STEP 3: Enter Marks
-  {
-    path: 'admin/enter-marks/:examId/:classId/:subjectId',
-    loadComponent: () =>
-      import('./pages/enter-marks/enter-marks.page')
-        .then(m => m.EnterMarksPage)
-  },
+    path: '**',
+    redirectTo: 'login'
+  }
 
 ];

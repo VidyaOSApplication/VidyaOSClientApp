@@ -1,4 +1,3 @@
-// select-class.page.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
@@ -32,13 +31,15 @@ export class SelectClassPage implements OnInit {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.mode = this.route.snapshot.paramMap.get('mode') as 'assign' | 'marks';
 
-    if (!this.mode) {
+    if (!this.examId || !this.mode) {
       this.showToast('Invalid navigation', 'danger');
       return;
     }
 
-    const profile = await Preferences.get({ key: 'user_profile' });
-    this.schoolId = JSON.parse(profile.value!).schoolId;
+    const profile = JSON.parse(
+      (await Preferences.get({ key: 'user_profile' })).value!
+    );
+    this.schoolId = profile.schoolId;
 
     this.loadClasses();
   }
@@ -64,7 +65,6 @@ export class SelectClassPage implements OnInit {
 
   selectClass(classId: number) {
 
-    // 🔀 DECIDE NEXT PAGE BASED ON MODE
     if (this.mode === 'assign') {
       this.router.navigate([
         '/admin/assign-subjects',
@@ -88,9 +88,9 @@ export class SelectClassPage implements OnInit {
     const toast = await this.toast.create({
       message,
       duration: 2000,
-      color,
-      position: 'top'
+      color
     });
     toast.present();
   }
 }
+

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Schedule Exam</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-text *ngIf="loading">Loading...</ion-text>
+
+  <ion-card *ngFor="let s of subjects; trackBy: trackById">
+    <ion-card-content>
+
+      <h2>{{ s.subjectName }}</h2>
+
+      <ion-item>
+        <ion-label position="stacked">Exam Date</ion-label>
+        <ion-input type="date" [(ngModel)]="s.examDate"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Max Marks</ion-label>
+        <ion-input type="number" [(ngModel)]="s.maxMarks"></ion-input>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text *ngIf="!loading && subjects.length === 0" color="danger">
+    No subjects found
+  </ion-text>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" color="success" (click)="save()">
+      Save Schedule
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

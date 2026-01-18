@@ -1,80 +1,56 @@
-<ion-header class="exam-header">
-  <ion-toolbar>
-    <ion-title>Examinations</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Exams</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="exam-page">
+<ion-content class="ion-padding">
 
-  <!-- LOADER -->
-  <div *ngIf="loading" class="center-spinner">
-    <ion-spinner></ion-spinner>
-    <p>Loading examinations…</p>
-  </div>
+  <ion-card *ngFor="let exam of exams">
 
-  <!-- EMPTY STATE -->
-  <div *ngIf="!loading && exams.length === 0" class="empty-state">
-    <ion-icon name="document-text-outline"></ion-icon>
-    <h3>No Exams Created</h3>
-    <p>Create an exam to begin managing assessments</p>
-  </div>
+    <ion-card-header>
+      <ion-card-title>{{ exam.examName }}</ion-card-title>
+      <ion-card-subtitle>
+        Academic Year: {{ exam.academicYear }}
+      </ion-card-subtitle>
+    </ion-card-header>
 
-  <!-- EXAM LIST -->
-  <div *ngIf="!loading && exams.length" class="exam-list">
+    <ion-card-content>
 
-    <div class="exam-card" *ngFor="let exam of exams">
+      <p>Status: <b>{{ exam.status }}</b></p>
 
-      <!-- TOP -->
-      <div class="exam-top">
-        <div>
-          <h3>{{ exam.examName }}</h3>
-          <span class="year">
-            Academic Year: {{ exam.academicYear }}
-          </span>
-        </div>
+      <!-- CLASSES -->
+      <ion-item lines="none">
+        <ion-label position="stacked">Select Class</ion-label>
+        <ion-select [(ngModel)]="exam.selectedClass">
+          <ion-select-option *ngFor="let c of exam.classes"
+                             [value]="c.classId">
+            Class {{ c.classId }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
 
-        <ion-badge class="status-badge"
-                   [color]="getStatusColor(exam.status)">
-          {{ exam.status }}
-        </ion-badge>
-      </div>
+      <ion-button expand="block"
+                  color="warning"
+                  (click)="openSchedule(exam)">
+        Schedule Exam
+      </ion-button>
 
-      <!-- META -->
-      <div class="exam-meta">
-        <ion-icon name="school-outline"></ion-icon>
-        <span>Classes: {{ exam.classes?.length || 0 }}</span>
-      </div>
+      <ion-button expand="block"
+                  color="primary"
+                  (click)="openMarks(exam)">
+        Enter Marks
+      </ion-button>
 
-      <!-- ACTIONS -->
-      <div class="actions">
+      <ion-button expand="block"
+                  color="success"
+                  *ngIf="exam.status === 'Marks Entered'"
+                  (click)="declareResult(exam)">
+        Declare Result
+      </ion-button>
 
-        <ion-button size="small"
-                    fill="outline"
-                    color="warning"
-                    *ngIf="exam.status === 'Draft'"
-                    (click)="goToAssignSubjects(exam)">
-          Assign Subjects
-        </ion-button>
+    </ion-card-content>
 
-        <ion-button size="small"
-                    fill="outline"
-                    color="primary"
-                    *ngIf="exam.status === 'Subjects Assigned'"
-                    (click)="goToEnterMarks(exam)">
-          Enter Marks
-        </ion-button>
-
-        <ion-button size="small"
-                    fill="outline"
-                    color="success"
-                    *ngIf="exam.status === 'Marks Entered'">
-          View Result
-        </ion-button>
-
-      </div>
-
-    </div>
-
-  </div>
+  </ion-card>
 
 </ion-content>

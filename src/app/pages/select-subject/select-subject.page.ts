@@ -18,6 +18,7 @@ export class SelectSubjectPage implements OnInit {
   classId!: number;
   subjects: any[] = [];
   schoolId!: number;
+  stream: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,9 @@ export class SelectSubjectPage implements OnInit {
     if (profile) {
       this.schoolId = profile.schoolId; // 👈 from API
     }
+    this.route.queryParams.subscribe(q => {
+      this.stream = q['stream'] || null;
+    });
 
     this.loadSubjects();
   }

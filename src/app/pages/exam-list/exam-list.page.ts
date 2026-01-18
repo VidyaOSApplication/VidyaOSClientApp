@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-exam-list',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './exam-list.page.html',
   styleUrls: ['./exam-list.page.scss']
 })
 export class ExamListPage implements OnInit {
 
   exams: any[] = [];
-  loading = false;
-  schoolId = 0;
+  schoolId!: number;
 
   constructor(
     private http: HttpClient,
@@ -25,57 +25,68 @@ export class ExamListPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    const profile = await Preferences.get({ key: 'user_profile' });
-    this.schoolId = JSON.parse(profile.value!).schoolId;
-    this.loadExams();
+    const profile = JSON.parse(
+      (await Preferences.get({ key: 'user_profile' })).value!
+    );
+    this.schoolId = profile.schoolId;
+    this.load();
   }
 
-  loadExams() {
-    this.loading = true;
-
+  load() {
     this.http.get<any>(
       'https://localhost:7201/api/Exam/GetExams',
       { params: { schoolId: this.schoolId } }
-    ).subscribe({
-      next: res => {
-        this.exams = res.data || [];
-        this.loading = false;
-      },
-      error: async () => {
-        this.loading = false;
-        (await this.toast.create({
-          message: 'Failed to load exams',
-          color: 'danger',
-          duration: 2000
-        })).present();
-      }
+    ).subscribe(res => {
+      this.exams = res.data.map((e: any) => ({
+        ...e,
+        selectedClass: null   // 👈 REQUIRED
+      }));
     });
   }
 
-  // 🔹 ASSIGN SUBJECTS FLOW
-  goToAssignSubjects(exam: any) {
-    this.router.navigate([
-      'admin/select-class',
-      exam.examId,
-      'assign'
-    ]);
-  }
-
-  // 🔹 ENTER MARKS FLOW
-  goToEnterMarks(exam: any) {
-    this.router.navigate([
-      'admin/select-class',
-      exam.examId,
-      'marks'
-    ]);
-  }
-
-  getStatusColor(status: string) {
-    switch (status) {
-      case 'Draft': return 'medium';
-      case 'Subjects Assigned': return 'warning';
-      case 'Marks Entered': return 'primary';
-      default: return 'medium';
+  openSchedule(exam: any) {
+    if (!exam.selectedClass) {
+      this.showToast('Please select class first', 'danger');
+      return;
     }
+
+    this.router.navigate([
+      '/admin/schedule-exam',
+      exam.examId,
+      exam.selectedClass
+    ]);
+  }
+
+  openMarks(exam: any) {
+    if (!exam.selectedClass) {
+      this.showToast('Please select class first', 'danger');
+      return;
+    }
+
+    this.router.navigate([
+      '/admin/enter-marks',
+      exam.examId,
+      exam.selectedClass
+    ]);
+  }
+
+  declareResult(exam: any) {
+    this.http.post(
+      'https://localhost:7201/api/Exam/DeclareResult',
+      { examId: exam.examId }
+    ).subscribe(() => {
+      this.showToast('Result declared', 'success');
+      this.load();
+    });
+  }
+
+  async showToast(message: string, color: 'success' | 'danger') {
+    const t = await this.toast.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'top'
+    });
+    t.present();
   }
 }

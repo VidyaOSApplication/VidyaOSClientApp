@@ -1,67 +1,35 @@
-<ion-header class="marks-header">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-title>Enter Marks</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="marks-page">
+<ion-content class="ion-padding">
 
-  <!-- EXAM INFO -->
-  <div class="exam-info-card">
-    <div class="info-row">
-      <span>Exam ID</span>
-      <strong>{{ examId }}</strong>
-    </div>
-    <div class="info-row">
-      <span>Class</span>
-      <strong>{{ classId }}</strong>
-    </div>
-    <div class="info-row">
-      <span>Subject</span>
-      <strong>{{ subjectId }}</strong>
-    </div>
-  </div>
+  <ion-item>
+    <ion-label>Select Subject</ion-label>
+    <ion-select [(ngModel)]="subjectId" (ionChange)="loadStudents()">
+      <ion-select-option *ngFor="let s of subjects" [value]="s.subjectId">
+        {{ s.subjectName }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
 
-  <!-- STUDENT LIST -->
-  <div class="section-card">
-    <h3 class="section-title">
-      <ion-icon name="people-outline"></ion-icon>
-      Students
-    </h3>
-
-    <div class="student-card"
-         *ngFor="let s of students; let i = index">
-
-      <!-- LEFT -->
-      <div class="left">
-        <div class="roll-circle">{{ s.rollNo }}</div>
-
-        <div class="details">
-          <div class="name">{{ s.name }}</div>
-          <div class="sub">Roll No {{ s.rollNo }}</div>
-        </div>
-      </div>
-
-      <!-- RIGHT -->
-      <div class="right">
-        <ion-input type="number"
-                   placeholder="Marks"
-                   [(ngModel)]="marks[i].marksObtained">
-        </ion-input>
-      </div>
-
-    </div>
-  </div>
+  <ion-card *ngFor="let s of students">
+    <ion-item>
+      <ion-label>
+        {{ s.rollNo }} - {{ s.studentName }}
+      </ion-label>
+      <ion-input type="number"
+                 [(ngModel)]="s.marks">
+      </ion-input>
+    </ion-item>
+  </ion-card>
 
 </ion-content>
 
-<!-- FOOTER -->
 <ion-footer>
-  <ion-toolbar class="save-footer">
-    <ion-button expand="block"
-                color="success"
-                (click)="saveMarks()">
-      Save Marks
-    </ion-button>
-  </ion-toolbar>
+  <ion-button expand="block" color="success" (click)="save()">
+    Save Marks
+  </ion-button>
 </ion-footer>

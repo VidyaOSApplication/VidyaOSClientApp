@@ -4,86 +4,140 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-enter-marks',
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
-  styleUrls: ['./enter-marks.page.scss'],
-  templateUrl: './enter-marks.page.html'
+  templateUrl: './enter-marks.page.html',
+  styleUrls: ['./enter-marks.page.scss']
 })
 export class EnterMarksPage implements OnInit {
 
   examId!: number;
   classId!: number;
-  subjectId!: number;
+  schoolId!: number;
 
+  subjects: any[] = [];
   students: any[] = [];
-  marks: any[] = [];
-  loading = false;
+  subjectId!: number;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     private toast: ToastController
-  ) {}
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
-    this.subjectId = Number(this.route.snapshot.paramMap.get('subjectId'));
 
-    this.loadStudents();
+    // ✅ CORRECT WAY (Capacitor Preferences)
+    const profile = await Preferences.get({ key: 'user_profile' });
+    if (!profile.value) {
+      this.showError('User session expired');
+      return;
+    }
+
+    this.schoolId = JSON.parse(profile.value).schoolId;
+
+    this.loadSubjects();
   }
 
-  loadStudents() {
-    this.loading = true;
+  loadSubjects() {
+    this.http.get<any>(
+      'https://localhost:7201/api/Exam/GetSubjectsForMarks',
+      {
+        params: {
+          examId: this.examId,
+          classId: this.classId
+        }
+      }
+    ).subscribe({
+      next: res => {
+        console.log(res.data.subjects);
+        this.subjects = res.data.subjects || [];
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
 
-    this.http.get<any[]>(
+
+  loadStudents() {
+    this.http.get<any>(
       'https://localhost:7201/api/Exam/GetStudentsForMarks',
       {
         params: {
           examId: this.examId,
           classId: this.classId,
-          subjectId: this.subjectId
+          subjectId: this.subjectId,
+          schoolId: this.schoolId
         }
       }
     ).subscribe({
-      next: (res) => {
-        this.students = res;
-        this.marks = res.map(s => ({
-          studentId: s.studentId,
-          marksObtained: s.mark?.marksObtained ?? 0,
-          isAbsent: s.mark?.isAbsent ?? false
-        }));
-        this.loading = false;
+      next: res => {
+        console.log(res);
+        this.students = res.students || [];
       },
-      error: async () => {
-        this.loading = false;
-        (await this.toast.create({
-          message: 'Failed to load students',
-          color: 'danger',
-          duration: 2000
-        })).present();
+      error: () => {
+        this.showError('Failed to load students');
       }
     });
   }
 
-  saveMarks() {
-    this.http.post(
+  save() {
+
+    const payload = {
+      examId: this.examId,
+      classId: this.classId,
+      subjectId: this.subjectId,
+      schoolId: this.schoolId,
+      marks: this.students.map(s => ({
+        studentId: s.studentId,
+        isAbsent: s.isAbsent ?? false,
+        marksObtained: (s.isAbsent)
+          ? null
+          : (s.marksObtained ?? 0)   // ✅ CRITICAL FIX
+      }))
+    };
+
+    console.log('Save payload:', payload);
+
+    this.http.post<any>(
       'https://localhost:7201/api/Exam/SaveMarks',
-      {
-        examId: this.examId,
-        classId: this.classId,
-        subjectId: this.subjectId,
-        marks: this.marks
+      payload
+    ).subscribe({
+      next: res => {
+        //console.log('Save success', res);
+        this.showSuccess("Marks saved successfully")
+      },
+      error: err => {
+        this.showError("some error occured while saving marks")
+        console.error('Save failed', err.error);
       }
-    ).subscribe(async () => {
-      (await this.toast.create({
-        message: 'Marks saved',
-        color: 'success',
-        duration: 2000
-      })).present();
     });
+  }
+
+
+
+  async showError(message: string) {
+    const t = await this.toast.create({
+      message,
+      color: 'danger',
+      duration: 2000
+    });
+    t.present();
+  }
+
+  async showSuccess(message: string) {
+    const t = await this.toast.create({
+      message,
+      color: 'success',
+      duration: 2000
+    });
+    t.present();
   }
 }

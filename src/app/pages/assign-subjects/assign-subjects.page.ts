@@ -59,6 +59,7 @@ export class AssignSubjectsPage implements OnInit {
     ).subscribe(res => {
       this.examName = res.data?.examName || '';
       this.subjects = res.data?.subjects || [];
+      this.selectedSubjects = res.data.assignedSubjects || [];
     });
   }
 
