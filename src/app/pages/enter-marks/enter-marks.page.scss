@@ -6,26 +6,9 @@
 
 /* HEADER */
 .marks-header ion-toolbar {
-  --background: linear-gradient(135deg, #0f766e, #14b8a6);
+  --background: linear-gradient(135deg, #0ea5a4, #14b8a6);
   --color: #ffffff;
   font-weight: 600;
-}
-
-/* EXAM INFO */
-.exam-info-card {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 14px 16px;
-  margin-bottom: 18px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: #374151;
-  margin-bottom: 6px;
 }
 
 /* SECTION CARD */
@@ -33,6 +16,7 @@
   background: #ffffff;
   border-radius: 18px;
   padding: 16px;
+  margin-bottom: 18px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
@@ -44,21 +28,36 @@
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 14px;
+  color: #1f2937;
+}
+
+  .section-title ion-icon {
+    color: #0ea5a4;
+    font-size: 18px;
+  }
+
+/* FORM ITEM */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
 }
 
 /* STUDENT CARD */
 .student-card {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: #f9fafb;
-  border-radius: 16px;
+  align-items: center;
   padding: 14px;
+  border-radius: 16px;
+  background: #f9fafb;
   margin-bottom: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
 }
 
 /* LEFT */
-.left {
+.student-left {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -71,39 +70,55 @@
   border-radius: 50%;
   background: #e0f2fe;
   color: #075985;
-  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
 }
 
-/* DETAILS */
-.details .name {
-  font-size: 14px;
+/* INFO */
+.info .name {
+  font-size: 15px;
   font-weight: 600;
   color: #111827;
 }
 
-.details .sub {
+.info .sub {
   font-size: 12px;
   color: #6b7280;
 }
 
-/* MARK INPUT */
-.right ion-input {
-  width: 72px;
+/* RIGHT */
+.student-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* MARKS INPUT */
+.marks-input {
+  width: 80px;
   text-align: center;
-  --background: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
+  --padding-start: 8px;
+  --padding-end: 8px;
   font-weight: 600;
 }
 
+/* ABSENT */
+.absent-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
 /* FOOTER */
-.save-footer {
+.footer-bar {
   --background: #ffffff;
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
   padding: 10px 14px;
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
 }
 
 ion-button {

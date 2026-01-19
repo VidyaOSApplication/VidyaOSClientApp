@@ -1,125 +1,104 @@
 /* PAGE */
-.exam-page {
+.exams-page {
   --background: #f4f6fb;
   padding: 16px;
 }
 
 /* HEADER */
-.exam-header ion-toolbar {
-  --background: linear-gradient( 135deg, var(--ion-color-primary), #4f8cff );
+.exams-header ion-toolbar {
+  --background: linear-gradient(135deg, #0ea5a4, #0284c7);
   --color: #ffffff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  font-weight: 700;
 }
-
-/* LOADER */
-.center-spinner {
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #475569;
-}
-
-  .center-spinner p {
-    margin-top: 8px;
-    font-size: 13px;
-  }
 
 /* EMPTY STATE */
 .empty-state {
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: 60px;
   text-align: center;
-  color: #64748b;
+  color: #6b7280;
 }
 
   .empty-state ion-icon {
-    font-size: 64px;
-    margin-bottom: 12px;
-    color: #94a3b8;
+    font-size: 56px;
+    opacity: 0.6;
   }
 
   .empty-state h3 {
-    margin: 0;
-    font-weight: 600;
-    color: #1f2937;
-  }
-
-  .empty-state p {
-    font-size: 14px;
-    margin-top: 4px;
-  }
-
-/* LIST */
-.exam-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* CARD */
-.exam-card {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-/* TOP */
-.exam-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-  .exam-top h3 {
-    margin: 0;
-    font-size: 16px;
+    margin-top: 12px;
     font-weight: 600;
     color: #111827;
   }
 
-  .exam-top .year {
-    font-size: 12px;
+/* EXAM CARD */
+.exam-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* HEADER */
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+  .exam-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: #111827;
+  }
+
+  .exam-header p {
+    font-size: 13px;
+    margin: 4px 0 0;
     color: #6b7280;
   }
 
-/* META */
-.exam-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 10px 0 14px;
-  font-size: 13px;
-  color: #374151;
-}
-
-  .exam-meta ion-icon {
-    color: var(--ion-color-primary);
-  }
-
-/* STATUS */
-.status-badge {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-weight: 600;
+/* BODY */
+.exam-body ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 14px;
 }
 
 /* ACTIONS */
 .actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 10px;
-  flex-wrap: wrap;
 }
 
+  /* BUTTONS */
   .actions ion-button {
-    --border-radius: 999px;
+    height: 40px;
     font-size: 13px;
     font-weight: 600;
+    --border-radius: 12px;
   }
+
+/* STATUS COLORS */
+ion-badge[color="success"] {
+  --background: #22c55e;
+  color: #ffffff;
+}
+
+ion-badge[color="warning"] {
+  --background: #f59e0b;
+  color: #ffffff;
+}
+
+ion-badge[color="primary"] {
+  --background: #3b82f6;
+  color: #ffffff;
+}
+
+ion-badge[color="medium"] {
+  --background: #9ca3af;
+  color: #ffffff;
+}

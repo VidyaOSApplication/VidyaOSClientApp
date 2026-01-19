@@ -89,4 +89,23 @@ export class ExamListPage implements OnInit {
     });
     t.present();
   }
+  getStatusColor(status: string): 'primary' | 'warning' | 'success' | 'medium' {
+    switch (status) {
+      case 'Draft':
+        return 'medium';
+
+      case 'Subjects Assigned':
+        return 'warning';
+
+      case 'Marks Entered':
+        return 'primary';
+
+      case 'Result Declared':
+        return 'success';
+
+      default:
+        return 'medium';
+    }
+  }
+
 }

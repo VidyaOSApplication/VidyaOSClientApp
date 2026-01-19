@@ -1,28 +1,42 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="exams-header">
+  <ion-toolbar>
     <ion-title>Exams</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="exams-page">
 
-  <ion-card *ngFor="let exam of exams">
+  <!-- EMPTY STATE -->
+  <div class="empty-state" *ngIf="exams.length === 0">
+    <ion-icon name="document-text-outline"></ion-icon>
+    <h3>No Exams Found</h3>
+    <p>Create exams to manage schedules and marks</p>
+  </div>
 
-    <ion-card-header>
-      <ion-card-title>{{ exam.examName }}</ion-card-title>
-      <ion-card-subtitle>
-        Academic Year: {{ exam.academicYear }}
-      </ion-card-subtitle>
-    </ion-card-header>
+  <!-- EXAM CARDS -->
+  <div class="exam-card"
+       *ngFor="let exam of exams">
 
-    <ion-card-content>
+    <!-- HEADER -->
+    <div class="exam-header">
+      <div class="left">
+        <h2>{{ exam.examName }}</h2>
+        <p>Academic Year {{ exam.academicYear }}</p>
+      </div>
 
-      <p>Status: <b>{{ exam.status }}</b></p>
+      <ion-badge [color]="getStatusColor(exam.status)">
+        {{ exam.status }}
+      </ion-badge>
+    </div>
 
-      <!-- CLASSES -->
-      <ion-item lines="none">
+    <!-- BODY -->
+    <div class="exam-body">
+
+      <!-- CLASS SELECT -->
+      <ion-item>
         <ion-label position="stacked">Select Class</ion-label>
-        <ion-select [(ngModel)]="exam.selectedClass">
+        <ion-select placeholder="Choose class"
+                    [(ngModel)]="exam.selectedClass">
           <ion-select-option *ngFor="let c of exam.classes"
                              [value]="c.classId">
             Class {{ c.classId }}
@@ -30,27 +44,35 @@
         </ion-select>
       </ion-item>
 
-      <ion-button expand="block"
-                  color="warning"
-                  (click)="openSchedule(exam)">
-        Schedule Exam
-      </ion-button>
+      <!-- ACTIONS -->
+      <div class="actions">
 
-      <ion-button expand="block"
-                  color="primary"
-                  (click)="openMarks(exam)">
-        Enter Marks
-      </ion-button>
+        <ion-button fill="outline"
+                    color="warning"
+                    (click)="openSchedule(exam)">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          Schedule
+        </ion-button>
 
-      <ion-button expand="block"
-                  color="success"
-                  *ngIf="exam.status === 'Marks Entered'"
-                  (click)="declareResult(exam)">
-        Declare Result
-      </ion-button>
+        <ion-button fill="outline"
+                    color="primary"
+                    (click)="openMarks(exam)">
+          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+          Marks
+        </ion-button>
 
-    </ion-card-content>
+        <ion-button fill="outline"
+                    color="success"
+                    *ngIf="exam.status === 'Marks Entered'"
+                    (click)="declareResult(exam)">
+          <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
+          Declare
+        </ion-button>
 
-  </ion-card>
+      </div>
+
+    </div>
+
+  </div>
 
 </ion-content>

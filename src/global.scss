@@ -134,3 +134,20 @@
 //  }
 //}
 
+/* ===========================
+   FIX INVISIBLE CHECKBOX
+   =========================== */
+
+ion-checkbox {
+  --size: 22px;
+  --border-width: 2px;
+  --border-radius: 6px;
+  /* UNCHECKED STATE */
+  --border-color: #9ca3af; /* visible gray */
+  --background: #ffffff;
+  /* CHECKED STATE */
+  --background-checked: #0ea5a4; /* teal */
+  --border-color-checked: #0ea5a4;
+  --checkmark-color: #ffffff;
+  opacity: 1 !important;
+}
