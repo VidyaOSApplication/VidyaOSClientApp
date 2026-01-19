@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-schedule-exam',
@@ -15,7 +16,7 @@ export class ScheduleExamPage implements OnInit {
 
   examId!: number;
   classId!: number;
-
+  schoolId!: number;
   subjects: any[] = [];
   loading = true;
 
@@ -25,10 +26,17 @@ export class ScheduleExamPage implements OnInit {
     private toast: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
 
+    const profile = await Preferences.get({ key: 'user_profile' });
+    if (!profile.value) {
+      this.showError('User session expired');
+      return;
+    }
+
+    this.schoolId = JSON.parse(profile.value).schoolId;
     console.log('ScheduleExam examId:', this.examId);
     console.log('ScheduleExam classId:', this.classId);
 
@@ -48,16 +56,21 @@ export class ScheduleExamPage implements OnInit {
         }
       }
     ).subscribe(res => {
+      console.log(res);
 
-      // 🔥 IMPORTANT: map to NEW objects (unfreezes ngModel)
+      const today = new Date().toISOString().slice(0, 10); // yyyy-MM-dd
+
       this.subjects = (res.data || []).map((s: any) => ({
         subjectId: s.subjectId,
         subjectName: s.subjectName,
-        examDate: s.examDate,     // yyyy-MM-dd works
-        maxMarks: s.maxMarks
+
+        // ✅ default values for UI
+        examDate: s.examDate ?? today,
+        maxMarks: s.maxMarks ?? 100
       }));
     });
   }
+
 
 
   async save() {
@@ -66,7 +79,9 @@ export class ScheduleExamPage implements OnInit {
       {
         examId: this.examId,
         classId: this.classId,
+        schoolId: this.schoolId,
         subjects: this.subjects
+
       }
     ).toPromise();
 
@@ -75,5 +90,13 @@ export class ScheduleExamPage implements OnInit {
       color: 'success',
       duration: 2000
     })).present();
+  }
+  async showError(message: string) {
+    const t = await this.toast.create({
+      message,
+      color: 'danger',
+      duration: 2000
+    });
+    t.present();
   }
 }
