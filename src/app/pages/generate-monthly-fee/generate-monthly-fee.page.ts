@@ -67,8 +67,7 @@ export class GenerateMonthlyFeePage implements OnInit {
 
     const payload = {
       schoolId: this.form.schoolId,
-      month: this.form.month,
-      year: this.form.year
+      feeMonth: this.form.year + '-' + this.form.month
     };
 
     console.log('Generate fee payload:', payload);

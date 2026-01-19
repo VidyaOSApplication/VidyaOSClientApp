@@ -7,6 +7,7 @@ import { Preferences } from '@capacitor/preferences';
 
 interface FeeStructure {
   feeStructureId: number;
+  streamId: number | null;
   classId: number;
   className: string;
   feeName: string;
@@ -25,13 +26,14 @@ export class AdminFeeStructurePage implements OnInit {
 
   loading = false;
   saving = false;
-
+  //streamId = null as number | null;
   schoolId = 0;
   classes: number[] = [];
   feeStructures: FeeStructure[] = [];
 
   form = {
     classId: null as number | null,
+    streamId: null as number | null,
     feeName: '',
     monthlyAmount: null as number | null
   };
@@ -70,6 +72,13 @@ export class AdminFeeStructurePage implements OnInit {
 
   // 💾 SAVE / UPDATE
   saveFee() {
+    if (
+      (this.form.classId === 11 || this.form.classId === 12) &&
+      !this.form.streamId
+    ) {
+      this.showToast('Please select stream for class 11 / 12', 'danger');
+      return;
+    }
     if (!this.form.classId || !this.form.feeName || !this.form.monthlyAmount) {
       this.showToast('Please fill all required fields', 'danger');
       return;
@@ -80,6 +89,7 @@ export class AdminFeeStructurePage implements OnInit {
     const payload = {
       schoolId: this.schoolId,
       classId: this.form.classId,
+      streamId: this.form.streamId,
       feeName: this.form.feeName,
       monthlyAmount: this.form.monthlyAmount
     };
@@ -103,6 +113,7 @@ export class AdminFeeStructurePage implements OnInit {
   // ✏ EDIT EXISTING
   editFee(fee: FeeStructure) {
     this.form.classId = fee.classId;
+    this.form.streamId = fee.streamId ?? null;
     this.form.feeName = fee.feeName;
     this.form.monthlyAmount = fee.monthlyAmount;
   }
@@ -111,6 +122,7 @@ export class AdminFeeStructurePage implements OnInit {
     this.form = {
       classId: null,
       feeName: '',
+      streamId: null, 
       monthlyAmount: null
     };
   }

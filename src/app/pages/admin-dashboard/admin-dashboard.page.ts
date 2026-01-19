@@ -36,6 +36,10 @@ export class AdminDashboardPage {
       route: '/register-teacher'
     },
     { title: 'Leave Requests', icon: 'document-text-outline', route: 'admin-pending-leaves' },
+
+    { title: 'Examination', icon: 'clipboard-outline', route: 'admin/exam-dashboard' },
+    { title: 'Birthdays', icon: 'gift-outline', route: '/birthdays' },
+    { title: 'Attendance', icon: 'calendar-outline', route: 'admin/view-attendance' },
     {
       title: 'Collect Fee',
       icon: 'cash-outline',
@@ -47,11 +51,11 @@ export class AdminDashboardPage {
       route: 'admin/fees'
     },
 
-    { title: 'Attendance', icon: 'calendar-outline', route: 'admin/view-attendance' },
+    
     { title: 'Homework', icon: 'book-outline', route: '/fees' },
     { title: 'Calendar', icon: 'today-outline', route: '/fees' },
-    { title: 'Birthdays', icon: 'gift-outline', route: '/birthdays' },
-    { title: 'Examination', icon: 'clipboard-outline', route: 'admin/exam-dashboard' },
+    
+    
   ];
 
   constructor(private authService: AuthService, private router: Router) { }

@@ -16,6 +16,17 @@
 
     <ion-item>
       <ion-label position="stacked">Class *</ion-label>
+      <ion-item *ngIf="form.classId === 11 || form.classId === 12">
+        <ion-label position="stacked">Stream *</ion-label>
+
+        <ion-select [(ngModel)]="form.streamId"
+                    placeholder="Select stream">
+          <ion-select-option [value]="1">PCM</ion-select-option>
+          <ion-select-option [value]="2">PCB</ion-select-option>
+          <ion-select-option [value]="3">Commerce</ion-select-option>
+          <ion-select-option [value]="4">Arts</ion-select-option>
+        </ion-select>
+      </ion-item>
       <ion-select [(ngModel)]="form.classId" placeholder="Select class">
         <ion-select-option *ngFor="let c of classes" [value]="c">
           Class {{ c }}
