@@ -14,26 +14,30 @@
       Add / Update Fee
     </h3>
 
+    <!-- CLASS -->
     <ion-item>
       <ion-label position="stacked">Class *</ion-label>
-      <ion-item *ngIf="form.classId === 11 || form.classId === 12">
-        <ion-label position="stacked">Stream *</ion-label>
-
-        <ion-select [(ngModel)]="form.streamId"
-                    placeholder="Select stream">
-          <ion-select-option [value]="1">PCM</ion-select-option>
-          <ion-select-option [value]="2">PCB</ion-select-option>
-          <ion-select-option [value]="3">Commerce</ion-select-option>
-          <ion-select-option [value]="4">Arts</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-select [(ngModel)]="form.classId" placeholder="Select class">
+      <ion-select [(ngModel)]="form.classId"
+                  placeholder="Select class">
         <ion-select-option *ngFor="let c of classes" [value]="c">
           Class {{ c }}
         </ion-select-option>
       </ion-select>
     </ion-item>
 
+    <!-- STREAM (ONLY FOR 11–12) -->
+    <ion-item *ngIf="form.classId === 11 || form.classId === 12">
+      <ion-label position="stacked">Stream *</ion-label>
+      <ion-select [(ngModel)]="form.streamId"
+                  placeholder="Select stream">
+        <ion-select-option [value]="1">PCM</ion-select-option>
+        <ion-select-option [value]="2">PCB</ion-select-option>
+        <ion-select-option [value]="3">Commerce</ion-select-option>
+        <ion-select-option [value]="4">Arts</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- FEE NAME -->
     <ion-item>
       <ion-label position="stacked">Fee Name *</ion-label>
       <ion-input [(ngModel)]="form.feeName"
@@ -41,6 +45,7 @@
       </ion-input>
     </ion-item>
 
+    <!-- AMOUNT -->
     <ion-item>
       <ion-label position="stacked">Monthly Amount *</ion-label>
       <ion-input type="number"
@@ -49,15 +54,14 @@
       </ion-input>
     </ion-item>
 
+    <!-- SAVE -->
     <ion-button expand="block"
                 color="success"
                 class="primary-btn"
                 [disabled]="saving"
                 (click)="saveFee()">
-
       <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
       Save Fee Structure
-
     </ion-button>
 
   </div>
@@ -72,10 +76,13 @@
 
     <div class="fee-list">
 
-      <div class="fee-row" *ngFor="let fee of feeStructures">
+      <div class="fee-row"
+           *ngFor="let fee of feeStructures">
 
         <div class="fee-info">
-          <div class="class-name">Class {{ fee.className }}</div>
+          <div class="class-name">
+            Class {{ fee.className }}
+          </div>
           <div class="fee-meta">
             {{ fee.feeName }} • ₹{{ fee.monthlyAmount }}
           </div>

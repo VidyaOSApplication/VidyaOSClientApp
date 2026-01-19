@@ -6,9 +6,9 @@
 
 /* HEADER */
 .fee-header ion-toolbar {
-  --background: #e0f2fe;
-  --color: #075985;
-  font-weight: 700;
+  --background: linear-gradient(135deg, #2563eb, #3b82f6);
+  --color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* SECTION CARD */
@@ -16,24 +16,25 @@
   background: #ffffff;
   border-radius: 18px;
   padding: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
-/* TITLE */
+/* SECTION TITLE */
 .section-title {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 14px;
   font-size: 15px;
   font-weight: 600;
-  margin-bottom: 14px;
   color: #1f2937;
 }
 
-.section-title ion-icon {
-  color: var(--ion-color-primary);
-}
+  .section-title ion-icon {
+    font-size: 18px;
+    color: var(--ion-color-primary);
+  }
 
 /* FORM ITEMS */
 ion-item {
@@ -43,43 +44,59 @@ ion-item {
   margin-bottom: 12px;
 }
 
-/* BUTTON */
-.primary-btn {
-  height: 48px;
-  font-weight: 600;
-  margin-top: 6px;
+  ion-item.item-has-focus {
+    border-color: var(--ion-color-primary);
+  }
+
+/* INPUT TEXT */
+ion-input,
+ion-select {
+  font-size: 14px;
 }
 
-/* FEE LIST */
+/* SAVE BUTTON */
+.primary-btn {
+  height: 50px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+}
+
+/* EXISTING FEES LIST */
 .fee-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* ROW */
+/* SINGLE ROW */
 .fee-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f9fafb;
-  padding: 12px;
+  padding: 12px 14px;
   border-radius: 14px;
+  background: #f9fafb;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
 }
 
-/* INFO */
-.fee-info .class-name {
+/* LEFT INFO */
+.fee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* CLASS NAME */
+.class-name {
+  font-size: 14px;
   font-weight: 600;
-  font-size: 14.5px;
   color: #111827;
 }
 
-.fee-info .fee-meta {
-  font-size: 12.5px;
+/* META */
+.fee-meta {
+  font-size: 13px;
   color: #6b7280;
-}
-
-/* EDIT ICON */
-.fee-row ion-button {
-  --color: #2563eb;
 }
