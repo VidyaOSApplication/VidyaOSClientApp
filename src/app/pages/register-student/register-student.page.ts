@@ -38,6 +38,7 @@ export class RegisterStudentPage implements OnInit {
     schoolId: 0,
     classId: null,
     sectionId: null,
+    streamId: null,
 
     firstName: '',
     lastName: '',
@@ -161,9 +162,18 @@ export class RegisterStudentPage implements OnInit {
       this.showToast('Invalid parent phone number', 'danger');
       return;
     }
+    if (
+  (this.form.classId === 11 || this.form.classId === 12) &&
+  !this.form.streamId
+) {
+  this.showToast('Please select stream for class 11 / 12', 'danger');
+  return;
+}
+
 
     // ✅ ALL VALID — START LOADER
     this.saving = true;
+
 
     const payload = {
       ...this.form,
@@ -276,7 +286,11 @@ export class RegisterStudentPage implements OnInit {
 
     await alert.present();
   }
-
+  onClassChange() {
+    if (this.form.classId !== 11 && this.form.classId !== 12) {
+      this.form.streamId = null; // ✅ auto-clear
+    }
+  }
 
 
   async showToast(message: string, color: 'success' | 'danger') {

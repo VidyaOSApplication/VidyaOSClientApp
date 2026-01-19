@@ -38,10 +38,9 @@
       <ion-item>
         <ion-label position="stacked">Class *</ion-label>
 
-        <ion-select interface="popover"
-                    mode="md"
-                    placeholder="Select class"
-                    [(ngModel)]="form.classId">
+        <ion-select [(ngModel)]="form.classId"
+                    (ionChange)="onClassChange()"
+                    placeholder="Select class">
 
           <ion-select-option *ngFor="let c of classes"
                              [value]="c">
@@ -50,6 +49,25 @@
 
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="form.classId === 11 || form.classId === 12">
+        <ion-label position="stacked">
+          Stream <ion-text color="danger">*</ion-text>
+        </ion-label>
+
+        <ion-select interface="popover"
+                    placeholder="Select stream"
+                    [(ngModel)]="form.streamId">
+          <ion-select-option [value]="1">PCM</ion-select-option>
+          <ion-select-option [value]="2">PCB</ion-select-option>
+          <ion-select-option [value]="3">Commerce</ion-select-option>
+          <ion-select-option [value]="4">Arts</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-text color="danger"
+                *ngIf="submitted && (form.classId === 11 || form.classId === 12) && !form.streamId">
+        Please select stream for class 11 / 12
+      </ion-text>
 
       <!-- Section -->
       <ion-item>

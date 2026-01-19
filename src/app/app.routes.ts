@@ -133,13 +133,37 @@ export const routes: Routes = [
       import('./pages/student-apply-leave/student-apply-leave.page')
         .then(m => m.StudentApplyLeavePage)
   },
+  {
+    path: 'register-student',
+    loadComponent: () =>
+      import('./pages/register-student/register-student.page')
+        .then(m => m.RegisterStudentPage)
+  },
+  {
+    path: 'register-teacher',
+    loadComponent: () =>
+      import('./pages/register-teacher/register-teacher.page')
+        .then(m => m.RegisterTeacherPage)
+  },
+  {
+    path: 'admin-pending-leaves',
+    loadComponent: () =>
+      import('./pages/admin-pending-leaves/admin-pending-leaves.page')
+        .then(m => m.AdminPendingLeavesPage)
+  },
+  {
+    path: 'birthdays',
+    loadComponent: () =>
+      import('./pages/birthdays/birthdays.page')
+        .then(m => m.BirthdaysPage)
+  }
 
   // ======================
   // FALLBACK (SAFETY)
   // ======================
-  {
-    path: '**',
-    redirectTo: 'login'
-  }
+  //{
+  //  path: '**',
+  //  redirectTo: 'login'
+  //}
 
 ];
