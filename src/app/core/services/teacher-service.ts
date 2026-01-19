@@ -15,14 +15,20 @@ export class TeacherService {
     schoolId: number,
     classId: number,
     sectionId: number,
-    date: string
+    date: string,
+    streamId?: number | null
   ): Observable<any> {
-
-    const params = new HttpParams()
+    console.log(streamId);
+    let params = new HttpParams()
       .set('schoolId', schoolId)
       .set('classId', classId)
       .set('sectionId', sectionId)
       .set('date', date);
+
+    // ✅ ADD STREAM ONLY WHEN PRESENT
+    if (streamId !== null && streamId !== undefined) {
+      params = params.set('streamId', streamId.toString());
+    }
 
     return this.http.get(
       `${this.apiUrl}/GetStudents/students`,

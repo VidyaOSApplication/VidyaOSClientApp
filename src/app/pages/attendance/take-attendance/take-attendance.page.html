@@ -25,6 +25,18 @@
       </ion-select>
     </ion-item>
 
+    <ion-item *ngIf="classId === 11 || classId === 12">
+      <ion-label position="stacked">Stream</ion-label>
+      <ion-select interface="popover"
+                  placeholder="Select Stream"
+                  [(ngModel)]="streamId">
+        <ion-select-option *ngFor="let s of streams"
+                           [value]="s.id">
+          {{ s.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
     <ion-item>
       <ion-label position="stacked">Section</ion-label>
       <ion-select interface="popover"

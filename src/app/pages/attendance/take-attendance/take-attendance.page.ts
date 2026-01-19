@@ -6,7 +6,6 @@ import { TeacherService } from '../../../core/services/teacher-service';
 import { AuthService } from '../../../core/services/auth.service';
 import { AlertController, ToastController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-take-attendance',
   standalone: true,
@@ -16,19 +15,29 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class TakeAttendancePage implements OnInit {
 
-  schoolId!: number;          // 🔐 from storage
+  // 🔐 From storage
+  schoolId!: number;
+  markedByUserId!: number;
+
+  // 🔎 Filters
   classId!: number;
   sectionId!: number;
+  streamId: number | null = null; // ✅ ONLY for 11 & 12
+
   hasSearched = false;
-  markedByUserId!: number;
+  loading = false;
   saving = false;
 
-
-  //attendanceDate = new Date().toISOString().split('T')[0];
-
-  classes: number[] = [];     // 1 → 12
+  classes: number[] = [];
   students: any[] = [];
-  loading = false;
+
+  // ✅ Static streams (can be API later)
+  streams = [
+    { id: 1, name: 'PCM' },
+    { id: 2, name: 'PCB' },
+    { id: 3, name: 'Commerce' },
+    { id: 4, name: 'Arts' }
+  ];
 
   constructor(
     private attendanceService: TeacherService,
@@ -37,105 +46,126 @@ export class TakeAttendancePage implements OnInit {
     private toastCtrl: ToastController
   ) { }
 
+  // ---------- INIT ----------
   async ngOnInit() {
     const profile = await this.authService.getStoredProfile();
 
     if (profile) {
       this.schoolId = profile.schoolId;
-      this.markedByUserId = profile.userId; // 👈 VERY IMPORTANT
+      this.markedByUserId = profile.userId;
     }
 
     this.classes = Array.from({ length: 12 }, (_, i) => i + 1);
   }
-  getTodayDate(): string {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+
+  // 🔁 Reset stream when class changes
+  onClassChange() {
+    if (this.classId !== 11 && this.classId !== 12) {
+      this.streamId = null;
+    }
   }
 
+  // ---------- DATE ----------
+  getTodayDate(): string {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  }
 
+  // ---------- LOAD STUDENTS ----------
   takeAttendance() {
-    //console.log(this.attendanceDate);
+    console.log(this.streamId);
     if (!this.classId || !this.sectionId) return;
+
+    // 🚫 Stream mandatory for 11 & 12
+    if ((this.classId === 11 || this.classId === 12) && !this.streamId) {
+      this.showToast('Please select stream', 'danger');
+      return;
+    }
 
     this.loading = true;
     this.hasSearched = true;
-
 
     this.attendanceService.getStudents(
       this.schoolId,
       this.classId,
       this.sectionId,
-      this.getTodayDate()
+      this.getTodayDate(),
+      (this.classId === 11 || this.classId === 12) ? this.streamId : null
     ).subscribe({
       next: (res) => {
         this.students = res.students ?? [];
+        console.log(this.students);
         this.loading = false;
       },
       error: () => {
         this.students = [];
         this.loading = false;
+        this.showToast('Failed to load students', 'danger');
       }
     });
   }
 
+  // ---------- SAVE ATTENDANCE ----------
   saveAttendance() {
-  if (!this.students.length) return;
+    if (!this.students.length) return;
 
-  this.saving = true;
+    this.saving = true;
 
-  const records = this.students
-    .filter(s => s.isEditable) // ❌ exclude leave students
-    .map(s => ({
-      userId: s.userId,
-      status: s.status // Present / Absent
-    }));
+    const records = this.students
+      .filter(s => s.isEditable) // ❌ exclude leave students
+      .map(s => ({
+        userId: s.userId,
+        status: s.status // Present / Absent
+      }));
 
-  const payload = {
-    schoolId: this.schoolId,
-    classId: this.classId,
-    sectionId: this.sectionId,
-    attendanceDate: this.getTodayDate(),
-    markedByUserId: this.markedByUserId,
-    records
-  };
+    const payload: any = {
+      schoolId: this.schoolId,
+      classId: this.classId,
+      sectionId: this.sectionId,
+      attendanceDate: this.getTodayDate(),
+      markedByUserId: this.markedByUserId,
+      records
+    };
 
-  this.attendanceService.markAttendance(payload).subscribe({
-    next: async () => {
-      this.saving = false;
-      await this.showSuccessToast('Attendance saved successfully');
-    },
-    error: async () => {
-      this.saving = false;
-      await this.showErrorAlert('Failed to save attendance. Please try again.');
+    // ✅ Send stream only for 11/12
+    if (this.classId === 11 || this.classId === 12) {
+      payload.streamId = this.streamId;
     }
-  });
-}
 
+    this.attendanceService.markAttendance(payload).subscribe({
+      next: async () => {
+        this.saving = false;
+        await this.showToast('Attendance saved successfully', 'success');
+      },
+      error: async () => {
+        this.saving = false;
+        await this.showErrorAlert('Failed to save attendance. Please try again.');
+      }
+    });
+  }
+
+  // ---------- TOGGLE ----------
   onToggle(student: any, event: any) {
     student.status = event.detail.checked ? 'Present' : 'Absent';
   }
-  async showSuccessToast(message: string) {
+
+  // ---------- UI ----------
+  async showToast(message: string, color: 'success' | 'danger') {
     const toast = await this.toastCtrl.create({
       message,
       duration: 2000,
-      color: 'success',
-      position: 'bottom',
-      icon: 'checkmark-circle-outline'
+      color,
+      position: 'bottom'
     });
-
     await toast.present();
   }
+
   async showErrorAlert(message: string) {
     const alert = await this.alertCtrl.create({
       header: 'Error',
       message,
-      buttons: ['OK'],
-      cssClass: 'error-alert'
+      buttons: ['OK']
     });
-
     await alert.present();
   }
 }

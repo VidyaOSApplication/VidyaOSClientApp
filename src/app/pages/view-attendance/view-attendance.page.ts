@@ -10,6 +10,7 @@ interface AttendanceStudent {
   admissionNo: string;
   fullName: string;
   status: 'Present' | 'Absent' | 'Leave' | 'NotMarked';
+
 }
 
 interface AttendanceSummary {
@@ -46,6 +47,14 @@ export class ViewAttendancePage implements OnInit {
 
   // 🔹 From Storage
   schoolId!: number;
+  streamId: number | null = null;
+
+  streams = [
+    { id: 1, name: 'PCM' },
+    { id: 2, name: 'PCB' },
+    { id: 3, name: 'Commerce' },
+    { id: 4, name: 'Arts' }
+  ];
 
   constructor(
     private http: HttpClient,
@@ -64,6 +73,11 @@ export class ViewAttendancePage implements OnInit {
 
     // Load schoolId from storage
     await this.loadSchoolId();
+  }
+  ngOnChanges() {
+    if (this.classId !== 11 && this.classId !== 12) {
+      this.streamId = null;
+    }
   }
 
   // ✅ Read schoolId from Capacitor Storage
@@ -93,6 +107,10 @@ export class ViewAttendancePage implements OnInit {
       this.showToast('School not identified');
       return;
     }
+    if ((this.classId === 11 || this.classId === 12) && !this.streamId) {
+      this.showToast('Please select stream for class 11/12');
+      return;
+    }
 
     const loading = await this.loadingCtrl.create({
       message: 'Loading attendance...'
@@ -106,7 +124,11 @@ export class ViewAttendancePage implements OnInit {
           schoolId: this.schoolId,
           classId: this.classId,
           sectionId: this.sectionId,
-          date: this.date
+          date: this.date,
+          streamId:
+            (this.classId === 11 || this.classId === 12)
+              ? this.streamId!
+              : ''
         }
       }
     ).subscribe({

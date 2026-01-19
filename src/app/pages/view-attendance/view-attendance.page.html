@@ -50,6 +50,17 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-item *ngIf="classId === 11 || classId === 12">
+      <ion-label position="stacked">Stream</ion-label>
+
+      <ion-select [(ngModel)]="streamId"
+                  placeholder="Select Stream">
+        <ion-select-option *ngFor="let s of streams"
+                           [value]="s.id">
+          {{ s.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
 
     <ion-button expand="block"
                 class="primary-btn"
