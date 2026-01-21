@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Master Subjects</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- ADD SUBJECT -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Add Subject</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Subject Name *</ion-label>
+        <ion-input [(ngModel)]="subjectName"
+                   placeholder="e.g. Mathematics">
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block"
+                  color="success"
+                  [disabled]="saving || !subjectName"
+                  (click)="addSubject()">
+
+        <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
+        Add Subject
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- SUBJECT LIST -->
+  <ion-card *ngIf="subjects.length">
+    <ion-card-header>
+      <ion-card-title>Existing Subjects</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let s of subjects"
+                  lines="full"
+                  class="subject-row">
+
+          <ion-label>
+            {{ s.subjectName }}
+          </ion-label>
+
+          <ion-button slot="end"
+                      size="small"
+                      color="danger"
+                      fill="solid"
+                      (click)="confirmDelete(s)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+  <p *ngIf="!subjects.length" class="ion-text-center ion-margin-top">
+    No subjects added yet
+  </p>
+
+</ion-content>

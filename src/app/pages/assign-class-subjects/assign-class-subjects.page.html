@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Assign Subjects</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- CLASS -->
+  <ion-item>
+    <ion-label position="stacked">Class *</ion-label>
+    <ion-select [(ngModel)]="classId"
+                placeholder="Select class"
+                (ionChange)="onClassChange()">
+      <ion-select-option *ngFor="let c of classes" [value]="c">
+        Class {{ c }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- STREAM (ONLY FOR 11 & 12) -->
+  <ion-item *ngIf="showStream">
+    <ion-label position="stacked">Stream *</ion-label>
+    <ion-select [(ngModel)]="streamId"
+                placeholder="Select stream"
+                (ionChange)="loadSubjects()">
+      <ion-select-option *ngFor="let s of streams" [value]="s.id">
+        {{ s.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- SUBJECT LIST -->
+  <ion-card *ngIf="subjects.length">
+    <ion-card-header>
+      <ion-card-title>Select Subjects</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item *ngFor="let s of subjects">
+        <ion-checkbox slot="start"
+                      [(ngModel)]="s.selected">
+        </ion-checkbox>
+
+        <ion-label>{{ s.subjectName }}</ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- SAVE -->
+  <ion-button expand="block"
+              color="success"
+              class="ion-margin-top"
+              [disabled]="saving || !subjects.length"
+              (click)="save()">
+    <ion-spinner *ngIf="saving" slot="start"></ion-spinner>
+    Save Subjects
+  </ion-button>
+
+</ion-content>

@@ -156,7 +156,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/birthdays/birthdays.page')
         .then(m => m.BirthdaysPage)
-  }
+  },  {
+    path: 'assign-class-subjects',
+    loadComponent: () => import('./pages/assign-class-subjects/assign-class-subjects.page').then( m => m.AssignClassSubjectsPage)
+  },
+  {
+    path: 'admin-master-subjects',
+    loadComponent: () => import('./pages/admin-master-subjects/admin-master-subjects.page').then( m => m.AdminMasterSubjectsPage)
+  },
+  
+
 
   // ======================
   // FALLBACK (SAFETY)

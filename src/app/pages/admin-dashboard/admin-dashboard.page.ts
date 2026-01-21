@@ -52,8 +52,8 @@ export class AdminDashboardPage {
     },
 
     
-    { title: 'Homework', icon: 'book-outline', route: '/fees' },
-    { title: 'Calendar', icon: 'today-outline', route: '/fees' },
+    { title: 'Assign Subjects', icon: 'book-outline', route: 'assign-class-subjects' },
+    { title: 'Subject Management', icon: 'today-outline', route: 'admin-master-subjects' },
     
     
   ];
