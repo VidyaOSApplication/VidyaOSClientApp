@@ -1,0 +1,83 @@
+/* PAGE */
+.timetable-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.timetable-header ion-toolbar {
+  --background: linear-gradient(135deg, #0ea5a4, #2563eb);
+  --color: #ffffff;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+  .section-title ion-icon {
+    color: #0ea5a4;
+  }
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* TIME ROW */
+.time-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* HINT */
+.hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* ACTION */
+.action-card {
+  margin-top: 10px;
+}
+
+.primary-btn {
+  height: 48px;
+  font-weight: 600;
+}
+
+/* MESSAGES */
+.msg {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+  .msg.success {
+    color: #166534;
+  }
+
+  .msg.error {
+    color: #991b1b;
+  }

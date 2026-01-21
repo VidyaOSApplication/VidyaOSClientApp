@@ -16,27 +16,30 @@
 
   <!-- AVAILABLE SUBJECTS -->
   <div class="section-card">
+
     <h3 class="section-title">
       <ion-icon name="book-outline"></ion-icon>
       Available Subjects
     </h3>
 
     <div class="subject-list" *ngIf="subjects.length > 0">
-      <div class="subject-pill"
+      <div class="subject-chip"
            *ngFor="let s of subjects"
            (click)="addSubject(s)">
         <span>{{ s.subjectName }}</span>
-        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-icon name="add-outline"></ion-icon>
       </div>
     </div>
 
     <div class="empty-text" *ngIf="subjects.length === 0">
       No subjects available
     </div>
+
   </div>
 
   <!-- SELECTED SUBJECTS -->
   <div class="section-card" *ngIf="selectedSubjects.length > 0">
+
     <h3 class="section-title">
       <ion-icon name="checkmark-done-outline"></ion-icon>
       Selected Subjects
@@ -46,7 +49,7 @@
          *ngFor="let sub of selectedSubjects">
 
       <div class="subject-header">
-        <strong>{{ sub.subjectName }}</strong>
+        {{ sub.subjectName }}
       </div>
 
       <ion-item>
@@ -65,6 +68,7 @@
       </ion-item>
 
     </div>
+
   </div>
 
 </ion-content>

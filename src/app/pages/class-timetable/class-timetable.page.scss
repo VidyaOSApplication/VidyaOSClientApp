@@ -1,0 +1,115 @@
+/* PAGE */
+.timetable-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
+
+/* HEADER */
+.timetable-header ion-toolbar {
+  --background: linear-gradient(135deg, #0ea5a4, #2563eb);
+  --color: #ffffff;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+  .section-title ion-icon {
+    color: #0ea5a4;
+  }
+
+/* FORM ITEMS */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.primary-btn {
+  height: 48px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* LOADER */
+.loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* MESSAGE */
+.msg {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+  .msg.error {
+    color: #991b1b;
+  }
+
+/* TABLE */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.timetable-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+  .timetable-table th {
+    background: #e0f2fe;
+    color: #075985;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #e5e7eb;
+  }
+
+  .timetable-table td {
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+/* PERIOD */
+.period-cell {
+  font-weight: 700;
+  background: #f0f9ff;
+  color: #075985;
+}
+
+/* SUBJECT */
+.subject {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* TIME */
+.time {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+}

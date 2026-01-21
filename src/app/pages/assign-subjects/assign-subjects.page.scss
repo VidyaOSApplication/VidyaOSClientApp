@@ -6,19 +6,18 @@
 
 /* HEADER */
 .assign-header ion-toolbar {
-  --background: linear-gradient(135deg, #0ea5a4, #0284c7);
+  --background: linear-gradient(135deg, #0ea5a4, #2563eb);
   --color: #ffffff;
-  font-weight: 700;
 }
 
-/* EXAM INFO */
+/* EXAM INFO CARD */
 .exam-info-card {
-  background: linear-gradient(135deg, #0ea5a4, #0284c7);
-  //border-radius: 20px;
+  background: linear-gradient(135deg, #0ea5a4, #2563eb);
+  border-radius: 18px;
   padding: 18px;
-  color: #ffffff;
   margin-bottom: 18px;
-  box-shadow: 0 14px 30px rgba(2, 132, 199, 0.35);
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 }
 
 .exam-info h2 {
@@ -54,8 +53,7 @@
 }
 
   .section-title ion-icon {
-    color: #0284c7;
-    font-size: 18px;
+    color: #0ea5a4;
   }
 
 /* SUBJECT LIST */
@@ -65,36 +63,53 @@
   gap: 10px;
 }
 
-/* SUBJECT PILL */
-.subject-pill {
-  display: flex;
+/* SUBJECT CHIP */
+.subject-chip {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
+  background: #f0f9ff;
   border-radius: 999px;
-  background: #eef6ff;
-  color: #1d4ed8;
   font-size: 13px;
   font-weight: 500;
-  border: none;
+  color: #075985;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-  .subject-pill ion-icon {
+  .subject-chip ion-icon {
     font-size: 16px;
   }
 
-/* SELECTED SUBJECT */
+  .subject-chip:hover {
+    background: #e0f2fe;
+  }
+
+  .subject-chip:active {
+    transform: scale(0.95);
+  }
+
+/* EMPTY */
+.empty-text {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* SELECTED SUBJECT CARD */
 .selected-subject-card {
-  border: 1px solid #e5e7eb;
+  background: #f9fafb;
   border-radius: 14px;
   padding: 14px;
   margin-bottom: 14px;
 }
 
+/* SUBJECT HEADER */
 .subject-header {
+  font-size: 15px;
   font-weight: 600;
-  color: #0284c7;
+  color: #111827;
   margin-bottom: 10px;
 }
 
@@ -103,20 +118,12 @@ ion-item {
   --background: transparent;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 /* FOOTER */
 .footer-bar {
   --background: #ffffff;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
   padding: 10px 14px;
-}
-
-/* PRIMARY BUTTON */
-.primary-btn {
-  height: 52px;
-  border-radius: 14px;
-  font-weight: 600;
-  --background: linear-gradient(135deg, #0ea5a4, #0284c7);
 }

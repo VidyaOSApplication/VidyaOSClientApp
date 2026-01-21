@@ -164,6 +164,14 @@ export const routes: Routes = [
     path: 'admin-master-subjects',
     loadComponent: () => import('./pages/admin-master-subjects/admin-master-subjects.page').then( m => m.AdminMasterSubjectsPage)
   },
+  {
+    path: 'class-timetable',
+    loadComponent: () => import('./pages/class-timetable/class-timetable.page').then( m => m.ClassTimetablePage)
+  },
+  {
+    path: 'add-class-timetable',
+    loadComponent: () => import('./pages/add-class-timetable/add-class-timetable.page').then( m => m.AddClassTimetablePage)
+  },
   
 
 

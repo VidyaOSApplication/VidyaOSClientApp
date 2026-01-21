@@ -40,6 +40,7 @@ export class AdminDashboardPage {
     { title: 'Examination', icon: 'clipboard-outline', route: 'admin/exam-dashboard' },
     { title: 'Birthdays', icon: 'gift-outline', route: '/birthdays' },
     { title: 'Attendance', icon: 'calendar-outline', route: 'admin/view-attendance' },
+    
     {
       title: 'Collect Fee',
       icon: 'cash-outline',
@@ -54,7 +55,8 @@ export class AdminDashboardPage {
     
     { title: 'Assign Subjects', icon: 'book-outline', route: 'assign-class-subjects' },
     { title: 'Subject Management', icon: 'today-outline', route: 'admin-master-subjects' },
-    
+    { title: 'Time Table', icon: 'today-outline', route: 'class-timetable' },
+    { title: 'Add TimeTable', icon: 'calendar-outline', route: 'add-class-timetable' },
     
   ];
 

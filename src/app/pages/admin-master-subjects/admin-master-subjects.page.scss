@@ -1,10 +1,115 @@
-.subject-row {
-  ion-label {
-    font-size: 15px;
-    font-weight: 500;
-  }
+/* PAGE */
+.master-page {
+  --background: #f4f6fb;
+  padding: 16px;
+}
 
-  ion-button {
-    margin-left: 8px;
-  }
+/* HEADER */
+.master-header ion-toolbar {
+  --background: linear-gradient(135deg, #0ea5a4, #2563eb);
+  --color: #ffffff;
+}
+
+/* HERO */
+.hero-card {
+  background: linear-gradient(135deg, #0ea5a4, #2563eb);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.hero-card ion-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.hero-card h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.hero-card p {
+  margin-top: 6px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* SECTION CARD */
+.section-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* SECTION TITLE */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2937;
+}
+
+.section-title ion-icon {
+  color: #0ea5a4;
+}
+
+/* FORM */
+ion-item {
+  --background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* BUTTON */
+.primary-btn {
+  height: 48px;
+  font-weight: 600;
+  border-radius: 14px;
+}
+
+/* SUBJECT LIST */
+.subject-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* SUBJECT ROW */
+.subject-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;
+  padding: 12px 14px;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+}
+
+.subject-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* EMPTY */
+.empty-state {
+  text-align: center;
+  margin-top: 40px;
+  color: #6b7280;
+}
+
+.empty-state ion-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+  opacity: 0.5;
 }

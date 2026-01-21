@@ -1,0 +1,119 @@
+<ion-header class="timetable-header">
+  <ion-toolbar>
+    <ion-title>Add Class Timetable</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="timetable-page">
+
+  <!-- CLASS & SECTION -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="school-outline"></ion-icon>
+      Class & Section
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">Class *</ion-label>
+      <ion-select [(ngModel)]="classId" (ionChange)="loadSubjects()">
+        <ion-select-option *ngFor="let c of [1,2,3,4,5,6,7,8,9,10,11,12]"
+                           [value]="c">
+          Class {{ c }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Section *</ion-label>
+      <ion-select [(ngModel)]="sectionId" (ionChange)="loadSubjects()">
+        <ion-select-option [value]="1">A</ion-select-option>
+        <ion-select-option [value]="2">B</ion-select-option>
+        <ion-select-option [value]="3">C</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <!-- SUBJECT -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="book-outline"></ion-icon>
+      Subject
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">Subject *</ion-label>
+      <ion-select [(ngModel)]="subjectId" placeholder="Select subject">
+        <ion-select-option *ngFor="let s of subjects"
+                           [value]="s.subjectId">
+          {{ s.subjectName }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <p class="hint" *ngIf="classId && sectionId && subjects.length === 0">
+      No subjects found for selected class & section
+    </p>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="section-card">
+    <h3 class="section-title">
+      <ion-icon name="time-outline"></ion-icon>
+      Schedule Details
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">Day *</ion-label>
+      <ion-select [(ngModel)]="dayOfWeek">
+        <ion-select-option [value]="1">Monday</ion-select-option>
+        <ion-select-option [value]="2">Tuesday</ion-select-option>
+        <ion-select-option [value]="3">Wednesday</ion-select-option>
+        <ion-select-option [value]="4">Thursday</ion-select-option>
+        <ion-select-option [value]="5">Friday</ion-select-option>
+        <ion-select-option [value]="6">Saturday</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Period No *</ion-label>
+      <ion-input type="number"
+                 placeholder="e.g. 1"
+                 [(ngModel)]="periodNo">
+      </ion-input>
+    </ion-item>
+
+    <div class="time-row">
+      <ion-item>
+        <ion-label position="stacked">Start Time *</ion-label>
+        <ion-input type="time" [(ngModel)]="startTime"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">End Time *</ion-label>
+        <ion-input type="time" [(ngModel)]="endTime"></ion-input>
+      </ion-item>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="action-card">
+    <ion-button expand="block"
+                color="success"
+                class="primary-btn"
+                [disabled]="loading"
+                (click)="saveTimetable()">
+
+      <ion-spinner *ngIf="loading" slot="start"></ion-spinner>
+      Save Timetable
+    </ion-button>
+
+    <ion-text color="success" *ngIf="successMessage">
+      <p class="msg success">{{ successMessage }}</p>
+    </ion-text>
+
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p class="msg error">{{ errorMessage }}</p>
+    </ion-text>
+  </div>
+
+</ion-content>

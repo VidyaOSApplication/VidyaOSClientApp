@@ -1,0 +1,90 @@
+<ion-header class="timetable-header">
+  <ion-toolbar>
+    <ion-title>Class Timetable</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="timetable-page">
+
+  <!-- FILTERS -->
+  <div class="section-card">
+
+    <h3 class="section-title">
+      <ion-icon name="options-outline"></ion-icon>
+      Select Class & Section
+    </h3>
+
+    <ion-item>
+      <ion-label position="stacked">Class *</ion-label>
+      <ion-select [(ngModel)]="classId">
+        <ion-select-option *ngFor="let c of [1,2,3,4,5,6,7,8,9,10,11,12]"
+                           [value]="c">
+          Class {{ c }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Section *</ion-label>
+      <ion-select [(ngModel)]="sectionId">
+        <ion-select-option [value]="1">A</ion-select-option>
+        <ion-select-option [value]="2">B</ion-select-option>
+        <ion-select-option [value]="3">C</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block"
+                class="primary-btn"
+                (click)="loadTimetable()">
+      Load Timetable
+    </ion-button>
+
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p class="msg error">{{ errorMessage }}</p>
+    </ion-text>
+
+    <div class="loader" *ngIf="loading">
+      <ion-spinner></ion-spinner>
+    </div>
+
+  </div>
+
+  <!-- TIMETABLE -->
+  <div class="section-card" *ngIf="periods.length > 0">
+
+    <h3 class="section-title">
+      <ion-icon name="calendar-outline"></ion-icon>
+      Weekly Timetable
+    </h3>
+
+    <div class="table-wrapper">
+      <table class="timetable-table">
+
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th *ngFor="let day of days">{{ day }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let p of periods">
+            <td class="period-cell">P{{ p }}</td>
+
+            <td *ngFor="let day of days">
+              <div class="subject">
+                {{ table[p]?.[day]?.subject || '-' }}
+              </div>
+              <div class="time">
+                {{ table[p]?.[day]?.time || '' }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</ion-content>
