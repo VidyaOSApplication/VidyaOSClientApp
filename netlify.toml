@@ -1,6 +1,5 @@
 [build]
   command = "ionic build"
-  publish = "www"
 
 [[redirects]]
   from = "/*"
