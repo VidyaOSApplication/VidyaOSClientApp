@@ -72,7 +72,9 @@ addIcons({
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
+    provideIonicAngular({
+      animated: false
+    }),
     provideHttpClient(
       withInterceptors([authInterceptor, errorInterceptor]) // 🔥 REGISTER HERE
     ),
