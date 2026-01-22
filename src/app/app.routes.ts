@@ -178,9 +178,9 @@ export const routes: Routes = [
   // ======================
   // FALLBACK (SAFETY)
   // ======================
-  //{
-  //  path: '**',
-  //  redirectTo: 'login'
-  //}
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
 
 ];
