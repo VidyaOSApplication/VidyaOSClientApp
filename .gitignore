@@ -19,7 +19,8 @@ log.txt
 
 # Ionic
 /.ionic
-/www
+www/*
+!www/.gitkeep
 /platforms
 /plugins
 
