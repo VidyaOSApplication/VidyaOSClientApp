@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
 import { ModalController } from '@ionic/angular';
 import { TeacherCredentialsModal } from '../../modals/teacher-credentials/teacher-credentials.modal';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-teacher',
@@ -29,7 +30,7 @@ export class RegisterTeacherPage implements OnInit {
     fullName: '',
     phone: '',
     email: '',
-    joiningDate: '',      // YYYY-MM-DD (native date input)
+    joiningDate: '',
     qualification: ''
   };
 
@@ -45,18 +46,14 @@ export class RegisterTeacherPage implements OnInit {
 
     if (profile.value) {
       const parsed = JSON.parse(profile.value);
-      this.form.schoolId = parsed.schoolId; // ✅ THIS WAS MISSING
+      this.form.schoolId = parsed.schoolId;
     }
   }
 
-
   // 📨 SUBMIT
   submit() {
-    console.log('Register Teacher clicked');
-
     this.submitted = true;
 
-    // 🔴 REQUIRED VALIDATIONS
     if (
       !this.form.schoolId ||
       !this.form.fullName ||
@@ -72,7 +69,6 @@ export class RegisterTeacherPage implements OnInit {
       return;
     }
 
-    // ✅ START LOADER ONLY AFTER ALL VALID
     this.saving = true;
 
     const payload = {
@@ -80,21 +76,18 @@ export class RegisterTeacherPage implements OnInit {
       fullName: this.form.fullName.trim(),
       phone: this.form.phone.trim(),
       email: this.form.email || null,
-      joiningDate: this.form.joiningDate, // YYYY-MM-DD ✔
+      joiningDate: this.form.joiningDate,
       qualification: this.form.qualification || null
     };
 
-    console.log('Teacher payload:', payload); // 👈 MUST PRINT
-
     this.http.post<any>(
-      'https://localhost:7201/api/Teacher/RegisterTeacher',
+      `${environment.apiBaseUrl}/Teacher/RegisterTeacher`,
       payload
     ).subscribe({
       next: async (res) => {
         this.saving = false;
 
         if (res?.success && res?.data) {
-
           const modal = await this.modalCtrl.create({
             component: TeacherCredentialsModal,
             componentProps: {
@@ -114,7 +107,6 @@ export class RegisterTeacherPage implements OnInit {
       }
     });
   }
-
 
   // 🔁 RESET FORM
   resetForm() {

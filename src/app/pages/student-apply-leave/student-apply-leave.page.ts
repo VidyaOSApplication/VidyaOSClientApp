@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-student-apply-leave',
@@ -28,7 +29,7 @@ export class StudentApplyLeavePage implements OnInit {
   constructor(
     private http: HttpClient,
     private toastCtrl: ToastController
-  ) {}
+  ) { }
 
   async ngOnInit() {
     const profile = await Preferences.get({ key: 'user_profile' });
@@ -79,7 +80,7 @@ export class StudentApplyLeavePage implements OnInit {
     };
 
     this.http.post(
-      'https://localhost:7201/api/School/ApplyLeave',
+      `${environment.apiBaseUrl}/School/ApplyLeave`,
       payload
     ).subscribe({
       next: () => {
@@ -108,6 +109,6 @@ export class StudentApplyLeavePage implements OnInit {
       position: 'top',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

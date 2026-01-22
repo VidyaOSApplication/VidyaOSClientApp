@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 interface MasterSubject {
   masterSubjectId: number;
@@ -26,7 +27,8 @@ export class AdminMasterSubjectsPage implements OnInit {
   saving = false;
   loading = false;
 
-  private api = 'https://localhost:7201/api/School';
+  // ✅ NO HARDCODED URL
+  private api = `${environment.apiBaseUrl}/School`;
 
   constructor(
     private http: HttpClient,
@@ -131,6 +133,6 @@ export class AdminMasterSubjectsPage implements OnInit {
       position: 'bottom',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

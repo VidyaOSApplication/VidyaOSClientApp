@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-class-timetable',
@@ -19,12 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AddClassTimetablePage {
 
-  // 🔧 APIs
+  // 🔧 APIs (NO HARDCODED URL)
   private subjectApi =
-    'https://localhost:7201/api/School/GetSubjectsForClassSection';
+    `${environment.apiBaseUrl}/School/GetSubjectsForClassSection`;
 
   private timetableApi =
-    'https://localhost:7201/api/School/CreateClassTimetable';
+    `${environment.apiBaseUrl}/School/CreateClassTimetable`;
 
   // 🔢 Fixed values
   schoolId = 17;

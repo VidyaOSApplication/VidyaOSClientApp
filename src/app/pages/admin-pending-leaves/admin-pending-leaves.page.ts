@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, AlertController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-admin-pending-leaves',
@@ -41,7 +41,7 @@ export class AdminPendingLeavesPage implements OnInit {
     this.loading = true;
 
     this.http.get<any>(
-      `https://localhost:7201/api/School/GetPendingLeaves?schoolId=${this.schoolId}`
+      `${environment.apiBaseUrl}/School/GetPendingLeaves?schoolId=${this.schoolId}`
     ).subscribe({
       next: (res) => {
         this.leaves = res.data || [];
@@ -56,35 +56,28 @@ export class AdminPendingLeavesPage implements OnInit {
 
   // 🔥 APPROVE / REJECT HANDLER
   async takeAction(leave: any, action: 'Approved' | 'Rejected') {
-    var fromDate = new Date(leave.fromDate).toLocaleDateString();
-    var toDate = new Date(leave.toDate).toLocaleDateString();
+    const fromDate = new Date(leave.fromDate).toLocaleDateString();
+    const toDate = new Date(leave.toDate).toLocaleDateString();
+
     const alert = await this.alertCtrl.create({
       header: action === 'Approved' ? 'Approve Leave?' : 'Reject Leave?',
       message: `
-      ${leave.name}
-      ${fromDate} → ${toDate}
-      Are you sure you want to ${action.toLowerCase()}
-    `,
+        ${leave.name}
+        ${fromDate} → ${toDate}
+        Are you sure you want to ${action.toLowerCase()}
+      `,
       buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
+        { text: 'Cancel', role: 'cancel' },
         {
           text: action === 'Approved' ? 'Approve' : 'Reject',
           role: 'confirm',
-          handler: () => {
-            this.confirmLeaveAction(leave, action);
-          }
+          handler: () => this.confirmLeaveAction(leave, action)
         }
       ]
     });
 
     await alert.present();
   }
-
-
-
 
   confirmLeaveAction(leave: any, action: 'Approved' | 'Rejected') {
 
@@ -94,10 +87,8 @@ export class AdminPendingLeavesPage implements OnInit {
       action: action
     };
 
-    console.log('Leave action payload:', payload);
-
     this.http.post(
-      'https://localhost:7201/api/School/TakeLeaveAction',
+      `${environment.apiBaseUrl}/School/TakeLeaveAction`,
       payload
     ).subscribe({
       next: () => {
@@ -117,7 +108,6 @@ export class AdminPendingLeavesPage implements OnInit {
     });
   }
 
-
   async showToast(message: string, color: 'success' | 'danger') {
     const toast = await this.toastCtrl.create({
       message,
@@ -125,6 +115,6 @@ export class AdminPendingLeavesPage implements OnInit {
       position: 'top',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

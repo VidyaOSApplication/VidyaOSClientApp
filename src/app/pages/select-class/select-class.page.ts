@@ -4,6 +4,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-select-class',
@@ -48,7 +49,7 @@ export class SelectClassPage implements OnInit {
     this.loading = true;
 
     this.http.get<any>(
-      'https://localhost:7201/api/Exam/GetExams',
+      `${environment.apiBaseUrl}/Exam/GetExams`,
       { params: { schoolId: this.schoolId } }
     ).subscribe({
       next: res => {
@@ -90,7 +91,6 @@ export class SelectClassPage implements OnInit {
       duration: 2000,
       color
     });
-    toast.present();
+    await toast.present();
   }
 }
-

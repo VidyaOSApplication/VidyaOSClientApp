@@ -6,6 +6,7 @@ import { Preferences } from '@capacitor/preferences';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-enter-marks',
@@ -31,7 +32,7 @@ export class EnterMarksPage implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toast: ToastController
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
@@ -44,25 +45,31 @@ export class EnterMarksPage implements OnInit {
   }
 
   loadSubjects() {
-    this.http.get<any>('https://localhost:7201/api/Exam/GetSubjectsForMarks', {
-      params: {
-        examId: this.examId,
-        classId: this.classId
+    this.http.get<any>(
+      `${environment.apiBaseUrl}/Exam/GetSubjectsForMarks`,
+      {
+        params: {
+          examId: this.examId,
+          classId: this.classId
+        }
       }
-    }).subscribe(res => {
+    ).subscribe(res => {
       this.subjects = res.data.subjects || [];
     });
   }
 
   loadStudents() {
-    this.http.get<any>('https://localhost:7201/api/Exam/GetStudentsForMarks', {
-      params: {
-        examId: this.examId,
-        classId: this.classId,
-        subjectId: this.subjectId,
-        schoolId: this.schoolId
+    this.http.get<any>(
+      `${environment.apiBaseUrl}/Exam/GetStudentsForMarks`,
+      {
+        params: {
+          examId: this.examId,
+          classId: this.classId,
+          subjectId: this.subjectId,
+          schoolId: this.schoolId
+        }
       }
-    }).subscribe(res => {
+    ).subscribe(res => {
       this.students = (res.students || []).map((s: any) => ({
         ...s,
         marksObtained: s.marksObtained ?? null,
@@ -88,15 +95,21 @@ export class EnterMarksPage implements OnInit {
         }))
     };
 
-    this.http.post('https://localhost:7201/api/Exam/SaveMarks', payload)
-      .subscribe({
-        next: () => this.showToast('Marks saved successfully', 'success'),
-        error: () => this.showToast('Something went wrong', 'danger')
-      });
+    this.http.post(
+      `${environment.apiBaseUrl}/Exam/SaveMarks`,
+      payload
+    ).subscribe({
+      next: () => this.showToast('Marks saved successfully', 'success'),
+      error: () => this.showToast('Something went wrong', 'danger')
+    });
   }
 
   async showToast(message: string, color: string) {
-    const t = await this.toast.create({ message, color, duration: 2000 });
-    t.present();
+    const t = await this.toast.create({
+      message,
+      color,
+      duration: 2000
+    });
+    await t.present();
   }
 }

@@ -4,13 +4,13 @@ import { IonicModule, LoadingController, ToastController } from '@ionic/angular'
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 interface AttendanceStudent {
   rollNo: number;
   admissionNo: string;
   fullName: string;
   status: 'Present' | 'Absent' | 'Leave' | 'NotMarked';
-
 }
 
 interface AttendanceSummary {
@@ -74,6 +74,7 @@ export class ViewAttendancePage implements OnInit {
     // Load schoolId from storage
     await this.loadSchoolId();
   }
+
   ngOnChanges() {
     if (this.classId !== 11 && this.classId !== 12) {
       this.streamId = null;
@@ -93,8 +94,6 @@ export class ViewAttendancePage implements OnInit {
 
     const profile = JSON.parse(value);
     this.schoolId = profile.schoolId;
-
-    console.log('✅ School ID loaded:', this.schoolId);
   }
 
   async viewAttendance() {
@@ -107,6 +106,7 @@ export class ViewAttendancePage implements OnInit {
       this.showToast('School not identified');
       return;
     }
+
     if ((this.classId === 11 || this.classId === 12) && !this.streamId) {
       this.showToast('Please select stream for class 11/12');
       return;
@@ -118,7 +118,7 @@ export class ViewAttendancePage implements OnInit {
     await loading.present();
 
     this.http.get<any>(
-      `https://localhost:7201/api/School/ViewAttendance`,
+      `${environment.apiBaseUrl}/School/ViewAttendance`,
       {
         params: {
           schoolId: this.schoolId,

@@ -4,11 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
-import { AlertController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { StudentCredentialsModal } from '../../modals/student-credentials/student-credentials.modal';
-
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-student',
@@ -22,8 +20,6 @@ export class RegisterStudentPage implements OnInit {
   saving = false;
   submitted = false;
   academicYears: string[] = [];
-
-
 
   mobileRegex = /^[6-9]\d{9}$/;
 
@@ -76,8 +72,7 @@ export class RegisterStudentPage implements OnInit {
     }
   }
 
-
-  // ---------- FIELD VALIDATIONS ----------
+  // ---------- VALIDATIONS ----------
   isInvalid(field: string): boolean {
     return this.submitted && (!this.form[field] || this.form[field].toString().trim() === '');
   }
@@ -102,38 +97,27 @@ export class RegisterStudentPage implements OnInit {
 
     return age < 3;
   }
+
   generateAcademicYears() {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1; // Jan = 1
+    const month = today.getMonth() + 1;
 
-    let currentStartYear: number;
-
-    // Academic year starts in April
-    if (month >= 4) {
-      currentStartYear = year;
-    } else {
-      currentStartYear = year - 1;
-    }
+    const startYear = month >= 4 ? year : year - 1;
 
     const currentAcademic =
-      `${currentStartYear}-${(currentStartYear + 1).toString().slice(2)}`;
-
+      `${startYear}-${(startYear + 1).toString().slice(2)}`;
     const nextAcademic =
-      `${currentStartYear + 1}-${(currentStartYear + 2).toString().slice(2)}`;
+      `${startYear + 1}-${(startYear + 2).toString().slice(2)}`;
 
     this.academicYears = [currentAcademic, nextAcademic];
-
-    // 🔥 Default select current academic year
     this.form.academicYear = currentAcademic;
   }
-
 
   // ---------- SUBMIT ----------
   submit() {
     this.submitted = true;
 
-    // REQUIRED FIELD CHECK
     if (
       !this.form.schoolId ||
       !this.form.firstName ||
@@ -148,7 +132,6 @@ export class RegisterStudentPage implements OnInit {
       return;
     }
 
-    // DOB VALIDATION
     if (this.isInvalidDOB()) {
       this.showToast(
         'Student must be at least 3 years old and DOB cannot be future',
@@ -157,23 +140,20 @@ export class RegisterStudentPage implements OnInit {
       return;
     }
 
-    // PHONE VALIDATION
     if (!this.mobileRegex.test(this.form.parentPhone)) {
       this.showToast('Invalid parent phone number', 'danger');
       return;
     }
+
     if (
-  (this.form.classId === 11 || this.form.classId === 12) &&
-  !this.form.streamId
-) {
-  this.showToast('Please select stream for class 11 / 12', 'danger');
-  return;
-}
+      (this.form.classId === 11 || this.form.classId === 12) &&
+      !this.form.streamId
+    ) {
+      this.showToast('Please select stream for class 11 / 12', 'danger');
+      return;
+    }
 
-
-    // ✅ ALL VALID — START LOADER
     this.saving = true;
-
 
     const payload = {
       ...this.form,
@@ -182,12 +162,14 @@ export class RegisterStudentPage implements OnInit {
     };
 
     this.http
-      .post<any>('https://localhost:7201/api/Students/RegisterStudent', payload)
+      .post<any>(
+        `${environment.apiBaseUrl}/Students/RegisterStudent`,
+        payload
+      )
       .subscribe({
         next: async (res) => {
           this.saving = false;
 
-          // ✅ OPEN SUCCESS MODAL
           const modal = await this.modalCtrl.create({
             component: StudentCredentialsModal,
             componentProps: {
@@ -199,7 +181,6 @@ export class RegisterStudentPage implements OnInit {
           });
 
           await modal.present();
-
           this.resetForm();
         },
         error: (err) => {
@@ -214,14 +195,13 @@ export class RegisterStudentPage implements OnInit {
       });
   }
 
-
-
   resetForm() {
     this.submitted = false;
     this.form = {
       ...this.form,
       classId: null,
       sectionId: null,
+      streamId: null,
       firstName: '',
       lastName: '',
       gender: '',
@@ -237,61 +217,12 @@ export class RegisterStudentPage implements OnInit {
       email: ''
     };
   }
-  async showSuccessAlert(admissionNo: string, username: string, password: string) {
-    const alert = await this.alertCtrl.create({
-      header: '🎉 Student Registered',
-      backdropDismiss: false,
-      message: `
-      <div style="text-align:left; font-size:14px">
-        <p><strong>Admission No:</strong> ${admissionNo}</p>
-        <p><strong>Username:</strong> ${username}</p>
-        <p><strong>Password:</strong> ${password}</p>
-        <hr/>
-        <p style="color:#d97706; font-weight:600">
-          ⚠ Please note down these details for future reference.
-        </p>
-      </div>
-    `,
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm'
-        }
-      ]
-    });
 
-    await alert.present();
-  }
-  async showWarningAlert(message: string) {
-    const alert = await this.alertCtrl.create({
-      header: '⚠ Registration Warning',
-      backdropDismiss: false,
-      cssClass: 'warning-alert',
-      message: `
-      <div style="text-align:left">
-        <p>${message}</p>
-        <hr/>
-        <p style="color:#b45309; font-weight:600">
-          Please verify the student details and try again.
-        </p>
-      </div>
-    `,
-      buttons: [
-        {
-          text: 'OK',
-          role: 'confirm'
-        }
-      ]
-    });
-
-    await alert.present();
-  }
   onClassChange() {
     if (this.form.classId !== 11 && this.form.classId !== 12) {
-      this.form.streamId = null; // ✅ auto-clear
+      this.form.streamId = null;
     }
   }
-
 
   async showToast(message: string, color: 'success' | 'danger') {
     const toast = await this.toastCtrl.create({
@@ -300,6 +231,6 @@ export class RegisterStudentPage implements OnInit {
       position: 'top',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

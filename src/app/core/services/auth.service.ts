@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap, map } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 import { UserProfile } from '../../models/userProfile';
+import { API_BASE_URL } from 'src/app/core/api-base';
 
 interface LoginResponse {
   success: boolean;
@@ -19,11 +20,11 @@ interface LoginResponse {
 })
 export class AuthService {
 
-  private apiUrl = 'https://localhost:7201/api';
+  private apiUrl = API_BASE_URL;
 
   constructor(private http: HttpClient) { }
 
-  // 🔐 LOGIN (NO PROFILE CALL HERE)
+  // 🔐 LOGIN
   login(username: string, password: string): Observable<string> {
     return this.http.post<LoginResponse>(
       `${this.apiUrl}/Auth/Login`,
@@ -34,19 +35,17 @@ export class AuthService {
           await this.saveAuthData(res.data);
         }
       }),
-      map(res => res.data.role) // 👈 return role only
+      map(res => res.data.role)
     );
   }
 
-  // 👤 PROFILE (CALL ONLY WHEN NEEDED)
+  // 👤 PROFILE
   getMyProfile(username: string): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/Common/Me`).pipe(
+    return this.http.get<UserProfile>(
+      `${this.apiUrl}/Common/Me`
+    ).pipe(
       tap(async profile => {
-        const enrichedProfile = {
-          ...profile,
-          username
-        };
-
+        const enrichedProfile = { ...profile, username };
         await Preferences.set({
           key: 'user_profile',
           value: JSON.stringify(enrichedProfile)
@@ -55,7 +54,7 @@ export class AuthService {
     );
   }
 
-  // 💾 SAVE JWT + ROLE
+  // 💾 SAVE TOKEN
   private async saveAuthData(data: {
     token: string;
     role: string;
@@ -68,25 +67,21 @@ export class AuthService {
     await Preferences.set({ key: 'token_expiry', value: expiryTime.toString() });
   }
 
-  // 🔑 READ ROLE
   async getRole(): Promise<string | null> {
     const res = await Preferences.get({ key: 'user_role' });
     return res.value;
   }
 
-  // 📦 READ STORED PROFILE
   async getStoredProfile(): Promise<UserProfile | null> {
     const res = await Preferences.get({ key: 'user_profile' });
     return res.value ? JSON.parse(res.value) : null;
   }
 
-  // 🔑 TOKEN (INTERCEPTOR)
   async getToken(): Promise<string | null> {
     const res = await Preferences.get({ key: 'jwt_token' });
     return res.value;
   }
 
-  // 🚪 LOGOUT
   async logout() {
     await Preferences.clear();
   }

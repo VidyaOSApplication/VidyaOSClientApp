@@ -5,6 +5,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create-exam',
@@ -19,8 +20,8 @@ export class CreateExamPage implements OnInit {
   selectedClasses: number[] = [];
 
   examName = '';
-  examType = 'Midterm';      // ✅ ADD THIS
-  examDate = '';             // ✅ ADD THIS
+  examType = 'Midterm';
+  examDate = '';
   academicYear = '';
   schoolId = 0;
   saving = false;
@@ -58,14 +59,14 @@ export class CreateExamPage implements OnInit {
     const payload = {
       schoolId: this.schoolId,
       examName: this.examName,
-      examType: this.examType,     // ✅ USED
-      examDate: this.examDate,     // ✅ USED
+      examType: this.examType,
+      examDate: this.examDate,
       academicYear: this.academicYear,
       classIds: this.selectedClasses
     };
 
     this.http.post<any>(
-      'https://localhost:7201/api/Exam/CreateExam',
+      `${environment.apiBaseUrl}/Exam/CreateExam`,
       payload
     ).subscribe({
       next: async () => {
@@ -87,6 +88,6 @@ export class CreateExamPage implements OnInit {
       color,
       position: 'top'
     });
-    t.present();
+    await t.present();
   }
 }

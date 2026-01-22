@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-select-subject',
@@ -24,17 +25,18 @@ export class SelectSubjectPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private authService:AuthService
+    private authService: AuthService
   ) { }
 
   async ngOnInit() {
     this.examId = Number(this.route.snapshot.paramMap.get('examId'));
     this.classId = Number(this.route.snapshot.paramMap.get('classId'));
-    const profile = await this.authService.getStoredProfile();
 
+    const profile = await this.authService.getStoredProfile();
     if (profile) {
-      this.schoolId = profile.schoolId; // 👈 from API
+      this.schoolId = profile.schoolId;
     }
+
     this.route.queryParams.subscribe(q => {
       this.stream = q['stream'] || null;
     });
@@ -44,7 +46,7 @@ export class SelectSubjectPage implements OnInit {
 
   loadSubjects() {
     this.http.get<any>(
-      'https://localhost:7201/api/Exam/GetAssignedSubjects',
+      `${environment.apiBaseUrl}/Exam/GetAssignedSubjects`,
       {
         params: {
           examId: this.examId,

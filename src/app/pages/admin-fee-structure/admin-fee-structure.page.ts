@@ -4,6 +4,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 interface FeeStructure {
   feeStructureId: number;
@@ -26,7 +27,7 @@ export class AdminFeeStructurePage implements OnInit {
 
   loading = false;
   saving = false;
-  //streamId = null as number | null;
+
   schoolId = 0;
   classes: number[] = [];
   feeStructures: FeeStructure[] = [];
@@ -58,7 +59,7 @@ export class AdminFeeStructurePage implements OnInit {
     this.loading = true;
 
     this.http.get<any>(
-      `https://localhost:7201/api/School/GetFeeStructures?schoolId=${this.schoolId}`
+      `${environment.apiBaseUrl}/School/GetFeeStructures?schoolId=${this.schoolId}`
     ).subscribe({
       next: res => {
         this.feeStructures = res.data || [];
@@ -79,6 +80,7 @@ export class AdminFeeStructurePage implements OnInit {
       this.showToast('Please select stream for class 11 / 12', 'danger');
       return;
     }
+
     if (!this.form.classId || !this.form.feeName || !this.form.monthlyAmount) {
       this.showToast('Please fill all required fields', 'danger');
       return;
@@ -95,7 +97,7 @@ export class AdminFeeStructurePage implements OnInit {
     };
 
     this.http.post<any>(
-      'https://localhost:7201/api/School/SaveFeeStructure',
+      `${environment.apiBaseUrl}/School/SaveFeeStructure`,
       payload
     ).subscribe({
       next: res => {
@@ -121,8 +123,8 @@ export class AdminFeeStructurePage implements OnInit {
   resetForm() {
     this.form = {
       classId: null,
+      streamId: null,
       feeName: '',
-      streamId: null, 
       monthlyAmount: null
     };
   }
@@ -134,6 +136,6 @@ export class AdminFeeStructurePage implements OnInit {
       position: 'top',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

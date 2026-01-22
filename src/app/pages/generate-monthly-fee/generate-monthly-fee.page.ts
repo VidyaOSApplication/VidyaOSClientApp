@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-generate-monthly-fee',
@@ -70,10 +71,11 @@ export class GenerateMonthlyFeePage implements OnInit {
       feeMonth: this.form.year + '-' + this.form.month
     };
 
-    console.log('Generate fee payload:', payload);
-
     this.http
-      .post<any>('https://localhost:7201/api/School/GenerateMonthlyFee', payload)
+      .post<any>(
+        `${environment.apiBaseUrl}/School/GenerateMonthlyFee`,
+        payload
+      )
       .subscribe({
         next: async (res) => {
           this.loading = false;
@@ -84,8 +86,8 @@ export class GenerateMonthlyFeePage implements OnInit {
             header: '✅ Fee Generated',
             message: `
               Month: ${data.feeMonth}
-              Fees Generated:${data.feesGenerated}
-              Already Exists:${data.skipped}
+              Fees Generated: ${data.feesGenerated}
+              Already Exists: ${data.skipped}
             `,
             buttons: ['OK']
           });
@@ -106,6 +108,6 @@ export class GenerateMonthlyFeePage implements OnInit {
       position: 'top',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

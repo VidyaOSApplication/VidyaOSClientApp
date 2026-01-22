@@ -5,6 +5,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-assign-subjects',
@@ -12,7 +13,6 @@ import { AuthService } from '../../core/services/auth.service';
   imports: [CommonModule, FormsModule, IonicModule],
   styleUrls: ['./assign-subjects.page.scss'],
   templateUrl: './assign-subjects.page.html'
-  
 })
 export class AssignSubjectsPage implements OnInit {
 
@@ -48,7 +48,7 @@ export class AssignSubjectsPage implements OnInit {
 
   loadData() {
     this.http.get<any>(
-      'https://localhost:7201/api/Exam/GetExamToAddSubjects',
+      `${environment.apiBaseUrl}/Exam/GetExamToAddSubjects`,
       {
         params: {
           examId: this.examId,
@@ -59,7 +59,7 @@ export class AssignSubjectsPage implements OnInit {
     ).subscribe(res => {
       this.examName = res.data?.examName || '';
       this.subjects = res.data?.subjects || [];
-      this.selectedSubjects = res.data.assignedSubjects || [];
+      this.selectedSubjects = res.data?.assignedSubjects || [];
     });
   }
 
@@ -88,7 +88,7 @@ export class AssignSubjectsPage implements OnInit {
 
     try {
       await this.http.post(
-        'https://localhost:7201/api/Exam/AddExamSubjects',
+        `${environment.apiBaseUrl}/Exam/AddExamSubjects`,
         {
           examId: this.examId,
           classId: this.classId,

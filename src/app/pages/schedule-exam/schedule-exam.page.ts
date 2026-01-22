@@ -5,6 +5,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-schedule-exam',
@@ -37,18 +38,17 @@ export class ScheduleExamPage implements OnInit {
     }
 
     this.schoolId = JSON.parse(profile.value).schoolId;
-    console.log('ScheduleExam examId:', this.examId);
-    console.log('ScheduleExam classId:', this.classId);
 
     this.loadSubjects();
   }
+
   trackById(_: number, item: any) {
     return item.subjectId;
   }
 
   loadSubjects() {
     this.http.get<any>(
-      'https://localhost:7201/api/Exam/GetSubjectsForSchedule',
+      `${environment.apiBaseUrl}/Exam/GetSubjectsForSchedule`,
       {
         params: {
           examId: this.examId,
@@ -56,32 +56,25 @@ export class ScheduleExamPage implements OnInit {
         }
       }
     ).subscribe(res => {
-      console.log(res);
-
-      const today = new Date().toISOString().slice(0, 10); // yyyy-MM-dd
+      const today = new Date().toISOString().slice(0, 10);
 
       this.subjects = (res.data || []).map((s: any) => ({
         subjectId: s.subjectId,
         subjectName: s.subjectName,
-
-        // ✅ default values for UI
         examDate: s.examDate ?? today,
         maxMarks: s.maxMarks ?? 100
       }));
     });
   }
 
-
-
   async save() {
     await this.http.post(
-      'https://localhost:7201/api/Exam/ScheduleExam',
+      `${environment.apiBaseUrl}/Exam/ScheduleExam`,
       {
         examId: this.examId,
         classId: this.classId,
         schoolId: this.schoolId,
         subjects: this.subjects
-
       }
     ).toPromise();
 
@@ -91,12 +84,13 @@ export class ScheduleExamPage implements OnInit {
       duration: 2000
     })).present();
   }
+
   async showError(message: string) {
     const t = await this.toast.create({
       message,
       color: 'danger',
       duration: 2000
     });
-    t.present();
+    await t.present();
   }
 }

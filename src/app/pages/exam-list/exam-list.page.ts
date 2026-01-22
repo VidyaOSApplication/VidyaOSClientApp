@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-exam-list',
@@ -34,7 +35,7 @@ export class ExamListPage implements OnInit {
 
   load() {
     this.http.get<any>(
-      'https://localhost:7201/api/Exam/GetExams',
+      `${environment.apiBaseUrl}/Exam/GetExams`,
       { params: { schoolId: this.schoolId } }
     ).subscribe(res => {
       this.exams = res.data.map((e: any) => ({
@@ -72,7 +73,7 @@ export class ExamListPage implements OnInit {
 
   declareResult(exam: any) {
     this.http.post(
-      'https://localhost:7201/api/Exam/DeclareResult',
+      `${environment.apiBaseUrl}/Exam/DeclareResult`,
       { examId: exam.examId }
     ).subscribe(() => {
       this.showToast('Result declared', 'success');
@@ -87,25 +88,21 @@ export class ExamListPage implements OnInit {
       color,
       position: 'top'
     });
-    t.present();
+    await t.present();
   }
+
   getStatusColor(status: string): 'primary' | 'warning' | 'success' | 'medium' {
     switch (status) {
       case 'Draft':
         return 'medium';
-
       case 'Subjects Assigned':
         return 'warning';
-
       case 'Marks Entered':
         return 'primary';
-
       case 'Result Declared':
         return 'success';
-
       default:
         return 'medium';
     }
   }
-
 }

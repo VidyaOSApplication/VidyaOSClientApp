@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-birthdays',
@@ -31,7 +32,7 @@ export class BirthdaysPage implements OnInit {
     this.loading = true;
 
     this.http.get<any>(
-      `https://localhost:7201/api/School/GetTodaysBirthdays?schoolId=${this.schoolId}`
+      `${environment.apiBaseUrl}/School/GetTodaysBirthdays?schoolId=${this.schoolId}`
     ).subscribe({
       next: (res) => {
         this.students = res?.data?.students || [];

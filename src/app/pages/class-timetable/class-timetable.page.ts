@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-class-timetable',
@@ -14,10 +15,11 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class ClassTimetablePage {
 
+  // ✅ NO HARDCODED URL
   private apiUrl =
-    'https://localhost:7201/api/School/GetClassTimetable';
+    `${environment.apiBaseUrl}/School/GetClassTimetable`;
 
-  // 🔢 Selections (RESTORED)
+  // 🔢 Selections
   schoolId = 17;
   classId!: number;
   sectionId!: number;

@@ -8,6 +8,7 @@ import {
 } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-collect-fee',
@@ -47,7 +48,7 @@ export class CollectFeePage implements OnInit {
     private http: HttpClient,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
-  ) {}
+  ) { }
 
   // ---------- INIT ----------
   async ngOnInit() {
@@ -70,7 +71,7 @@ export class CollectFeePage implements OnInit {
     if (!this.classId || !this.sectionId) return;
 
     this.http.get<any>(
-      'https://localhost:7201/api/School/GetStudentsByClassSection',
+      `${environment.apiBaseUrl}/School/GetStudentsByClassSection`,
       {
         params: {
           schoolId: this.schoolId,
@@ -97,7 +98,7 @@ export class CollectFeePage implements OnInit {
     this.loading = true;
 
     this.http.get<any>(
-      `https://localhost:7201/api/School/GetStudentFeeHistory?studentId=${student.studentId}`
+      `${environment.apiBaseUrl}/School/GetStudentFeeHistory?studentId=${student.studentId}`
     ).subscribe({
       next: (res) => {
         this.fees = res.data || [];
@@ -151,7 +152,7 @@ export class CollectFeePage implements OnInit {
     };
 
     this.http.post<any>(
-      'https://localhost:7201/api/School/CollectFees',
+      `${environment.apiBaseUrl}/School/CollectFees`,
       payload
     ).subscribe({
       next: async (res) => {
@@ -172,22 +173,19 @@ export class CollectFeePage implements OnInit {
       header: '💰 Fee Collected',
       backdropDismiss: false,
       message: `
-        
-          ${data.receiptNo}
-          ${data.paidMonths.join(', ')}
-          ${data.totalAmount}
-          Payment successful
-         
+        ${data.receiptNo}
+        ${data.paidMonths.join(', ')}
+        ${data.totalAmount}
+        Payment successful
       `,
       buttons: ['OK']
     });
 
     await alert.present();
   }
-  formatMonth(month: string): string {
-    // month comes like "2026-01"
-    const [year, m] = month.split('-').map(Number);
 
+  formatMonth(month: string): string {
+    const [year, m] = month.split('-').map(Number);
     const date = new Date(year, m - 1);
     return date.toLocaleString('en-US', {
       month: 'long',
@@ -202,6 +200,6 @@ export class CollectFeePage implements OnInit {
       position: 'top',
       color
     });
-    toast.present();
+    await toast.present();
   }
 }

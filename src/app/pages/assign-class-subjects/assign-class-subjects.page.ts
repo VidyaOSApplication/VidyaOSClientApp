@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-assign-class-subjects',
@@ -57,7 +58,7 @@ export class AssignClassSubjectsPage implements OnInit {
     if (!this.classId) return;
     if (this.showStream && !this.streamId) return;
 
-    let params: any = {
+    const params: any = {
       schoolId: this.schoolId,
       classId: this.classId
     };
@@ -67,10 +68,9 @@ export class AssignClassSubjectsPage implements OnInit {
     }
 
     this.http.get<{ data: any[] }>(
-      'https://localhost:7201/api/School/GetSubjectsForAssignment',
+      `${environment.apiBaseUrl}/School/GetSubjectsForAssignment`,
       { params }
     ).subscribe(res => {
-      console.log(res);
       this.subjects = (res.data || []).map(s => ({
         subjectId: s.subjectId,
         subjectName: s.subjectName,
@@ -100,10 +100,9 @@ export class AssignClassSubjectsPage implements OnInit {
     if (this.showStream) {
       payload.streamId = this.streamId;
     }
-    console.log("payload", payload);
 
     this.http.post(
-      'https://localhost:7201/api/School/AssignClassSubjects',
+      `${environment.apiBaseUrl}/School/AssignClassSubjects`,
       payload
     ).subscribe({
       next: async () => {
@@ -124,6 +123,6 @@ export class AssignClassSubjectsPage implements OnInit {
       position: 'top',
       color
     });
-    t.present();
+    await t.present();
   }
 }
