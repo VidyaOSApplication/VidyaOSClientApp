@@ -34,7 +34,7 @@
                 "input": "src/assets",
                 "output": "assets"
               },
-              "src/_redirects"
+              "src/404.html"
             ],
             "styles": [ "src/global.scss", "src/theme/variables.scss" ],
             "scripts": [],
