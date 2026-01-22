@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://your-render-url.onrender.com/api'
+  apiBaseUrl: 'https://vidyaosapp.onrender.com/api'
 };
