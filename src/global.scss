@@ -1,153 +1,112 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Global styles for the entire Ionic application
  */
 
-/* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+/* ===========================
+   IONIC CORE STYLES (REQUIRED)
+   =========================== */
 
-/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* ===========================
+   IONIC UTILITIES
+   =========================== */
+
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* ===========================
+   DARK MODE (SYSTEM)
+   =========================== */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
-
-/* =========================================
-   GLOBAL FIX: IONIC INPUTS & SELECT LOOK FADED
-   ========================================= */
-
-/* Make all inputs/selects fully opaque */
-//ion-input,
-//ion-select,
-//ion-datetime,
-//ion-textarea {
-//  --color: #111827; /* strong readable text */
-//  --placeholder-color: #6b7280;
-//  --placeholder-opacity: 1;
-//  opacity: 1 !important;
-//}
-
-///* Fix selected value text (VERY IMPORTANT) */
-//ion-select::part(text) {
-//  color: #111827;
-//  font-weight: 500;
-//  opacity: 1;
-//}
-
-///* Fix dropdown icon */
-//ion-select::part(icon) {
-//  color: #6b7280;
-//  opacity: 1;
-//}
-
-///* Prevent Ionic from dimming items */
-//ion-item {
-//  --disabled-opacity: 1;
-//  opacity: 1 !important;
-//}
-
-///* Focus state */
-//ion-item.item-has-focus,
-//ion-item.item-has-value {
-//  --color: #111827;
-//}
-
-///* Dark mode safety */
-//@media (prefers-color-scheme: dark) {
-//  ion-input,
-//  ion-select,
-//  ion-datetime,
-//  ion-textarea {
-//    --color: #e5e7eb;
-//    --placeholder-color: #9ca3af;
-//  }
-
-//  ion-select::part(text) {
-//    color: #e5e7eb;
-//  }
-//}
-//on-action-sheet {
-//  --button-color: #111827 !important;
-//  --button-color-selected: #111827 !important;
-//  --button-color-activated: #111827 !important;
-//  --color: #111827 !important;
-//}
-
-///* Individual buttons */
-//ion-action-sheet .action-sheet-button {
-//  color: #111827 !important;
-//  opacity: 1 !important;
-//  font-weight: 500;
-//}
-
-///* Button inner text */
-//ion-action-sheet .action-sheet-button-inner {
-//  opacity: 1 !important;
-//}
-
-///* Cancel button */
-//ion-action-sheet .action-sheet-cancel {
-//  color: #374151 !important;
-//  opacity: 1 !important;
-//}
-
-///* Backdrop (keep dim but readable) */
-//ion-action-sheet::part(backdrop) {
-//  background: rgba(0, 0, 0, 0.35);
-//}
-
-///* ===== Dark mode safety ===== */
-//@media (prefers-color-scheme: dark) {
-//  ion-action-sheet {
-//    --button-color: #e5e7eb !important;
-//    --button-color-selected: #e5e7eb !important;
-//    --button-color-activated: #e5e7eb !important;
-//    --color: #e5e7eb !important;
-//  }
-
-//  ion-action-sheet .action-sheet-button {
-//    color: #e5e7eb !important;
-//  }
-//}
+@import "@ionic/angular/css/palettes/dark.system.css";
 
 /* ===========================
-   FIX INVISIBLE CHECKBOX
+   🚨 PRODUCTION LAYOUT FIX
+   (THIS FIXES BLANK / FADED UI)
+   =========================== */
+
+html,
+body,
+ion-app,
+ion-router-outlet {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure Ionic background is applied */
+body {
+  background: var(--ion-background-color);
+  color: var(--ion-text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* ===========================
+   PREVENT IONIC DIMMING BUGS
+   =========================== */
+
+/* ===========================
+   CHECKBOX VISIBILITY FIX
    =========================== */
 
 ion-checkbox {
   --size: 22px;
   --border-width: 2px;
   --border-radius: 6px;
-  /* UNCHECKED STATE */
-  --border-color: #9ca3af; /* visible gray */
+  /* Unchecked */
+  --border-color: #9ca3af;
   --background: #ffffff;
-  /* CHECKED STATE */
-  --background-checked: #0ea5a4; /* teal */
+  /* Checked */
+  --background-checked: #0ea5a4;
   --border-color-checked: #0ea5a4;
   --checkmark-color: #ffffff;
   opacity: 1 !important;
+}
+
+/* ===========================
+   OPTIONAL: INPUT CLARITY FIX
+   (SAFE TO ENABLE)
+   =========================== */
+
+/*
+ion-input,
+ion-select,
+ion-datetime,
+ion-textarea {
+  --color: #111827;
+  --placeholder-color: #6b7280;
+  --placeholder-opacity: 1;
+  opacity: 1 !important;
+}
+
+ion-select::part(text) {
+  color: #111827;
+  font-weight: 500;
+}
+
+ion-item {
+  --disabled-opacity: 1;
+  opacity: 1 !important;
+}
+*/
+
+/* ===========================
+   MOBILE SAFETY
+   =========================== */
+
+@media (max-width: 768px) {
+  ion-content {
+    --padding-start: 16px;
+    --padding-end: 16px;
+  }
 }

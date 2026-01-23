@@ -54,25 +54,36 @@ export class LoginPage {
         }
 
         // OTHER ROLES
-        this.authService.getMyProfile(this.username).subscribe({
-          next: profile => {
-            this.loading = false;
+        this.authService.login(this.username, this.password).subscribe({
+          next: async (role: string) => {
 
-            if (profile.role === 'Student') {
-              this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
-            }
-            else if (profile.role === 'Teacher') {
-              this.router.navigateByUrl('/teacher/dashboard', { replaceUrl: true });
-            }
-            else if (profile.role === 'SchoolAdmin') {
-              this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
-            }
+            this.authService.getMyProfile(this.username).subscribe({
+              next: async () => {
+
+                if (role === 'SuperAdmin') {
+                  this.router.navigateByUrl('/super-admin/dashboard', { replaceUrl: true });
+                }
+                else if (role === 'Student') {
+                  this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
+                }
+                else if (role === 'Teacher') {
+                  this.router.navigateByUrl('/teacher/dashboard', { replaceUrl: true });
+                }
+                else if (role === 'SchoolAdmin') {
+                  this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+                }
+
+                this.loading = false;
+              }
+            });
+
           },
-          error: () => {
+          error: (err) => {
             this.loading = false;
-            this.errorMessage = 'Unable to load profile';
+            this.errorMessage = 'Invalid username or password';
           }
         });
+
       },
       error: () => {
         this.loading = false;

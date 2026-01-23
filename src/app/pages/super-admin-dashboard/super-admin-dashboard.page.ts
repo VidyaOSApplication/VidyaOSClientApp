@@ -31,7 +31,7 @@ export class SuperAdminDashboardPage {
     {
       title: 'Register School',
       icon: 'add-circle-outline',
-      route: '/super-admin/register-school'
+      route: 'register-school'
     },
     {
       title: 'Manage Schools',

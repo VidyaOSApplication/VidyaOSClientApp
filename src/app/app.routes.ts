@@ -15,6 +15,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/login/login.page').then(m => m.LoginPage)
   },
+  {
+    path: 'super-admin/dashboard',
+    loadComponent: () =>
+      import('./pages/super-admin-dashboard/super-admin-dashboard.page')
+        .then(m => m.SuperAdminDashboardPage)
+  },
 
   // ======================
   // DASHBOARDS
@@ -173,14 +179,18 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/add-class-timetable/add-class-timetable.page').then( m => m.AddClassTimetablePage)
   },
   
-
+  {
+    path: 'super-admin/dashboard/register-school',
+    loadComponent: () => import('./pages/register-school/register-school.page').then(m => m.RegisterSchoolPage)
+  },
 
   // ======================
   // FALLBACK (SAFETY)
   // ======================
-  {
-    path: '**',
-    redirectTo: 'login'
-  }
+  //{
+  //  path: '**',
+  //  redirectTo: 'login'
+  //}, 
+
 
 ];
