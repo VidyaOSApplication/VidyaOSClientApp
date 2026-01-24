@@ -36,51 +36,29 @@ export class LoginPage {
     this.errorMessage = '';
 
     this.authService.login(this.username, this.password).subscribe({
-      next: async (role) => {
+      next: (role: string) => {
 
-        // SUPER ADMIN
-        if (role === 'SuperAdmin') {
-          await Preferences.set({
-            key: 'user_profile',
-            value: JSON.stringify({
-              role: 'SuperAdmin',
-              name: 'System Administrator'
-            })
-          });
+        this.authService.getMyProfile(this.username).subscribe({
+          next: () => {
 
-          this.loading = false;
-          this.router.navigateByUrl('/super-admin/dashboard', { replaceUrl: true });
-          return;
-        }
+            if (role === 'SuperAdmin') {
+              this.router.navigateByUrl('/super-admin/dashboard', { replaceUrl: true });
+            }
+            else if (role === 'Student') {
+              this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
+            }
+            else if (role === 'Teacher') {
+              this.router.navigateByUrl('/teacher/dashboard', { replaceUrl: true });
+            }
+            else if (role === 'SchoolAdmin') {
+              this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
+            }
 
-        // OTHER ROLES
-        this.authService.login(this.username, this.password).subscribe({
-          next: async (role: string) => {
-
-            this.authService.getMyProfile(this.username).subscribe({
-              next: async () => {
-
-                if (role === 'SuperAdmin') {
-                  this.router.navigateByUrl('/super-admin/dashboard', { replaceUrl: true });
-                }
-                else if (role === 'Student') {
-                  this.router.navigateByUrl('/student/dashboard', { replaceUrl: true });
-                }
-                else if (role === 'Teacher') {
-                  this.router.navigateByUrl('/teacher/dashboard', { replaceUrl: true });
-                }
-                else if (role === 'SchoolAdmin') {
-                  this.router.navigateByUrl('/admin/dashboard', { replaceUrl: true });
-                }
-
-                this.loading = false;
-              }
-            });
-
-          },
-          error: (err) => {
             this.loading = false;
-            this.errorMessage = 'Invalid username or password';
+          },
+          error: () => {
+            this.loading = false;
+            this.errorMessage = 'Unable to load profile';
           }
         });
 
@@ -91,4 +69,5 @@ export class LoginPage {
       }
     });
   }
+
 }
