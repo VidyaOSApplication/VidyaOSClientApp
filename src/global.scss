@@ -1,13 +1,8 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Global styles for the entire Ionic application
- */
+/* App Global CSS */
 
 /* ===========================
    IONIC CORE STYLES (REQUIRED)
    =========================== */
-
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -17,7 +12,6 @@
 /* ===========================
    IONIC UTILITIES
    =========================== */
-
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
@@ -25,88 +19,39 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 /* ===========================
-   DARK MODE (SYSTEM)
+   FORCE DARK PALETTE 
+   (Ensures your UI looks like the browser version)
    =========================== */
-
-@import "@ionic/angular/css/palettes/dark.system.css";
+@import "@ionic/angular/css/palettes/dark.always.css";
 
 /* ===========================
-   🚨 PRODUCTION LAYOUT FIX
-   (THIS FIXES BLANK / FADED UI)
+   PRODUCTION LAYOUT FIX
    =========================== */
-
-html,
-body,
-ion-app,
-ion-router-outlet {
+html, body {
   width: 100%;
   height: 100%;
+  /* Force the background to match your theme */
+  background-color: #000814 !important;
 }
 
-/* Ensure Ionic background is applied */
-body {
-  background: var(--ion-background-color);
-  color: var(--ion-text-color);
-  margin: 0;
-  padding: 0;
-}
-
-/* ===========================
-   PREVENT IONIC DIMMING BUGS
-   =========================== */
-
-/* ===========================
-   CHECKBOX VISIBILITY FIX
-   =========================== */
-
-ion-checkbox {
-  --size: 22px;
-  --border-width: 2px;
-  --border-radius: 6px;
-  /* Unchecked */
-  --border-color: #9ca3af;
-  --background: #ffffff;
-  /* Checked */
-  --background-checked: #0ea5a4;
-  --border-color-checked: #0ea5a4;
-  --checkmark-color: #ffffff;
-  opacity: 1 !important;
+ion-content {
+  /* This ensures the dark background flows into the scroll area */
+  --background: transparent;
 }
 
 /* ===========================
-   OPTIONAL: INPUT CLARITY FIX
-   (SAFE TO ENABLE)
+   INPUT & BUTTON CLARITY
    =========================== */
-
-/*
-ion-input,
-ion-select,
-ion-datetime,
-ion-textarea {
-  --color: #111827;
-  --placeholder-color: #6b7280;
-  --placeholder-opacity: 1;
-  opacity: 1 !important;
+ion-input {
+  --background: #f0f4f9;
+  --color: #000;
+  --placeholder-color: #666;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
-ion-select::part(text) {
-  color: #111827;
-  font-weight: 500;
-}
-
-ion-item {
-  --disabled-opacity: 1;
-  opacity: 1 !important;
-}
-*/
-
-/* ===========================
-   MOBILE SAFETY
-   =========================== */
-
-@media (max-width: 768px) {
-  ion-content {
-    --padding-start: 16px;
-    --padding-end: 16px;
-  }
+.login-button {
+  --background: #0ea5a4;
+  --color: white;
+  font-weight: bold;
 }

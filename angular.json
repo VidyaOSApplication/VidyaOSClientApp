@@ -22,8 +22,7 @@
               "base": "www",
               "browser": ""
             },
-            "baseHref": "/VidyaOSClientApp/",
-            "deployUrl": "/VidyaOSClientApp/",
+            "baseHref": "/",
             "index": "src/index.html",
             "polyfills": [
               "src/polyfills.ts"
@@ -47,6 +46,11 @@
           },
           "configurations": {
             "production": {
+              "optimization": {
+                "scripts": true,
+                "styles": false,
+                "fonts": true
+              },
               "budgets": [
                 {
                   "type": "initial",

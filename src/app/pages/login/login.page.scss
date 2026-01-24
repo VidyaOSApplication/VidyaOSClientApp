@@ -77,29 +77,47 @@
 }
 
 /* INPUTS */
+/* Update your .input-item in login.page.scss */
+/* Target the Item container */
 .input-item {
   margin-bottom: 16px;
   border-radius: 14px;
-  background: #f9fafb;
+  /* Force a light background that won't blend with dark mode */
+  --background: #f9fafb !important;
+  background: #f9fafb !important;
+  /* Add a subtle border to define the box */
+  border: 1px solid #d1d5db;
   --padding-start: 12px;
+  --inner-padding-end: 12px;
 }
 
-.input-item ion-icon {
-  font-size: 20px;
-  color: #6b7280;
-}
+  /* Target the actual Input text */
+  .input-item ion-input {
+    /* Force the text you type to be dark grey/black */
+    --color: #111827 !important;
+    color: #111827 !important;
+    /* Force the placeholder to be a visible grey */
+    --placeholder-color: #6b7280 !important;
+    --placeholder-opacity: 1;
+    font-size: 14px;
+    font-weight: 500;
+    /* Fix for the internal native input height */
+    min-height: 45px;
+  }
 
-.input-item ion-input {
-  font-size: 14px;
-}
+  /* Ensure the icon stands out against the light background */
+  .input-item ion-icon {
+    font-size: 20px;
+    color: #4b5563 !important;
+  }
 
-/* BUTTON */
 .login-btn {
   margin-top: 12px;
   height: 48px;
   font-size: 15px;
   font-weight: 600;
-  border-radius: 14px;
+  --border-radius: 14px;
+  --background: #0ea5a4; /* Ensure your primary color is set */
 }
 
 /* ERROR */
